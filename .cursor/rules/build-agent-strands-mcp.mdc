@@ -1,0 +1,9 @@
+---
+description: Advanced, not used in the challenge. Generate a Strands agent with a bundled MCP server (OpenTelemetry path). Use when the brief says strands.
+globs:
+alwaysApply: false
+---
+
+Follow these instructions exactly. "$ARGUMENTS" means the brief path the user gave you.
+
+@.claude/skills/build-agent-strands-mcp/SKILL.md

@@ -1,0 +1,9 @@
+---
+description: Generate a LangGraph agent skeleton from a scenario brief (SDK callback path). Use when the brief's framework is langgraph or langchain.
+globs:
+alwaysApply: false
+---
+
+Follow these instructions exactly. "$ARGUMENTS" means the brief path the user gave you.
+
+@.claude/skills/build-agent-langgraph/SKILL.md

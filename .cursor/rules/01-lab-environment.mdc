@@ -1,0 +1,21 @@
+---
+description: What is preinstalled on the workshop host (model gateway, SDK variables) and how generated code must use it.
+alwaysApply: true
+---
+
+This repo runs on a prepared EC2 workshop host. Before suggesting any setup, read
+`LAB-ENVIRONMENT.md` and follow it. In short:
+
+- Model: call the OpenAI-compatible endpoint already in the environment.
+  `OPENAI_API_KEY` and `OPENAI_BASE_URL` are preset. Do not ask for a key and
+  do not clear those variables. The model is `gpt-4.1-mini`. Read
+  `OPENAI_MODEL` when it is set; otherwise use `gpt-4.1-mini`.
+- Observability: the SDK is `splunk-ao`. It sends traces using the preset
+  `SPLUNK_AO_CONSOLE_URL`, `SPLUNK_AO_API_URL`, `SPLUNK_AO_API_KEY`, and
+  `SPLUNK_AO_PROJECT`. The agent stream name is `INSTANCE`. The SDK does not
+  read it; pass `agent_stream=os.environ["INSTANCE"]` when creating the logger.
+  Do not create a project. `SPLUNK_AO_USER`, `SPLUNK_AO_PASSWORD`, and
+  `SPLUNK_AO_USER_ID` are console login only; the SDK does not read them.
+- Running: Python is already installed. The agent runs from the terminal.
+  Do not suggest containers, Kubernetes, or deploying. The challenge does not
+  use the cluster on the host. Do not suggest a laptop TLS proxy fix.

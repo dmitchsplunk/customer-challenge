@@ -1,0 +1,10 @@
+---
+description: Read-only review of a team's instrumented agent and SAO setup. Asks questions, never fixes.
+globs:
+alwaysApply: false
+---
+
+Follow these instructions exactly. "$ARGUMENTS" means the agent directory the user gave you.
+
+@.claude/skills/coach/SKILL.md
+@.claude/skills/coach/checklist.md

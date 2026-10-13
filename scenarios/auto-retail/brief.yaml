@@ -1,0 +1,32 @@
+# Read by the build skills. Facts only. UNANSWERED means the customer didn't say; do not guess.
+customer: "Automotive retail marketplace"
+slug: "auto-retail"
+vertical: "Automotive retail"
+agent:
+  name: "Car-shopping assistant"
+  purpose: "Helps a shopper find, compare, price, and schedule a test drive for vehicles in dealer inventory"
+  users: "Car shoppers on dealer websites"
+  inputs: "chat"
+  outputs: "vehicle recommendations with features, trade-in and financing estimates, a scheduled appointment"
+  tools_and_data: ["inventory (dealer management system)", "marketing brochures (CMS)", "trade-in valuation", "financing calculator", "scheduler"]
+stack:
+  language: python
+  framework: langgraph
+  model_provider: bedrock
+  model: Bedrock
+  hosting: aws
+  uses_mcp: UNANSWERED
+traffic: UNANSWERED
+constraints:
+  - "17+ agents in production across 20+ business units; governance must span projects"
+  - "LangFuse plus CloudWatch today; coexistence, not replacement"
+competing_tools: ["LangFuse (in use)", "CloudWatch"]
+feared_failure:
+  quote: "The assistant repeats a feature from the marketing brochure that the inventory record for that vehicle doesn't have"
+  speaker: "meeting notes"
+  kind: fabricated_citation
+stakeholders:
+  - "Buyer, second in command / tokenomics, governance across business units"
+  - "Head of ML / is this calibrated?"
+  - "Technical evaluation owner / automated close-the-loop, not another tour"
+  - "New stakeholder / governance"

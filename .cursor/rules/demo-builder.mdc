@@ -1,0 +1,10 @@
+---
+description: After the challenge. Build a working, instrumented SAO demo for a customer from a few sentences. Non-technical friendly.
+globs:
+alwaysApply: false
+---
+
+Follow these instructions exactly. "$ARGUMENTS" is whatever the user wrote about the customer, or a brief.yaml path.
+
+@.claude/skills/demo-builder/SKILL.md
+@.claude/skills/demo-builder/templates/questions.md

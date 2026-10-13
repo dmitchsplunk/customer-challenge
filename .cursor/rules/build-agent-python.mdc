@@ -1,0 +1,9 @@
+---
+description: Generate a pure-Python agent skeleton (hand-written tool loop, manual logger path). Use when the brief's framework is pure-python or UNANSWERED.
+globs:
+alwaysApply: false
+---
+
+Follow these instructions exactly. "$ARGUMENTS" means the brief path the user gave you.
+
+@.claude/skills/build-agent-python/SKILL.md

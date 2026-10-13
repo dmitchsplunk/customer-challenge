@@ -1,0 +1,34 @@
+# Read by the build skills. Facts only. UNANSWERED means the customer didn't say; do not guess.
+customer: "HR and payroll software company"
+slug: "hr-payroll"
+vertical: "HR/payroll SaaS with a bank entity"
+agent:
+  name: "Employee self-service assistant"
+  purpose: "Answers employees' HR and payroll questions from help articles, or opens the right screen or workflow for them"
+  users: "Employees of the company's customers"
+  inputs: "chat, inside the product"
+  outputs: "answer with help-article citations, or an opened screen / started workflow"
+  tools_and_data: ["help articles", "employee's own record", "self-service screens", "workflows"]
+stack:
+  language: python
+  framework: langgraph
+  model_provider: self-hosted
+  model: their own, self-hosted, behind an internal gateway
+  hosting: on-prem
+  uses_mcp: UNANSWERED
+traffic: UNANSWERED
+constraints:
+  - "no real data leaves on-prem; the hosted environment only sees synthetic data"
+  - "no trace data scored by an outside model provider"
+  - "one tracing instance per data center today; they want consolidation"
+competing_tools: ["Arize Phoenix (self-hosted, in use)", "Arize paid (rejected on cost)", "Portkey (evaluating)"]
+feared_failure:
+  quote: "The PII evaluator goes off and notices the agent just provided someone's bank account information. Is that alerted? How would somebody know, unless they were looking at the UI?"
+  speaker: "Systems engineer"
+  kind: pii_leak
+stakeholders:
+  - "Systems engineer, would administer / admin overhead, consolidation across data centers, latency alerting, no external models"
+  - "Monitoring and guardrails lead / trace fidelity, guardrail fidelity, anomaly alerting"
+  - "Data science lead / orchestration vs Phoenix and Portkey, own models, role-based access for agents"
+  - "Security lead / guardrails"
+  - "Program coordinator / simple latency and token reporting"

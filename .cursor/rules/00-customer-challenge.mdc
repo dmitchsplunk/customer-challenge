@@ -1,0 +1,31 @@
+---
+description: SAO Customer Challenge workshop. How to run the build and coach skills from Cursor.
+alwaysApply: true
+---
+
+This repo is the SAO Customer Challenge. Participants read `scenarios/START-HERE.md`,
+then their scenario, fill `worksheets/design-worksheet.md`, generate a starter agent,
+and instrument it themselves.
+
+In Claude Code the skills are slash commands. In Cursor they are these rules;
+each rule includes the skill's own SKILL.md. Where a SKILL.md says `$ARGUMENTS`,
+read the path or text the user gave in chat.
+
+How to ask for things in this chat:
+- "Build the agent for scenarios/<name>/brief.yaml on the langgraph path"
+  → follow the build-agent-langgraph rule.
+- "Build the agent ... on the python path" → build-agent-python rule.
+- "Build the agent ... on the strands-mcp path" → build-agent-strands-mcp rule (advanced; not used in the challenge).
+- "Coach agents/<folder>" → follow the coach rule. It reviews, it never fixes.
+
+Hard rules that apply in every case:
+- The generated agent must contain no observability code (no splunk_ao, galileo,
+  opentelemetry, langsmith, langfuse imports; no SPLUNK_AO_, OTEL_ or GALILEO_ variables).
+  `python shared/check_skeleton.py <dir>` must print OK before you are done.
+- Never add evaluators, controls, alerts, or tracing to the skeleton for the
+  team. That is the exercise. Point them at https://agent-observability-docs.splunk.com instead.
+- When anyone instruments an agent in this repo, the SDK is `splunk-ao`
+  (`from splunk_ao import SplunkAOLogger`, `SPLUNK_AO_*` variables). Never the
+  `galileo` package.
+- Scaffold with `python shared/scaffold.py --skill <skill> --brief <brief.yaml> --out <dir>`,
+  then edit only the blocks marked `# CUSTOMIZE:`.

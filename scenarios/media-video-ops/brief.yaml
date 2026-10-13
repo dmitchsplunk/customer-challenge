@@ -1,0 +1,33 @@
+# Read by the build skills. Facts only. UNANSWERED means the customer didn't say; do not guess.
+customer: "Pay-TV operator, engineering security team"
+slug: "media-video-ops"
+vertical: "Media; pay-TV and streaming operations"
+agent:
+  name: "Video incident triage bot"
+  purpose: "Reads monitoring alerts about video infrastructure, classifies them, looks up the affected device, opens or updates a ticket, and posts a summary to the on-call channel"
+  users: "Video operations engineers, through the on-call channel"
+  inputs: "monitoring alerts and tickets, as text"
+  outputs: "severity, a ticket, a channel post"
+  tools_and_data: ["device status lookup", "open or update ticket", "post to on-call channel", "runbooks", "subscriber records the bot must never surface"]
+stack:
+  language: python
+  framework: pure-python
+  model_provider: bedrock
+  model: a hosted model, reached through an API key the platform team issued
+  hosting: on-prem
+  uses_mcp: UNANSWERED
+traffic: "10 to 15 incidents a day"
+constraints:
+  - "outbound traffic blocked by a corporate proxy until a domain is whitelisted"
+  - "a change is a pull request, a review, and a restart; instrumentation must be inert until configured"
+  - "too little traffic for a two-week evaluation; replay closed incidents into a separate agent stream"
+  - "developer holds no cloud credentials; judge evaluators need a platform-team integration"
+competing_tools: []
+feared_failure:
+  quote: "Agent hijacking detection: a prompt-injection attack caught and blocked in real time. Data exfiltration guardrails: blocking a tool-call attempt to leak subscriber PII."
+  speaker: "Director of software engineering, engineering security"
+  kind: injection_success
+stakeholders:
+  - "Director of software engineering, engineering security / SOC-level visibility into agentic AI risk, detection and response"
+  - "Bot developer, owns the code / one-PR change, every tool call visible, the proxy"
+  - "Splunk admin lead / lands in the Splunk they run, who gets alerted and how"

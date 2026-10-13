@@ -1,0 +1,17 @@
+.DS_Store
+
+# Local secrets. .env.example is the template and stays in the repo.
+.env
+.env.*
+!.env.example
+
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Generated when a skill or demo runs. Not part of the workshop packet.
+agents/
+demos/

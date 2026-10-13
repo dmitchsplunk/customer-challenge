@@ -1,0 +1,4 @@
+strands-agents[openai]>=1.48
+strands-agents-tools>=0.2
+mcp>=1.10,<2          # FastMCP was renamed in mcp 2.x; pin until the template moves to MCPServer
+python-dotenv>=1.0

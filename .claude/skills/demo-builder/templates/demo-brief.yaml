@@ -1,0 +1,26 @@
+customer: ""                 # industry description, never the real name
+slug: ""                     # lowercase-hyphen, used for folder and project names
+vertical: ""
+agent:
+  name: ""
+  purpose: ""
+  users: ""
+  inputs: "chat"
+  outputs: ""
+  tools_and_data: []         # up to four
+stack:
+  language: python
+  framework: langgraph
+  model_provider: openai
+  model: gpt-4.1-mini
+  hosting: UNANSWERED
+  uses_mcp: UNANSWERED
+traffic: UNANSWERED
+constraints: []
+competing_tools: []
+feared_failure:
+  quote: ""
+  speaker: ""
+  kind: UNANSWERED           # pii_leak | fabricated_citation | wrong_tool | injection_success | latency
+stakeholders: []             # "role / cares about"
+wants_to_see: []             # their words
