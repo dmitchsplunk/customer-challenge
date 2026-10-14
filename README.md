@@ -41,13 +41,12 @@ demo must answer. If the customer didn't say something, you don't know it;
 don't invent it for the demo.
 Done when: your team agrees on which quotes the demo must answer.
 
-**Step 2. Fill the design worksheet.** `worksheets/design-worksheet.md`, or the
-Word version `design-worksheet.docx` next to it if you'd rather fill it by hand. Three
+**Step 2. Fill the design worksheet.** `worksheets/design-worksheet.md`. Three
 to five rows. Each row starts with a quote, then what you'll show, which
 product feature does it, and how you'll set it up. Below the table: the three
 screens you'll show, the metadata you'll tag on every trace, and the build
 path (the scenario's framework tells you which build skill).
-Save your copy as `agents/<your folder>/readout/worksheet.md` (or `.docx`) once the agent
+Save your copy as `agents/<your folder>/readout/worksheet.md` once the agent
 folder exists (until then, anywhere your team can see it).
 Done when: a coach has crossed out anything the customer didn't ask for and put
 their name on the sign-off line.
@@ -200,13 +199,12 @@ bind one control.
 Done when: the planted failure is caught and acted on, and clean traffic is
 left alone.
 
-**Step 7. Write the success criteria.** Use `worksheets/success-criteria.md`,
-or the Word version `success-criteria.docx` next to it. Three to five lines, not
+**Step 7. Write the success criteria.** Use `worksheets/success-criteria.md`. Three to five lines, not
 a plan. Each one in the customer's words with how your demo proves it, taken
 from your worksheet rows. Then one line for the objection this customer will
 raise and your answer, and one line for what you'd hand off because it isn't
 this product's job.
-Save it as `agents/<your folder>/readout/success-criteria.md` (or `.docx`).
+Save it as `agents/<your folder>/readout/success-criteria.md`.
 Done when: the customer would agree those are the criteria.
 
 **Step 8. Present.** Ten minutes as the customer meeting. Coaches play the roles
@@ -221,10 +219,8 @@ every setting and line you wrote.
 | | |
 |---|---|
 | Your customer | `scenarios/<your scenario>/SCENARIO.md` and `brief.yaml` |
-| The worksheet | `worksheets/design-worksheet.md`, or `.docx` to fill in Word |
-| Success criteria sheet | `worksheets/success-criteria.md`, or `.docx` |
-| What coaches look for | `worksheets/feedback-guide.md` |
-| Control and alert examples | `coaching/` |
+| The worksheet | `worksheets/design-worksheet.md` |
+| Success criteria sheet | `worksheets/success-criteria.md` |
 | Commands in detail | `README.md` |
-| Your agent | `agents/<your folder>/` after step 3 |
+| Your agent | `agents/<your folder>/` after step 4 |
 | Product docs and SDK | https://agent-observability-docs.splunk.com |
