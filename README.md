@@ -83,6 +83,9 @@ cd customer-challenge
 Then, use Cursor or Claude to ssh to the ec2 instance using the information from Splunk Show. 
 With Cursor, this is done using the `Remote-SSH` extension. 
 
+With Claude, this is done by connecting Claude Desktop to the server using ssh, as 
+explained in [SSH remote sessions in Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/ssh-remote-sessions). 
+
 Open the `/home/splunk/customer-challenge` folder using Cursor/Claude so you can view all 
 of the files using your IDE. 
 
@@ -103,6 +106,8 @@ In Cursor, use the following prompt instead:
 build the agent for scenarios/<your scenario>/brief.yaml on the <path> path
 ````
 
+> For example:  `Please build the agent for scenarios/auto-retail/brief.yaml on the langgraph path`.
+
 A few minutes later you have a folder under `agents/` with a working agent, mock
 data, 30 realistic inputs, and one planted failure taken from the scenario. The
 skill creates the virtual environment (venv), installs, and runs one question; its README shows how to
@@ -120,6 +125,7 @@ SPLUNK_AO_CONSOLE_URL=https://console.multitenant.sao.splunkcloud.com
 SPLUNK_AO_API_URL=https://api.multitenant.sao.splunkcloud.com
 SPLUNK_AO_API_KEY=provided_by_facilitator 
 SPLUNK_AO_PROJECT=provided_by_facilitator
+SPLUNK_AO_AGENT_STREAM=$INSTANCE
 ````
 
 Done when: `python app.py "<a question>"` answers, and
