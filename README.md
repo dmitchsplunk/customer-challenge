@@ -35,13 +35,13 @@ Ensure that Cursor or Claude is installed on your machine.
 
 ## Day one: Discover, Design, Build (about two hours)
 
-**Step 1. Read the scenario.** `scenarios/<your scenario>/SCENARIO.md`. Read it
+**Step 1. Read the scenario (10 minutes)** `scenarios/<your scenario>/SCENARIO.md`. Read it
 twice. Mark the three to five sentences the customer said that you think the
 demo must answer. If the customer didn't say something, you don't know it;
 don't invent it for the demo.
 Done when: your team agrees on which quotes the demo must answer.
 
-**Step 2. Fill the design worksheet.** `worksheets/design-worksheet.md`. Three
+**Step 2. Fill the design worksheet (30 minutes)** `worksheets/design-worksheet.md`. Three
 to five rows. Each row starts with a quote, then what you'll show, which
 product feature does it, and how you'll set it up. Below the table: the three
 screens you'll show, the metadata you'll tag on every trace, and the build
@@ -51,7 +51,7 @@ folder exists (until then, anywhere your team can see it).
 Done when: a coach has crossed out anything the customer didn't ask for and put
 their name on the sign-off line.
 
-**Step 3. Prepare the environment.**
+**Step 3. Prepare the environment (20 minutes)**
 
 Access the Splunk Show event by clicking the link provided by your workshop instructor. You’ll need to sign in using your Cisco.com account.
 
@@ -104,7 +104,7 @@ With Cursor, this is done using the `Remote-SSH` extension. Once connected, open
 
 Now, any commands you enter into Claude will be executed on the EC2 instance. 
 
-**Step 4. Generate the agent.** 
+**Step 4. Generate the agent (30 minutes)** 
 
 In this step, we'll use AI to build an agent using the provided skills. 
 
@@ -146,7 +146,7 @@ SPLUNK_AO_AGENT_STREAM=${INSTANCE}
 Done when: `python app.py "<a question>"` answers, and
 `FAILURE_MODE=<the scenario's failure> python app.py "<a question>"` shows the failure.
 
-**Step 5. Instrument it and get the first trace in.** This is yours to do, from
+**Step 5. Instrument it and get the first trace in (30 minutes)** This is yours to do, from
 the docs. Pointers, not answers:
 - `pip install "splunk-ao[langchain]"` in the agent's venv (plain `splunk-ao` on the Python path).
 - The SDK reads `SPLUNK_AO_CONSOLE_URL`, `SPLUNK_AO_API_URL`, `SPLUNK_AO_API_KEY`,
@@ -178,9 +178,9 @@ on it, and the evaluators are scoring.
 Optional homework, under an hour: run the batch with the planted failure on, and
 bind one control.
 
-## Day two: Validate, Position, Solve (about two hours)
+## Day two: Validate, Position, Solve (about three hours)
 
-**Step 6. Validate.** Prove the failure gets caught and stopped.
+**Step 6. Validate (120 minutes)** Prove the failure gets caught and stopped.
 1. Send clean traffic: `python run_batch.py 10`. Nothing should flag.
 2. Send the failure: `FAILURE_MODE=<the scenario's failure> python run_batch.py 5`.
    This replays five questions with the planted failure switched on, so the
@@ -199,7 +199,7 @@ bind one control.
 Done when: the planted failure is caught and acted on, and clean traffic is
 left alone.
 
-**Step 7. Write the success criteria.** Use `worksheets/success-criteria.md`. Three to five lines, not
+**Step 7. Write the success criteria (30 minutes)** Use `worksheets/success-criteria.md`. Three to five lines, not
 a plan. Each one in the customer's words with how your demo proves it, taken
 from your worksheet rows. Then one line for the objection this customer will
 raise and your answer, and one line for what you'd hand off because it isn't
@@ -207,7 +207,7 @@ this product's job.
 Save it as `agents/<your folder>/readout/success-criteria.md`.
 Done when: the customer would agree those are the criteria.
 
-**Step 8. Present.** Ten minutes as the customer meeting. Coaches play the roles
+**Step 8. Present (60 minutes)** Ten minutes as the customer meeting. Coaches play the roles
 from the scenario and ask the quoted questions. Three screens, each tied to a
 quote, then the success criteria. Then five minutes of feedback on four things: does every
 screen trace back to the customer, are the evaluators and control the right
