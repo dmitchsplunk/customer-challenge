@@ -125,7 +125,7 @@ SPLUNK_AO_CONSOLE_URL=https://console.multitenant.sao.splunkcloud.com
 SPLUNK_AO_API_URL=https://api.multitenant.sao.splunkcloud.com
 SPLUNK_AO_API_KEY=provided_by_facilitator 
 SPLUNK_AO_PROJECT=provided_by_facilitator
-SPLUNK_AO_AGENT_STREAM=$INSTANCE
+SPLUNK_AO_AGENT_STREAM=${INSTANCE}
 ````
 
 Done when: `python app.py "<a question>"` answers, and
