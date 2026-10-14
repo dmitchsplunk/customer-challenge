@@ -98,7 +98,7 @@ so plainly, and say the rest plainly too:
 
 ## What changes what you show
 - Outbound traffic from the bot's host is blocked until a domain is whitelisted.
-  "How did you get traffic out?" is a readout question; have the answer.
+  "How did you get traffic out?" will be asked at the show-and-tell; have the answer.
 - A change is a PR, a review, and a restart. Your instrumentation has to be
   inert until an environment variable is set; show the diff.
 - 10 to 15 incidents a day is too thin; replay closed incidents into a separate
@@ -114,14 +114,17 @@ so plainly, and say the rest plainly too:
 - Making the agent bigger. One bot, one developer, four steps.
 
 ## Your deliverable
-A 10-minute customer meeting. Coaches play the roles in "Who you will present
-to" and ask the questions in "What they said they want". Then 5 minutes of
-feedback. Three screens, each tied to a numbered item: the injected alert
+Two parts. In the session, a short show-and-tell to your group, two to three
+minutes, console open: what you built, which evaluators and control you set
+up and why, and what you hit. Coaches give feedback. After the bootcamp, a
+recorded demo run as the customer meeting with the people in "Who you will
+present to", answering the questions in "What they said they want". The
+facilitator gives the window and where to submit it. Three screens, each tied to a numbered item: the injected alert
 blocked before the model runs, with the evaluator flag on the record (1 and 2);
 a grounding score with its rationale on a reply (3); token cost and latency per
 agent with an alert on a spend threshold (5). Then your three to five success
 criteria, and the honest sentence about items 4, 6, and 8.
 
 ## Next
-Finished reading? Go to `scenarios/START-HERE.md`, step 2: the design worksheet.
-It lists every step from here to the readout.
+Finished reading? Go to the README at the repo root, step 2: the design
+worksheet. It lists every step from here to the show-and-tell.

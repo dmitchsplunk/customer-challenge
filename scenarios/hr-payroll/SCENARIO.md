@@ -69,11 +69,14 @@ failure in your starter agent (`pii_leak`).
 - Leaning on any feature that calls an external model.
 
 ## Your deliverable
-A 10-minute customer meeting. Coaches play the roles in "Who you will present
-to" and ask the questions in "What they said they want". Then 5 minutes of
-feedback. Three screens, each tied to one of those quotes, then your
+Two parts. In the session, a short show-and-tell to your group, two to three
+minutes, console open: what you built, which evaluators and control you set
+up and why, and what you hit. Coaches give feedback. After the bootcamp, a
+recorded demo run as the customer meeting with the people in "Who you will
+present to", answering the questions in "What they said they want". The
+facilitator gives the window and where to submit it. Three screens, each tied to one of those quotes, then your
 three to five success criteria.
 
 ## Next
-Finished reading? Go to `scenarios/START-HERE.md`, step 2: the design worksheet.
-It lists every step from here to the readout.
+Finished reading? Go to the README at the repo root, step 2: the design
+worksheet. It lists every step from here to the show-and-tell.

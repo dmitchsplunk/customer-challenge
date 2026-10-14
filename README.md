@@ -2,12 +2,13 @@
 
 ## What this is
 
-Over two days your team acts as the solutions engineers for one customer,
-written up as a scenario. Four scenarios are offered; the facilitator assigns
-one per group. You work out what that customer asked for, set up Splunk Agent
-Observability for an agent shaped like theirs, and at the end present the
-result to that customer, played by your coaches, who ask the questions quoted
-in the scenario.
+Over two days you act as the solutions engineer for one customer, written up
+as a scenario. Four scenarios are offered; the facilitator assigns one per
+group. Everyone in the group builds their own agent and works through the
+steps themselves; the group is there to compare notes and unblock each other.
+You work out what that customer asked for, set up Splunk Agent Observability
+for an agent shaped like theirs, and at the end show your group what you
+built and how. After the bootcamp you record the demo as the customer meeting.
 
 The agent is given to you and kept small. What you set up in the product, and
 how well it answers what the customer said, is the whole exercise.
@@ -22,7 +23,7 @@ some console screens still say log stream. Same thing.
 - Spend your time on the product and the customer, not on the agent. The agent
   is capped at four steps and four tools; `shared/check_skeleton.py` counts them.
 - You may use Claude Code or Cursor to help write the instrumentation. You
-  must be able to explain every line at the readout.
+  must be able to explain every line at the show-and-tell.
 - If the scenario says the customer didn't ask for it, it isn't in your demo.
 - Between the two blocks, coaches answer in the workshop channel the facilitator
   names, within 30 minutes. In the room, just ask. They won't write your code.
@@ -41,7 +42,7 @@ Read `scenarios/<your scenario>/SCENARIO.md` twice. Mark the three to five
 sentences the customer said that you think the demo must answer. If the
 customer didn't say something, you don't know it; don't invent it for the demo.
 
-**Done when:** your team agrees on which quotes the demo must answer.
+**Done when:** you have marked the quotes your demo must answer, and your group agrees they are the right ones.
 
 ### Step 2. Fill the design worksheet (30 minutes)
 
@@ -51,8 +52,8 @@ you'll set it up. Below the table: the three screens you'll show, the metadata
 you'll tag on every trace, and the build path (the scenario's framework tells
 you which build skill).
 
-Save your copy as `agents/<your folder>/readout/worksheet.md` once the agent
-folder exists (until then, anywhere your team can see it).
+Keep it next to this README for now, as `worksheets/my-worksheet.md`. Once the
+agent folder exists in step 4, move it to `agents/<your folder>/readout/worksheet.md`.
 
 **Done when:** a coach has crossed out anything the customer didn't ask for and
 put their name on the sign-off line.
@@ -181,11 +182,20 @@ you: tell the facilitator.
 **Done when:** a trace with the full tree is in your project, with your
 metadata on it, and the evaluators are scoring.
 
-### Checkpoint
+### End of day one
 
-At the end of day one, one line per team: what's wired, what's left. Optional
-homework, under an hour: run the batch with the planted failure on, and bind
-one control.
+Where you should be when the block ends:
+
+- Design worksheet filled and signed off by a coach.
+- Agent generated and answering.
+- Instrumented: a trace with the full tree in your project, with your metadata.
+- Traffic: `python run_batch.py 10` has run at least once.
+- At least one evaluator from your worksheet turned on and scoring.
+
+One line per person at the checkpoint: what's wired, what's left. If you are
+behind, say so; the coaches use the gap between blocks to catch people up.
+Optional homework, under an hour: run the batch with the planted failure on,
+and bind one control.
 
 ## Day two: Validate, Position, Solve (about three hours)
 
@@ -205,7 +215,7 @@ Prove the failure gets caught and stopped.
 4. Make something act on it. Either a runtime control that steers or blocks
    the reply (set up in the Agent Control console or with the SDK), or an alert
    on the agent stream that posts to a channel. One is enough. Work from the
-   docs first; `coaching/` has a worked example of each if you get stuck.
+   docs first; `examples/` has a worked example of each if you get stuck.
 5. Run the coach: `/coach agents/<your folder>` (Cursor: "coach agents/<your
    folder>"). It reads your work and asks the questions the customer will ask.
 
@@ -223,14 +233,41 @@ Save it as `agents/<your folder>/readout/success-criteria.md`.
 
 **Done when:** the customer would agree those are the criteria.
 
-### Step 8. Present (60 minutes)
+### Step 8. Show and tell (2 to 3 minutes each)
 
-Ten minutes as the customer meeting. Coaches play the roles from the scenario
-and ask the quoted questions. Three screens, each tied to a quote, then the
-success criteria. Then five minutes of feedback on four things: does every
-screen trace back to the customer, are the evaluators and control the right
-ones and why, would the customer agree with the success criteria, can you
-explain every setting and line you wrote.
+A short turn in front of your group, console open: what you built, which
+evaluators and control you set up and why, what you hit along the way, and
+which quote each screen answers. This is not a customer presentation and not
+a certification; it is how the group learns from each other and how the
+coaches see where everyone is. Coaches give feedback on the spot on four
+things: does every screen trace back to the customer, are the evaluators and
+control the right ones and why, would the customer agree with the success
+criteria, can you explain every setting and line you wrote.
+
+The facilitator may pick a few people to show their work to the whole room on
+the last day. Same format, a little longer.
+
+### Step 9. Back up your agent (5 minutes)
+
+Your EC2 instance is deleted the day after the bootcamp. Before you leave,
+copy your agent folder and worksheets to your laptop so you can record your
+demo from them:
+
+```bash
+rsync -av -e "ssh -p 2222" --exclude .venv splunk@<your instance>:~/customer-challenge/agents/<your folder>/ ~/customer-challenge-agent/
+```
+
+Recreate the venv on your laptop with Python 3.12 and `requirements.txt` plus
+`splunk-ao`. Your `.env` holds the keys the facilitator gave you; keep it off
+shared drives.
+
+## After the bootcamp: record your demo
+
+Record the demo as the customer meeting: the people in the scenario's "Who you
+will present to", the questions in "What they said they want", three screens
+each tied to a quote, then your success criteria as the POC you propose. The
+facilitator gives the window and where to submit it. Use the feedback from the
+show-and-tell before you record.
 
 ## Where things are
 
