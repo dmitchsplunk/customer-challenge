@@ -162,8 +162,11 @@ This is yours to do, from the docs. Pointers, not answers:
 - The agent calls `gpt-4.1-mini` through `OPENAI_API_KEY` and
   `OPENAI_BASE_URL`. Those are already set. Do not clear them in `.env`.
 - LangGraph path: the LangChain callback,
-  <https://agent-observability-docs.splunk.com/sdk-api/third-party-integrations/langchain>
-  (one object attached to the graph call).
+  <https://agent-observability-docs.splunk.com/sdk-api/third-party-integrations/langchain>.
+  Attach it on the graph call, `graph.invoke(..., config={"callbacks": [cb], ...})`,
+  not on the `ChatOpenAI` object. On the LLM you only get model spans; on the
+  invoke you get the whole tree, one trace per request, and a place to put
+  your metadata.
 - Python path: the logger,
   <https://agent-observability-docs.splunk.com/sdk-api/logging/splunk-ao-logger>
   (start a trace, add agent, LLM and tool spans, conclude, flush) around the
