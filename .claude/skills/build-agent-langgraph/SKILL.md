@@ -8,6 +8,10 @@ description: Generate a small LangGraph agent skeleton in the shape of a custome
 You produce the customer's agent, not the observability setup. The team wires
 Splunk Agent Observability themselves.
 
+## Environment
+
+Ensure that you use Python 3.12 to build the agent. Install it on the machine if it's not already installed. 
+
 ## Inputs
 
 `$ARGUMENTS`: path to a scenario's `brief.yaml` (e.g. `scenarios/hr-payroll/brief.yaml`),

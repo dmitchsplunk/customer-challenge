@@ -9,6 +9,10 @@ You produce the customer's agent, not the observability setup. On this path the
 team builds every span by hand with the SDK logger, so the skeleton must leave
 clean seams and nothing more.
 
+## Environment
+
+Ensure that you use Python 3.12 to build the agent. Install it on the machine if it's not already installed. 
+
 ## Inputs
 
 `$ARGUMENTS`: path to a scenario's `brief.yaml` (e.g. `scenarios/hr-payroll/brief.yaml`),

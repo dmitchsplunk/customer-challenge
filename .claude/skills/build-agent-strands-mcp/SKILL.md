@@ -10,6 +10,10 @@ setup. On this path there is no SDK to wire; Strands emits OpenTelemetry and the
 team has to get the exporter, endpoint, headers, and convention mode right.
 Leave those for the team.
 
+## Environment
+
+Ensure that you use Python 3.12 to build the agent. Install it on the machine if it's not already installed. 
+
 ## Inputs
 
 `$ARGUMENTS`: path to a scenario's `brief.yaml` (e.g. `scenarios/hr-payroll/brief.yaml`),
