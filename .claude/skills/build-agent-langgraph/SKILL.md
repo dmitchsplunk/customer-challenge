@@ -11,6 +11,8 @@ Splunk Agent Observability themselves.
 ## Environment
 
 Ensure that you use Python 3.12 to build the agent. Install it on the machine if it's not already installed. 
+The `template/.env.example` file includes placeholders for OPENAI_* and SPLUNK_AO_* environment variables. 
+These will be added to the .env file by the workshop participant once the agent is created. 
 
 ## Inputs
 

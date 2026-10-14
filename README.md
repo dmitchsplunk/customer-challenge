@@ -114,7 +114,7 @@ Using Claude Code, this can be achieved via the following prompt:
 ````
 /build-agent-<path> scenarios/<your scenario>/brief.yaml
 ````
-> Fill in the appropriate path and scenario name before running the commmand
+> Fill in the appropriate path and scenario name before running the commmand. For example: `/build-agent-langgraph scenarios/auto-retail/brief.yaml`
 
 In Cursor, use the following prompt instead: 
 
