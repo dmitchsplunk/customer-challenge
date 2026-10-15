@@ -2,13 +2,24 @@
 
 ## What this is
 
-Over two days you act as the solutions engineer for one customer, written up
-as a scenario. Four scenarios are offered; the facilitator assigns one per
-group. Everyone in the group builds their own agent and works through the
-steps themselves; the group is there to compare notes and unblock each other.
-You work out what that customer asked for, set up Splunk Agent Observability
-for an agent shaped like theirs, and at the end show your group what you
-built and how. After the bootcamp you record the demo as the customer meeting.
+Over two days you act as the solutions engineer for one customer, written up as
+a scenario. Four scenarios are offered, and the facilitator assigns one to each
+person. Your team works on the same scenario. Each of you builds in your own
+environment and produces your own deliverable.
+
+This is an individual exercise in a group setting. Your team is there to
+discuss ideas with you, not to do the work for you. Your coach guides you and
+does not do the work for you.
+
+Your goal is to finish with two things. The first is an agent that shows the
+customer's use case. The second is a Splunk Agent Observability configuration
+that meets the customer's requirements.
+
+At the end you show what you set up, in the agent and in Splunk Agent
+Observability, to your coach and team. This is a team-only show and tell. It is
+not an L2 certification demo. After the bootcamp you record a full
+customer-facing demo of your agent and configuration to complete L2. The
+session gives more detail.
 
 The agent is given to you and kept small. What you set up in the product, and
 how well it answers what the customer said, is the whole exercise.
@@ -55,8 +66,8 @@ you which build skill).
 Keep it next to this README for now, as `worksheets/my-worksheet.md`. Once the
 agent folder exists in step 4, move it to `agents/<your folder>/readout/worksheet.md`.
 
-**Done when:** a coach has crossed out anything the customer didn't ask for and
-put their name on the sign-off line.
+**Done when:** you have reviewed the worksheet with your team and removed
+anything the customer didn't ask for.
 
 ### Step 3. Prepare the environment (20 minutes)
 
@@ -69,8 +80,9 @@ the details of your EC2 instance from the Splunk Show event:
 - Click **Enroll event** on the top-right corner.
 - Then look near the bottom of the page for your EC2 instance details.
 
-Using a terminal window, use the SSH Command and SSH Password to connect to
-your environment.
+Using a terminal window, run the SSH command from Splunk Show, for example
+`ssh -p 2222 splunk@<ip address>`. When it asks for a password, use the
+**second** SSH password listed for your instance.
 
 The workshop requires Python 3.12+, so run the following command using the
 terminal to install Python 3.12 on the EC2 instance:
@@ -200,7 +212,7 @@ behind, say so; the coaches use the gap between blocks to catch people up.
 Optional homework, under an hour: run the batch with the planted failure on,
 and bind one control.
 
-## Day two: Validate, Position, Solve (about three hours)
+## Day two: Validate, Position, Solve (about three and a half hours)
 
 ### Step 6. Validate (120 minutes)
 
@@ -236,13 +248,16 @@ Save it as `agents/<your folder>/readout/success-criteria.md`.
 
 **Done when:** the customer would agree those are the criteria.
 
-### Step 8. Show and tell (2 to 3 minutes each)
+### Step 8. Show and tell (60 minutes in all, 2 to 3 minutes each)
+
+Each person shows their work to their coach and team. Keep it to two or three
+minutes per person. This is informal. It is not a certification demo.
 
 A short turn in front of your group, console open: what you built, which
 evaluators and control you set up and why, what you hit along the way, and
-which quote each screen answers. This is not a customer presentation and not
-a certification; it is how the group learns from each other and how the
-coaches see where everyone is. Coaches give feedback on the spot on four
+which quote each screen answers. This is not a customer presentation; it is
+how the group learns from each other and how the coaches see where everyone
+is. Coaches give feedback on the spot on four
 things: does every screen trace back to the customer, are the evaluators and
 control the right ones and why, would the customer agree with the success
 criteria, can you explain every setting and line you wrote.
