@@ -12,23 +12,22 @@ agent:
 stack:
   language: python
   framework: langgraph
-  model_provider: self-hosted
-  model: their own, self-hosted, behind an internal gateway
-  hosting: on-prem
+  model_provider: hosted, through the workshop gateway
+  model: the model the workshop gateway provides
+  hosting: cloud
   uses_mcp: UNANSWERED
 traffic: UNANSWERED
 constraints:
-  - "no real data leaves on-prem; the hosted environment only sees synthetic data"
-  - "no trace data scored by an outside model provider"
-  - "one tracing instance per data center today; they want consolidation"
+  - "the challenge environment only sees synthetic data"
+  - "separate tracing instances today; they want one consolidated view"
 competing_tools: ["Arize Phoenix (self-hosted, in use)", "Arize paid (rejected on cost)", "Portkey (evaluating)"]
 feared_failure:
   quote: "The PII evaluator goes off and notices the agent just provided someone's bank account information. Is that alerted? How would somebody know, unless they were looking at the UI?"
   speaker: "Systems engineer"
   kind: pii_leak
 stakeholders:
-  - "Systems engineer, would administer / admin overhead, consolidation across data centers, latency alerting, no external models"
-  - "Monitoring and guardrails lead / trace fidelity, guardrail fidelity, anomaly alerting"
+  - "Systems engineer, would administer / admin overhead, consolidation across environments, latency alerting"
+  - "Monitoring and guardrails lead / detailed traces, accurate guardrails, anomaly alerting"
   - "Data science lead / orchestration vs Phoenix and Portkey, own models, role-based access for agents"
   - "Security lead / guardrails"
   - "Program coordinator / simple latency and token reporting"

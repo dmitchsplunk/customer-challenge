@@ -13,6 +13,7 @@ Use the following steps to connect Claude to the EC2 Instance provided by the wo
 
 ![Claude SSH Connection](../images/claude-ssh-connection.png)
 
+* Click `Test connection` and enter your SSH password when prompted
 * Click on `Select Folder` and open the `/home/splunk/customer-challenge` folder
 * Click `Trust Workspace` when prompted
 

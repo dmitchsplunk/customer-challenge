@@ -1,8 +1,7 @@
 # Design worksheet
 
-Team: ______________   Scenario: ______________   Coach sign-off (name): ______  Date: ______
+Name: ______________   Scenario: ______________   Date: ______
 
-Prefer to fill it in Word? `design-worksheet.docx` next to this file is the same sheet.
 Save your filled copy as `agents/<your folder>/readout/worksheet.md` (or `.docx`).
 
 Fill this from the scenario before you build anything. Every row must
@@ -17,7 +16,7 @@ the row doesn't belong here.
 | 4 | | | | |
 | 5 | | | | |
 
-Rules of thumb the coach will check:
+Rules of thumb to check with your team:
 - Three to five rows. More than five means you're doing a platform tour.
 - At least one row is an evaluator, and at least one row is something that acts
   on the failure: a runtime control, or an alert that answers "how would I know

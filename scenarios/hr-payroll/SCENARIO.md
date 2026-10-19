@@ -3,8 +3,7 @@
 ## Who they are
 A large HR and payroll software company. They are putting an AI assistant
 inside their product so employees can ask payroll and benefits questions and
-get things done without a ticket. Their rule is that none of their data leaves
-their own data centers, so everything AI runs on their own hardware.
+get things done without a ticket.
 
 **Why they need agent observability.** They can trace the assistant today with
 a self-hosted open-source tool, but tracing is all it does. It doesn't tell them
@@ -13,7 +12,7 @@ it, and doesn't tell anyone it happened.
 
 **Where they're heading.** One platform their infrastructure team can run and
 their security team can trust: evaluation and guardrails on top of tracing,
-alerts that reach people, and one view across data centers.
+alerts that reach people, and one view across all their environments.
 
 ## The agent
 An employee self-service assistant inside their HR and payroll product.
@@ -32,8 +31,8 @@ help articles and a handful of synthetic employee records.
 | | |
 |---|---|
 | Language and framework | Python, LangGraph |
-| Model | Their own, self-hosted, behind an internal gateway |
-| Hosting | On-prem |
+| Model | A hosted model, reached through a gateway |
+| Hosting | Cloud |
 | Steps | Intake (turn the request into a ticket), route, resolve (articles or one tool call), write the reply |
 | Tools | Open a screen, start a workflow, look up the requesting employee's own record |
 | Data | 20 help articles, employee records, screen and workflow names |
@@ -41,8 +40,8 @@ help articles and a handful of synthetic employee records.
 ## Who you will present to
 | Role | Cares about |
 |---|---|
-| Systems engineer, would administer the platform | Admin overhead on his team, one consolidated view across data centers, latency alerting, no external models touching their data |
-| Monitoring and guardrails lead | Fidelity of the traces, fidelity of the guardrails, anomaly alerting |
+| Systems engineer, would administer the platform | Admin overhead on his team, one consolidated view across their environments, latency alerting |
+| Monitoring and guardrails lead | Detailed traces, accurate guardrails, anomaly alerting |
 | Data science lead | How agent-to-agent orchestration is traced, using their own models for evaluation, role-based access for agents |
 | Security lead | Guardrails |
 | Program coordinator | Simple latency and token reporting |
@@ -51,7 +50,7 @@ help articles and a handful of synthetic employee records.
 In their words, lightly cleaned up.
 
 - Systems engineer: "Say the PII evaluator goes off and notices the agent just provided someone's bank account information. Is that alerted? How would somebody know that happened, unless they were looking at the UI?"
-- Monitoring lead: "My team is interested in the guardrails piece, and the fidelity of what we can get out of that. From a monitoring standpoint we want the fidelity of the traces, and what we can use for anomaly alerting, for weird things occurring."
+- Monitoring lead: "My team is interested in the guardrails piece, and how accurate and detailed what we get out of it is. From a monitoring standpoint we want detailed traces, and what we can use for anomaly alerting, for weird things occurring."
 - Program coordinator: "Just some simple reporting on latency for these models and token usage, per client or employee. Simple things we could get right off the bat."
 - Someone on their side: "What's the difference between evaluators and controls? How do they link together?"
 - Data science lead: "Can we have access to these guardrail models and use our own data to train them? We'll be identifying the false positives and annotating that data."
@@ -64,19 +63,18 @@ reply, and nobody finds out until someone happens to look. This is the planted
 failure in your starter agent (`pii_leak`).
 
 ## Traps
-- Doing too much. The PII question is the whole demo: evaluator, alert, control, in that order.
 - Comparing against the tracing tool they already run. They described its gaps; they didn't ask for a bake-off.
-- Leaning on any feature that calls an external model.
 
 ## Your deliverable
-Two parts. In the session, a short show-and-tell to your group, two to three
-minutes, console open: what you built, which evaluators and control you set
-up and why, and what you hit. Coaches give feedback. After the bootcamp, a
-recorded demo run as the customer meeting with the people in "Who you will
-present to", answering the questions in "What they said they want". The
-facilitator gives the window and where to submit it. Three screens, each tied to one of those quotes, then your
-three to five success criteria.
+Two things.
+
+1. A short show and tell for your coach and team, two to three minutes. Show
+   three screens in Splunk Agent Observability, each tied to one of the quotes
+   in "What they said they want". Say what you built and what you configured.
+2. Your success criteria: three to five lines, in the customer's words.
+
+This is not a certification demo. After the bootcamp you record a full
+customer-facing demo of your agent for L2. The session explains how.
 
 ## Next
-Finished reading? Go to the README at the repo root, step 2: the design
-worksheet. It lists every step from here to the show-and-tell.
+Finished reading? Go to the README, Step 2: the design worksheet.
