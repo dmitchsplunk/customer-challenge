@@ -45,10 +45,14 @@ optionally followed by an output directory. Default output: `agents/<slug>-langg
    retries, memory, streaming, or anything from the forbidden list in
    `shared/check_skeleton.py`. The customer's real agent may be bigger; the
    starter stays small.
-5. Create a venv with the host Python, install requirements, and smoke-test.
-   `OPENAI_API_KEY` and `OPENAI_BASE_URL` are already set; the model is
-   `gpt-4.1-mini`. Run `python app.py "<one question from questions.txt>"` and
-   `FAILURE_MODE=<kind> python app.py "<a question that triggers it>"`. Both
+5. Create a venv with Python 3.12 and install the requirements.
+   Then stop. Print the exact lines the participant has to fill in `.env`
+   (model key, base URL if their host has a gateway, SAO console URL, API URL,
+   API key, project, agent stream) and wait. Do not go looking for keys on the
+   host and do not run the smoke test until they say the file is filled. If
+   they have no gateway, tell them to delete the `OPENAI_BASE_URL` line.
+   When they confirm, smoke-test: `python app.py "<one question from questions.txt>"`
+   and `FAILURE_MODE=<kind> python app.py "<a question that triggers it>"`. Both
    must succeed and the second must visibly show the failure.
 6. Run `python shared/check_skeleton.py <dir>`. It must print `OK`.
 7. Print the output directory, the failure mode, and the "What you still have

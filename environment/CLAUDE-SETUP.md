@@ -16,4 +16,8 @@ Use the following steps to connect Claude to the EC2 Instance provided by the wo
 * Click on `Select Folder` and open the `/home/splunk/customer-challenge` folder
 * Click `Trust Workspace` when prompted
 
-Now, any commands you enter into Claude will be executed on the EC2 instance. 
+Now, any commands you enter into Claude will be executed on the EC2 instance.
+
+Claude asks permission before each command it runs on the instance. Accept
+them as they come; if you prefer not to be asked, choose the option to allow
+commands for this workspace when the first prompt appears. 

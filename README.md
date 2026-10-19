@@ -123,25 +123,38 @@ For example:
 Please build the agent for scenarios/auto-retail/brief.yaml on the langgraph path
 ```
 
-A few minutes later you have a folder under `agents/` with a working agent,
-mock data, 30 realistic inputs, and one planted failure taken from the
-scenario. The skill creates the virtual environment (venv), installs, and runs
-one question; its README shows how to do that yourself if anything failed. The
-failure is off by default. It has no observability code in it.
+Claude or Cursor will ask permission before each command it runs (creating
+the venv, installing, running the agent). Accept them; that is how it works.
 
-Once the agent is built, open the `agents/<scenario name>/.env` file for
-editing, and add the following environment variables, using the values provided
-by your facilitator:
+A few minutes later you have a folder `agents/<your scenario>-<path>/` (for
+example `agents/auto-retail-langgraph/`) with a working agent, mock data, 30
+realistic inputs, and one planted failure taken from the scenario. It has no
+observability code in it. The failure is off by default.
+
+The skill stops before the smoke test and tells you which values it needs.
+Open `agents/<your scenario>-<path>/.env` and fill in the empty values with
+what your facilitator gave you. The keys are already there; do not add lines:
 
 ```text
-OPENAI_API_KEY=provided_by_facilitator
-OPENAI_BASE_URL=provided_by_facilitator
-SPLUNK_AO_CONSOLE_URL=https://console.multitenant.sao.splunkcloud.com
-SPLUNK_AO_API_URL=https://api.multitenant.sao.splunkcloud.com
-SPLUNK_AO_API_KEY=provided_by_facilitator
-SPLUNK_AO_PROJECT=provided_by_facilitator
-SPLUNK_AO_AGENT_STREAM=${INSTANCE}
+OPENAI_API_KEY=            your model key
+OPENAI_BASE_URL=           your gateway URL. No gateway? delete this line.
+SPLUNK_AO_CONSOLE_URL=     https://console.multitenant.sao.splunkcloud.com
+SPLUNK_AO_API_URL=         https://api.multitenant.sao.splunkcloud.com
+SPLUNK_AO_API_KEY=         your API key
+SPLUNK_AO_PROJECT=         your project name
+SPLUNK_AO_AGENT_STREAM=${INSTANCE}   leave as is; it expands to your instance name
 ```
+
+Then tell Claude or Cursor the file is filled and let it run the smoke tests.
+
+Before you move on, check four things in the folder yourself. The skeleton
+check counts files; it cannot tell whether the agent fits your customer.
+
+- The tool names in `tools.py` (or `agent/tools.py`) are the customer's tools,
+  not the HR template's.
+- `WRITE_TOOL` is set to the one tool that changes something.
+- `questions.txt` reads like the customer's users wrote it.
+- The README title names your customer.
 
 **Done when:** `python app.py "<a question>"` answers, and
 `FAILURE_MODE=<the scenario's failure> python app.py "<a question>"` shows the
@@ -159,8 +172,8 @@ This is yours to do, from the docs. Pointers, not answers:
   pass `agent_stream=os.environ["INSTANCE"]` when you create the logger. Do not
   create a project, and do not put the console login (`SPLUNK_AO_USER`,
   `SPLUNK_AO_PASSWORD`, `SPLUNK_AO_USER_ID`) in the agent.
-- The agent calls `gpt-4.1-mini` through `OPENAI_API_KEY` and
-  `OPENAI_BASE_URL`. Those are already set. Do not clear them in `.env`.
+- The agent calls `gpt-4.1-mini` through `OPENAI_API_KEY` and, if you have a
+  gateway, `OPENAI_BASE_URL`, both from the `.env` you filled in step 4.
 - LangGraph path: the LangChain callback,
   <https://agent-observability-docs.splunk.com/sdk-api/third-party-integrations/langchain>.
   Attach it on the graph call, `graph.invoke(..., config={"callbacks": [cb], ...})`,

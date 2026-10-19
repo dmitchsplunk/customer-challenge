@@ -42,10 +42,15 @@ optionally followed by an output directory. Default output: `agents/<slug>-pytho
    tool call. The team will wrap exactly those. Do not restructure them.
 5. Keep the guarantees: no UI, no extra agents or tools, no memory, retries,
    streaming, or anything on the forbidden list in `shared/check_skeleton.py`.
-6. Create a venv with the host Python, install, and smoke-test. `OPENAI_API_KEY`
-   and `OPENAI_BASE_URL` are already set; the model is `gpt-4.1-mini`. Run
-   `python app.py "<a knowledge question>"`, `python app.py "<an action request>"`
-   (must show a tool call), and `FAILURE_MODE=<kind> python app.py "<trigger>"`.
+6. Create a venv with Python 3.12 and install the requirements.
+   Then stop. Print the exact lines the participant has to fill in `.env`
+   (model key, base URL if their host has a gateway, SAO console URL, API URL,
+   API key, project, agent stream) and wait. Do not go looking for keys on the
+   host and do not run the smoke test until they say the file is filled. If
+   they have no gateway, tell them to delete the `OPENAI_BASE_URL` line.
+   When they confirm, smoke-test: `python app.py "<a knowledge question>"`,
+   `python app.py "<an action request>"` (must show a tool call), and
+   `FAILURE_MODE=<kind> python app.py "<trigger>"`.
 7. Run `python shared/check_skeleton.py <dir>`. Must print `OK`.
 8. Print the output directory, the failure mode, and the "What you still have
    to do" list. Stop.

@@ -17,4 +17,7 @@ Use the following steps to connect Cursor to the EC2 Instance provided by the wo
 
 * When prompted, enter the password from Splunk Show
 * Click the `Open Folder` button in Cursor
-* Open the `/home/splunk/customer-challenge` folder 
+* Open the `/home/splunk/customer-challenge` folder
+
+Cursor asks permission before running each terminal command. Accept them as
+they come. 
