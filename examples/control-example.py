@@ -8,6 +8,10 @@ Run once from the agent folder:
 Then wrap the reply step with `@control(step_name="write")` from `agent_control`
 and catch `ControlSteerError` / `ControlViolationError` around the graph call.
 Show this to a team only after they have tried; it is a reference, not a shortcut.
+
+Regex note: the control plane validates patterns with RE2. No lookahead, so
+"deny unless X" cannot be written as (?!X); write the pattern for what you want
+to catch instead, for example "reads like a question" to refuse a write.
 """
 import asyncio, os, sys
 from dotenv import load_dotenv
@@ -40,7 +44,12 @@ async def main():
     items = res.get("items") or res.get("controls") or []
     cid = next((c.get("id") or c.get("control_id") for c in items if c.get("name") == CONTROL_NAME), None)
     if cid is None:
-        r = await agent_control.create_control(name=CONTROL_NAME, data=CONTROL); cid = r.get("control_id") or r.get("id"); print("created control", cid)
+        try:
+            r = await agent_control.create_control(name=CONTROL_NAME, data=CONTROL); cid = r.get("control_id") or r.get("id"); print("created control", cid)
+        except Exception as exc:
+            resp = getattr(exc, "response", None)
+            print("create_control failed:", resp.status_code if resp is not None else exc, (resp.text[:600] if resp is not None else ""))
+            return 1
     else:
         print("reused control", cid)
     async with AgentControlClient(base_url=url, api_key=key, api_key_header=hdr) as client:
