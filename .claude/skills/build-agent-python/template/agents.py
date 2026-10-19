@@ -15,7 +15,10 @@ _client = None
 def client() -> OpenAI:
     global _client
     if _client is None:
-        _client = OpenAI(base_url=os.getenv("OPENAI_BASE_URL") or None)
+        base = os.getenv("OPENAI_BASE_URL") or None
+        if not base:
+            os.environ.pop("OPENAI_BASE_URL", None)   # an empty value would point the client at nothing
+        _client = OpenAI(base_url=base)
     return _client
 
 

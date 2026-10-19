@@ -33,11 +33,12 @@ def main(root: pathlib.Path) -> int:
                 problems.append(f"{p.relative_to(root)}: imports '{mod}'. The skeleton must contain no observability code.")
         tools += len(re.findall(r"^\s*#\s*TOOL:", text, re.M))
         steps += len(re.findall(r"^\s*#\s*STEP:", text, re.M))
-    for p in list(root.glob(".env*")) + list(root.glob("*.md")):
+    # .env files are allowed to carry SPLUNK_AO_* placeholders (the host template does); code must not read them.
+    for p in py_files:
         text = p.read_text(errors="ignore")
         for prefix in FORBIDDEN_ENV:
-            if prefix in text and p.name != "README.md":
-                problems.append(f"{p.name}: mentions {prefix}* variables. Leave observability config to the team.")
+            if prefix in text:
+                problems.append(f"{p.relative_to(root)}: reads {prefix}* variables. Leave observability config to the team.")
     if tools > MAX_TOOLS:
         problems.append(f"{tools} tools marked '# TOOL:'; cap is {MAX_TOOLS}.")
     if steps > MAX_STEPS:
