@@ -242,6 +242,9 @@ Prove the failure gets caught and stopped.
    the reply (set up in the Agent Control console or with the SDK), or an alert
    on the agent stream that posts to a channel. One is enough. Work from the
    docs first; `examples/` has a worked example of each if you get stuck.
+   A control's pattern describes what to refuse. The engine has no "unless",
+   so write it as the thing to catch: "reads like a question", "contains an
+   SSN", "mentions ignore your instructions", not "no change verb".
 5. Run the coach: `/coach agents/<your folder>` (Cursor: "coach agents/<your
    folder>"). It reads your work and asks the questions the customer will ask.
 
