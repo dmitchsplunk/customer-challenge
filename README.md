@@ -159,14 +159,18 @@ SPLUNK_AO_AGENT_STREAM=${INSTANCE}   leave as is; it expands to your instance na
 
 Then tell Claude or Cursor the file is filled and let it run the smoke tests.
 
-Before you move on, check four things in the folder yourself. The skeleton
-check counts files; it cannot tell whether the agent fits your customer.
+Before you move on, run the check yourself and read what it says:
 
-- The tool names in `tools.py` (or `agent/tools.py`) are the customer's tools,
-  not the HR template's.
-- `WRITE_TOOL` is set to the one tool that changes something.
-- `questions.txt` reads like the customer's users wrote it.
-- The README title names your customer.
+```bash
+python shared/check_skeleton.py agents/<your scenario>-<path>
+```
+
+It fails if the agent was not customized for your customer: HR template text
+left in the prompts, tools not renamed, the write tool not set, fewer than 30
+questions, a README that does not name the customer, or a placeholder left in
+the env file. Fix what it names, or tell Claude or Cursor to, until it prints
+OK. Then look at `questions.txt` yourself: it should read like the customer's
+users wrote it.
 
 **Done when:** `python app.py "<a question>"` answers, and
 `FAILURE_MODE=<the scenario's failure> python app.py "<a question>"` shows the
