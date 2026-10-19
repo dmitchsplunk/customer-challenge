@@ -3,19 +3,18 @@
 ## Who they are
 The internal platform team at a large automotive manufacturer. Everything
 runs on-prem, including Splunk. Engineers across the company are building
-agents fast, and most of them are MCP servers over internal tools, used from
+agents fast, most of them small tools over internal systems, used from
 whatever coding assistant each engineer prefers.
 
-**Why they need agent observability.** They have no way to tell whether an MCP
-is any good, whether it is being used the way its author intended, or what it
-costs per consumer. Today they have homegrown pieces, some token tracking and
-some monitoring, built by different people, and nothing that evaluates agent
-behavior.
+**Why they need agent observability.** They have no way to tell whether a
+tool is any good, whether it is being used the way its author intended, or
+what it costs per consumer. Today they have homegrown pieces, some token
+tracking and some monitoring, built by different people, and nothing that
+evaluates agent behavior.
 
-**Where they're heading.** A purpose-built platform, on their own Kubernetes,
-that evaluates tool use across the harnesses people actually use, shows cost per
-consumer, takes the thumbs-up and thumbs-down feedback they already collect as
-an input to evaluation, and lets many agent owners see only their own data.
+**Where they're heading.** A purpose-built platform, on their own
+Kubernetes, that evaluates how agents use tools, shows cost per consumer, and
+lets many agent owners see only their own data.
 
 ## The agent
 An internal assistant for the platform team's own engineers. Instead of
@@ -30,8 +29,8 @@ works out what is being asked (triage), finds the relevant internal doc
 alert (action). A writer turns the results into a short answer.
 
 In production those tools sit behind MCP servers the team built, and engineers
-reach them from several different harnesses that behave differently against
-the same server. Your starter agent skips all of that: the tools are plain
+reach them from several different coding assistants, which don't always pick
+the same tool for the same request. Your starter agent skips all of that: the tools are plain
 Python functions with the same names and shapes, so you build no MCP plumbing.
 
 | | |
@@ -46,17 +45,15 @@ Python functions with the same names and shapes, so you build no MCP plumbing.
 ## Who you will present to
 | Role | Cares about |
 |---|---|
-| Platform lead, owns the Splunk MCP | MCP quality across harnesses, token cost per consumer, feeding existing user feedback into evaluation, per-owner data segregation |
+| Platform lead, owns the internal tools | Tool quality, token cost per consumer, per-owner data segregation |
 | Platform engineer | Specifics of the use case for the demo |
-| Platform engineer | Which product does what, and why there are two |
 
 ## What they said they want
 In their words, lightly cleaned up.
 
-- Platform lead: "One of the things I really care about, especially for MCPs, is how different harnesses interact with the same MCP. They have different truncation limits for reading tool descriptions. They make different choices about which tools to call when given the same prompt."
 - Platform lead: "Everybody needs some framework and some help to say, I just wrote this thing, is it any good? Is it being used the way I think it is?"
+- Platform lead: "They make different choices about which tools to call when given the same prompt."
 - Platform lead: "Keeping an eye on token cost and who's consuming the most tokens is relevant too."
-- Platform lead: "If we have an agent with an existing feedback mechanism, thumbs up, thumbs down, comments, can we hook into that as another data source for the evaluator?"
 - Platform lead: "How do we let owners of many agents view their own data and segregate it so they're not touching other stuff?"
 - Platform lead: "We open an MCP to our own application and we're seeing our traffic patterns change. Some of our interest is monitoring the load on our own thing."
 
@@ -71,7 +68,7 @@ failure in your starter agent (`wrong_tool`).
 
 ## Traps
 - Monitoring the load on their MCP server. That is APM and the Splunk platform, not this product. A team that builds load dashboards missed the lead's actual ask.
-- Building a pretty agent. He said "lots of MCPs," not "a chat UI."
+- Building a pretty agent. They said "lots of small tools," not "a chat UI."
 - Claiming to see agents nobody instrumented.
 
 ## Your deliverable

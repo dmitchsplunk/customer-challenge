@@ -3,10 +3,10 @@ customer: "Automotive manufacturer, internal platform team"
 slug: "auto-manufacturer-platform"
 vertical: "Automotive; internal platform engineering"
 agent:
-  name: "Internal-tool MCP server and the agents that use it"
-  purpose: "A read-write MCP over their on-prem Splunk and other internal tools, used through various harnesses to run searches and edit alerts"
-  users: "Internal engineers, through whatever harness they use"
-  inputs: "natural-language requests from a coding or chat harness"
+  name: "Internal-tools assistant for platform engineers"
+  purpose: "Takes a plain-language request from an engineer and runs searches, checks host status, or edits alerts in their on-prem Splunk through the platform team's tools"
+  users: "Internal engineers, from whatever coding assistant they use"
+  inputs: "natural-language requests"
   outputs: "search results, alert changes, summaries"
   tools_and_data: ["search events", "host status", "update alert"]
 stack:
@@ -23,10 +23,9 @@ constraints:
   - "owners of many agents must see only their own data"
 competing_tools: ["homegrown tooling for token cost and pieces of monitoring"]
 feared_failure:
-  quote: "Different harnesses make different choices about which tools to call when given the same prompt. I just wrote this thing, is it any good? Is it being used the way I think it is?"
+  quote: "They make different choices about which tools to call when given the same prompt. I just wrote this thing, is it any good? Is it being used the way I think it is?"
   speaker: "Platform lead"
   kind: wrong_tool
 stakeholders:
-  - "Platform lead, owns the Splunk MCP / MCP quality across harnesses, token cost per consumer, feedback into evals, segregation"
+  - "Platform lead, owns the internal tools / tool quality, token cost per consumer, per-owner segregation"
   - "Platform engineer / use-case specifics"
-  - "Platform engineer / which product is which"
