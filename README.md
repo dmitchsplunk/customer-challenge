@@ -186,7 +186,17 @@ This is yours to do, from the docs. Pointers, not answers:
   seams the README names. Overview of both:
   <https://agent-observability-docs.splunk.com/sdk-api/logging/logging-basics>
 - Metadata: whatever your worksheet says the customer wants to filter by, on
-  every trace. `run_batch.py` already rotates through several users.
+  every trace. `run_batch.py` already rotates through several users. On the
+  bootcamp tenant it shows on the spans, not on the trace, so put it on the
+  agent spans too.
+- Things that bite on the Python path, learned the hard way:
+  - Pass `tools=<your tool schemas>` on the LLM spans that may call tools.
+    Without it the Tool Selection Quality evaluator errors instead of scoring.
+  - `conclude()` closes the open agent span, not the trace. One `conclude()`
+    per agent span you opened, then one more at the end for the trace.
+  - The console prefixes span names (`invoke_agent`, `execute_tool`,
+    `chat <model>`) and shows the trace under the first agent span's name.
+    Your code worked; that is just how it displays.
 
 Run one question, find the trace in the console. Then turn on the evaluators
 your worksheet names, and no more: agent stream, Configure Evaluators. Luna
