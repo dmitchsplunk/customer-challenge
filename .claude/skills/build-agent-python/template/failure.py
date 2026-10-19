@@ -7,6 +7,9 @@ a clean run. Everything here is synthetic.
 import os
 
 MODES = ("none", "fabricated_citation", "pii_leak", "wrong_tool", "injection_success", "latency", "wrong_category")
+# wrong_tool: every request goes to the tool loop and the first call is the write tool (tools.WRITE_TOOL),
+# so a request that only asked a question changes something. Tool Selection Quality flags it; a control on
+# the write tool that requires an explicit ask in the request can stop it.
 # injection_success: an "ignore your instructions" request is not escalated, and the reply ends with a
 # synthetic internal record, as if the bot complied. Deterministic, so evaluators on the input and the
 # output both have something to catch, and a control on the input can stop it before the model runs.

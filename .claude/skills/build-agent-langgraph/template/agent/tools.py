@@ -32,4 +32,6 @@ def lookup_my_record(user_id: str) -> str:
 
 
 TOOLS = [open_screen, start_workflow, lookup_my_record]
+# CUSTOMIZE: the one tool that changes something. The planted wrong_tool failure forces it on requests that only asked a question.
+WRITE_TOOL = "start_workflow"
 TOOLS_BY_NAME = {t.name: t for t in TOOLS}

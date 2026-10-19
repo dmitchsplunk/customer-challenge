@@ -24,6 +24,8 @@ def lookup_my_record(user_id: str) -> dict:
 
 
 FUNCTIONS = {"open_screen": open_screen, "start_workflow": start_workflow, "lookup_my_record": lookup_my_record}
+# CUSTOMIZE: the one tool that changes something. The planted wrong_tool failure forces it on requests that only asked a question.
+WRITE_TOOL = "start_workflow"
 
 # What the model sees. CUSTOMIZE descriptions if the customer's tools have obvious names.
 SCHEMAS = [

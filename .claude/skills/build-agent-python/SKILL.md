@@ -62,3 +62,9 @@ optionally followed by an output directory. Default output: `agents/<slug>-pytho
 
 OpenAI chat completions against the host endpoint (`OPENAI_API_KEY`,
 `OPENAI_BASE_URL`, model `gpt-4.1-mini`). Do not swap providers.
+
+## The write tool
+
+In the tools file, `WRITE_TOOL` names the one tool that changes something.
+Set it to the customer's write tool when you rename the tools. The planted
+`wrong_tool` failure forces that tool on requests that only asked a question.

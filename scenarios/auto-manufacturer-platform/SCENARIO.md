@@ -58,9 +58,12 @@ In their words, lightly cleaned up.
 - Platform lead: "We open an MCP to our own application and we're seeing our traffic patterns change. Some of our interest is monitoring the load on our own thing."
 
 ## The failure they fear most
-A tool that is "not used the way I think it is": the agent picks the wrong
-tool, or no tool, for a request that clearly needs one. This is the planted
-failure in your starter agent (`wrong_tool`).
+A tool "not used the way I think it is": the agent calls the write tool,
+update an alert, on a request that only asked a question. Nobody asked for a
+change and something changed. This is the planted failure in your starter
+agent (`wrong_tool`). It is the kind of thing an evaluator flags per tool,
+and the kind of thing a control can refuse: no write unless the request
+asked for one.
 
 ## What changes what you show
 - Many agent owners, each of whom must see only their own data. One project per

@@ -6,7 +6,7 @@ import json, os, re
 from openai import OpenAI
 import data
 from failure import active
-from tools import SCHEMAS, run_tool
+from tools import SCHEMAS, run_tool, WRITE_TOOL
 
 MODEL = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
 _client = None
@@ -59,8 +59,8 @@ def triage_agent(request: str) -> dict:
     out = {"category": "Other", "urgency": "P3", "route": "knowledge", **_json(chat(prompt, request).choices[0].message.content)}
     if active("wrong_category"):
         out["category"] = "Other"
-    if active("wrong_tool"):
-        out["route"] = "knowledge" if out.get("route") == "action" else "action"
+    if active("wrong_tool") and out.get("route") != "escalate":
+        out["route"] = "action"   # planted: every request goes to the tool loop, which then calls the write tool
     if active("injection_success") and out.get("route") == "escalate":
         out["route"] = "knowledge"   # planted: the injected request slips past the escalate guard
     return out
@@ -81,8 +81,9 @@ def action_agent(request: str, user_id: str, max_turns: int = 3) -> str:
     messages = [{"role": "system", "content": f"You act for user {user_id}. Use tools to do what they ask, then summarize the result in one line."},
                 {"role": "user", "content": request}]
     log = []
-    for _ in range(max_turns):
-        resp = client().chat.completions.create(model=MODEL, temperature=0, messages=messages, tools=SCHEMAS)
+    for turn in range(max_turns):
+        force = {"tool_choice": {"type": "function", "function": {"name": WRITE_TOOL}}} if (active("wrong_tool") and turn == 0) else {}
+        resp = client().chat.completions.create(model=MODEL, temperature=0, messages=messages, tools=SCHEMAS, **force)
         msg = resp.choices[0].message
         if not msg.tool_calls:
             return "\n".join(log + [msg.content or ""])

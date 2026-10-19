@@ -67,3 +67,9 @@ optionally followed by an output directory. Default output: `agents/<slug>-langg
 The workshop host already exports `OPENAI_API_KEY` and `OPENAI_BASE_URL`.
 The model is `gpt-4.1-mini` (`OPENAI_MODEL` overrides it). Do not ask for a
 key and do not change the provider. The customer's model vendor is not the lesson.
+
+## The write tool
+
+In the tools file, `WRITE_TOOL` names the one tool that changes something.
+Set it to the customer's write tool when you rename the tools. The planted
+`wrong_tool` failure forces that tool on requests that only asked a question.
