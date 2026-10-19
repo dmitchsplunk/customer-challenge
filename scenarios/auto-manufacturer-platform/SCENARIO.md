@@ -66,10 +66,12 @@ and the kind of thing a control can refuse: no write unless the request
 asked for one.
 
 ## What changes what you show
-- Many agent owners, each of whom must see only their own data. One project per
-  owner is a screen, not a footnote.
+- Many agent owners, each of whom must see only their own data. In the lab you
+  have one project and your own agent stream, so your stream stands in for an
+  owner's project: say "one project per owner" over the project list. It is a
+  screen, not a footnote.
 
-## Traps
+## Out of scope
 - Monitoring the load on their MCP server. That is APM and the Splunk platform, not this product. A team that builds load dashboards missed the lead's actual ask.
 - Building a pretty agent. They said "lots of small tools," not "a chat UI."
 - Claiming to see agents nobody instrumented.

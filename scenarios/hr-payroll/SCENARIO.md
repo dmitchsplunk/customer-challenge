@@ -62,7 +62,7 @@ The assistant puts personal data, a bank account number or an SSN, into a
 reply, and nobody finds out until someone happens to look. This is the planted
 failure in your starter agent (`pii_leak`).
 
-## Traps
+## Out of scope
 - Comparing against the tracing tool they already run. They described its gaps; they didn't ask for a bake-off.
 
 ## Your deliverable

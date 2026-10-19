@@ -31,6 +31,7 @@ def _json(text: str) -> dict:
 
 # STEP: intake, turn the raw request into a ticket
 def intake(state: State) -> dict:
+    # CUSTOMIZE: categories and persona in the prompts of this file are the HR template's. Rewrite them for the customer.
     prompt = ("Turn the employee request into a ticket. Reply with JSON: "
               '{"title": str, "category": one of ["Pay","Benefits","Time Off","Tax","Account Access","Other"], "urgency": one of ["P1","P2","P3"]}')
     out = llm().invoke([SystemMessage(prompt), HumanMessage(state["request"])])

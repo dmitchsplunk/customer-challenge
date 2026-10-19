@@ -35,6 +35,9 @@ def main() -> int:
     # The failure is OFF by default so plain runs are clean traffic; the kind is recorded for the team.
     env = out / ".env.example"
     env.write_text(re.sub(r"^FAILURE_MODE=.*$", f"FAILURE_MODE=none\n# This scenario's planted failure is: {kind}. Turn it on with FAILURE_MODE={kind}", env.read_text(), flags=re.M))
+    q = out / "questions.txt"
+    if q.exists():
+        q.write_text("".join(l for l in q.read_text().splitlines(True) if not l.startswith("# CUSTOMIZE") and not l.startswith("# a few") and not l.startswith("# prompt")))
     print(f"scaffolded {out}\n  skill={a.skill} customer={name} planted_failure={kind} (off by default)\n  next: customize '# CUSTOMIZE:' blocks, then: python shared/check_skeleton.py {out}")
     return 0
 

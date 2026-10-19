@@ -106,7 +106,7 @@ so plainly, and say the rest plainly too:
 - The developer holds no cloud credentials; judge evaluators need an
   integration the platform team sets up. Lead with Luna evaluators.
 
-## Traps
+## Out of scope
 - Trying to show all eight. Five are yours; three are hand-offs.
 - Showing the injection caught after the fact. They asked for "caught and
   blocked in real time." That's a control on the input, not an evaluator on the

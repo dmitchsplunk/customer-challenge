@@ -54,6 +54,7 @@ def _json(text: str) -> dict:
 
 # STEP: triage agent, ticket + route in one call
 def triage_agent(request: str) -> dict:
+    # CUSTOMIZE: categories, routing rules and persona below are the HR template's. Rewrite them for the customer.
     prompt = ('Classify the employee request. Reply with JSON: {"category": one of ["Pay","Benefits","Time Off","Tax","Account Access","Other"], '
               '"urgency": one of ["P1","P2","P3"], "route": one of ["knowledge","action","escalate"]}. '
               "'action' when the user asks for THEIR OWN data (next pay date, PTO balance, direct deposit status) or wants a screen opened "
@@ -101,6 +102,7 @@ def action_agent(request: str, user_id: str, max_turns: int = 3) -> str:
 
 # STEP: writer, the reply the user sees
 def writer(request: str, route: str, articles: list[dict], tool_log: str, user_id: str) -> str:
+    # CUSTOMIZE: the escalate line and the system prompt below are the HR template's. Rewrite them for the customer.
     if route == "escalate":
         return "I can't help with that request. I've routed it to a human in HR who will follow up with you."
     system = ("You are an employee self-service assistant. Answer in 3-6 sentences, plain language. "

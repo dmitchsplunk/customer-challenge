@@ -72,7 +72,7 @@ From meeting notes, so the wording is close rather than exact.
   import. It does not attribute cost per agent or per trace; the agent-stream
   metrics view does that. Show the right screen for the claim.
 
-## Traps
+## Out of scope
 - The platform tour. If your demo opens with the agent graph, you've lost the evaluation owner.
 - Attacking LangFuse.
 - Inventing a customer-facing access path for tokenomics that doesn't exist.
