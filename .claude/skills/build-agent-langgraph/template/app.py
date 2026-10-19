@@ -1,7 +1,7 @@
 """Command-line chat with the agent.
 
     python app.py                      # interactive
-    python app.py "How do I change my direct deposit?"
+    python app.py "<a question from questions.txt>"
 
 The graph is built once per process. Observability wiring is NOT here; that is
 the team's job. See README.md, "What you still have to do".

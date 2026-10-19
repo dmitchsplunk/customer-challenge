@@ -2,7 +2,7 @@
 
     python run_batch.py            # all questions
     python run_batch.py 10         # first 10
-    FAILURE_MODE=pii_leak python run_batch.py 5
+    FAILURE_MODE=<the planted failure> python run_batch.py 5
 
 Each question runs as a different user from data.RECORDS so that anything you
 group per user later has several users in it.

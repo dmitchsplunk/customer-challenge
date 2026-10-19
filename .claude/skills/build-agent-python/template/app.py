@@ -1,7 +1,7 @@
 """Command-line chat with the agent.
 
     python app.py
-    python app.py "When is my next pay date?"
+    python app.py "<a question from questions.txt>"
 
 No observability code here on purpose. See README.md, "What you still have to do".
 """
