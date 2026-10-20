@@ -316,7 +316,7 @@ shared drives.
 ## After the bootcamp: record your demo
 
 Record the demo as the customer meeting: the people in the scenario's "Who you
-will present to", the questions in "What they said they want", three screens
+will present to", the questions in "What they said they want", three console views
 each tied to a quote, then your success criteria as the POC you propose. The
 facilitator gives the window and where to submit it. Use the feedback from the
 show-and-tell before you record.
