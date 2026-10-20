@@ -110,6 +110,9 @@ from Splunk Show.
 Refer to [CLAUDE-SETUP.md](environment/CLAUDE-SETUP.md) or
 [CURSOR-SETUP.md](environment/CURSOR-SETUP.md) for detailed instructions.
 
+**Done when:** your editor is connected to your instance and shows this README from
+`/home/splunk/customer-challenge`, and `python3.12 --version` answers in a terminal there.
+
 ### Step 4. Generate the agent (30 minutes)
 
 In this step, we'll use AI to build an agent using the provided skills.

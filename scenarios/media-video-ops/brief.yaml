@@ -8,7 +8,7 @@ agent:
   users: "Video operations engineers, through the on-call channel"
   inputs: "monitoring alerts and tickets, as text"
   outputs: "severity, a ticket, a channel post"
-  tools_and_data: ["device status lookup", "open or update ticket", "post to on-call channel", "runbooks", "subscriber records the bot must never surface"]
+  tools_and_data: ["device status lookup", "open or update ticket", "post to on-call channel", "runbooks and the subscriber records the bot must never surface"]
 stack:
   language: python
   framework: pure-python
