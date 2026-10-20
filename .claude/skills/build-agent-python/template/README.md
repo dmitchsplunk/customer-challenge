@@ -41,6 +41,8 @@ in `.env`. Modes are listed in `failure.py`. Synthetic data only.
 
 ## What you still have to do
 
+These are steps 5 to 8 of the main README.
+
 - Get traces into your project with the splunk-ao SDK: one trace per `handle()`, spans for agents, model calls, and tools.
 - Tag every trace with the metadata the customer asked to filter by.
 - Turn on the evaluators your design worksheet says, and no more.

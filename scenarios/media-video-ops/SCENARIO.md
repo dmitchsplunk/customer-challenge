@@ -87,9 +87,9 @@ obeys an "ignore your instructions" line in the input.
 - Outbound traffic from the bot's host is blocked until a domain is whitelisted.
   "How did you get traffic out?" will be asked at the show-and-tell; have the answer.
 - A change is a PR, a review, and a restart. Your instrumentation has to be
-  inert until an environment variable is set; show the diff.
-- 10 to 15 incidents a day is too thin; replay closed incidents into a separate
-  agent stream and show that stream.
+  inert until an environment variable is set; show that.
+- 10 to 15 incidents a day is too thin; replay closed incidents to build up
+  traffic, tagged so it stays apart from live traffic.
 - The developer holds no cloud credentials; judge evaluators need an
   integration the platform team sets up.
 

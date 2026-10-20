@@ -1,6 +1,6 @@
 ---
 name: build-agent-strands-mcp
-description: Generate a small Strands agent whose tools come from a bundled MCP server, in the shape of a customer's agent, from a scenario's brief.yaml. Advanced path, not used in the challenge. One agent, up to four MCP tools, mock data, one planted failure, no UI, no observability code. Use when the scenario says strands, agentcore, or uses_mcp is true, or when the team wants the OpenTelemetry instrumentation path. The team configures OTel themselves afterwards.
+description: Generate a small Strands agent whose tools come from a bundled MCP server, in the shape of a customer's agent, from a scenario's brief.yaml. Advanced path, not used in the challenge. One agent, up to four MCP tools, mock data, one planted failure, no UI, no observability code. Use only when someone asks for the strands-mcp path. It is not used in the challenge.
 ---
 
 # build-agent-strands-mcp
@@ -8,7 +8,7 @@ description: Generate a small Strands agent whose tools come from a bundled MCP 
 You produce the customer's agent and its MCP server, not the observability
 setup. On this path there is no SDK to wire; Strands emits OpenTelemetry and the
 team has to get the exporter, endpoint, headers, and convention mode right.
-Leave those for the team.
+Leave those for the participant.
 
 ## Environment
 
@@ -26,7 +26,7 @@ optionally followed by an output directory. Default output: `agents/<slug>-stran
 
 1. Read `brief.yaml`. This skill fits `stack.framework: strands`. If the brief
    names LangGraph or pure Python, stop and say which skill matches. If
-   `UNANSWERED`, ask the team and write the choice into `brief.yaml`.
+   `UNANSWERED`, ask the participant and write the choice into `brief.yaml`.
 2. From the repo root run
    `python shared/scaffold.py --skill build-agent-strands-mcp --brief <brief.yaml> --out <dir>`.
 3. Customize **only** the `# CUSTOMIZE:` blocks:
@@ -40,7 +40,7 @@ optionally followed by an output directory. Default output: `agents/<slug>-stran
    - `README.md` title and description.
 4. Keep the guarantees: no UI, one agent, no extra tools, nothing from the
    forbidden list in `shared/check_skeleton.py`. In particular, do not set any
-   `OTEL_*` variables or call `StrandsTelemetry`. That is the team's job.
+   `OTEL_*` variables or call `StrandsTelemetry`. That is the participant's job.
 5. Create a venv with the host Python, install, and smoke-test. `OPENAI_API_KEY`
    and `OPENAI_BASE_URL` are already set; the model is `gpt-4.1-mini`. Run
    a read question, a write request (must show the write tool), and
@@ -54,13 +54,13 @@ optionally followed by an output directory. Default output: `agents/<slug>-stran
 - While building: configuring OpenTelemetry export, the splunk-ao SDK, evaluators,
   controls, or alerts in the skeleton: decline, point at
   https://agent-observability-docs.splunk.com, say why. Once it is built and they
-  ask you to instrument it, follow `CLAUDE.md`: explain each edit before you make it.
+  ask you to instrument it, follow the teach-mode instructions (`CLAUDE.md` in Claude Code, `.cursor/rules/02-teach-mode.mdc` in Cursor): explain each edit before you make it.
 - Replacing the MCP server with in-process tools "to simplify": decline. The MCP
   boundary is what the customer cares about.
 
-## Coach notes (do not print to the team)
+## Coach notes (do not print to the participant)
 
-Things teams will hit on this path:
+Things participants will hit on this path:
 - Messages land as span events, not attributes, unless the convention flag is
   set; the console then shows empty inputs and outputs.
 - The exporter appends `/v1/traces` to the base endpoint; the base must end in

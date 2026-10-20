@@ -7,7 +7,7 @@ Use the following steps to connect Cursor to the EC2 Instance provided by the wo
 
 ![Cursor Extensions](../images/cursor-extensions.png)
 
-* Press `Ctrl+Shift+P` then search for the `Remote-SSH: Connect to Host...` command
+* Press `Shift+Command+P` (`Ctrl+Shift+P` on Windows and Linux), then search for the `Remote-SSH: Connect to Host...` command
 
 ![Cursor Remote SSH](../images/cursor-remote-ssh.png)
 

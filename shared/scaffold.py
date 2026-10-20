@@ -32,9 +32,14 @@ def main() -> int:
     kind = a.failure or (km.group(1) if km else "none")
     if kind in ("UNANSWERED", "", None): kind = "none"
     readme = out / "README.md"; readme.write_text(readme.read_text().replace("<Customer>", name).replace("<failure>", kind))
-    # The failure is OFF by default so plain runs are clean traffic; the kind is recorded for the team.
+    # The failure is OFF by default so plain runs are clean traffic; the kind is recorded for the participant.
     env = out / ".env.example"
     env.write_text(re.sub(r"^FAILURE_MODE=.*$", f"FAILURE_MODE=none\n# This scenario's planted failure is: {kind}. Turn it on with FAILURE_MODE={kind}", env.read_text(), flags=re.M))
+    if not (out / ".env").exists():
+        # python-dotenv does not override variables already set on the host. The empty OPENAI_BASE_URL line is left out:
+        # an empty value points the client at nothing, and the host normally sets it. Add it only if yours is missing.
+        (out / ".env").write_text(re.sub(r"(?m)^OPENAI_BASE_URL=\s*\n", "", env.read_text()))
+    (out / "readout").mkdir(exist_ok=True)
     q = out / "questions.txt"
     if q.exists():
         q.write_text("".join(l for l in q.read_text().splitlines(True) if not l.startswith("# CUSTOMIZE") and not l.startswith("# a few") and not l.startswith("# prompt")))

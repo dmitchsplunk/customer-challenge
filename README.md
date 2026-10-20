@@ -108,7 +108,9 @@ Then, use Claude or Cursor to SSH to the EC2 instance using the information
 from Splunk Show.
 
 Refer to [CLAUDE-SETUP.md](environment/CLAUDE-SETUP.md) or
-[CURSOR-SETUP.md](environment/CURSOR-SETUP.md) for detailed instructions.
+[CURSOR-SETUP.md](environment/CURSOR-SETUP.md) for detailed instructions. What is
+already on your host, and what to check, is in
+[environment/LAB-ENVIRONMENT.md](environment/LAB-ENVIRONMENT.md).
 
 **Done when:** your editor is connected to your instance and shows this README from
 `/home/splunk/customer-challenge`, and `python3.12 --version` answers in a terminal there.
@@ -151,20 +153,31 @@ realistic inputs, and one planted failure taken from the scenario. It has no
 observability code in it. The failure is off by default.
 
 The skill stops before the smoke test and tells you which values it needs.
-Open `agents/<your scenario>-<path>/.env` and fill in the empty values with
-what your facilitator gave you. The keys are already there; do not add lines:
+First check what your host already has:
+
+```bash
+env | grep -E 'SPLUNK_AO|OPENAI|INSTANCE'
+```
+
+Anything already set on the host wins; the agent reads the host environment
+first and `.env` second. Open `agents/<your scenario>-<path>/.env` (the skill
+creates it from `.env.example`) and fill in only the values that are missing,
+using what your facilitator gave you. The file lists a few other variables too;
+leave those alone. Do not add lines:
 
 ```text
 OPENAI_API_KEY=            your model key
-OPENAI_BASE_URL=           your gateway URL. No gateway? delete this line.
+OPENAI_BASE_URL=           your gateway URL. Not in the file yet? Add it only if your host does not set it.
 SPLUNK_AO_CONSOLE_URL=     https://console.multitenant.sao.splunkcloud.com
 SPLUNK_AO_API_URL=         https://api.multitenant.sao.splunkcloud.com
 SPLUNK_AO_API_KEY=         your API key
 SPLUNK_AO_PROJECT=         your project name
-SPLUNK_AO_AGENT_STREAM=${INSTANCE}   leave as is; it expands to your instance name
+SPLUNK_AO_AGENT_STREAM=${INSTANCE}   leave as is; it expands to your instance name, which names your agent stream
 ```
 
-Then tell Claude or Cursor the file is filled and let it run the smoke tests.
+Then tell Claude or Cursor the values are in place and let it run the smoke tests.
+Run the agent's commands from its folder with its virtual environment active:
+`cd agents/<your scenario>-<path> && source .venv/bin/activate`.
 
 Before you move on, run the check yourself and read what it says:
 
@@ -174,14 +187,15 @@ python shared/check_skeleton.py agents/<your scenario>-<path>
 
 It fails if the agent was not customized for your customer: HR template text
 left in the prompts, tools not renamed, the write tool not set, fewer than 30
-questions, a README that does not name the customer, or a placeholder left in
-the env file. Fix what it names, or tell Claude or Cursor to, until it prints
+questions, a README that does not name the customer, or an empty `OPENAI_BASE_URL`
+line in `.env`. Fix what it names, or tell Claude or Cursor to, until it prints
 OK. Then look at `questions.txt` yourself: it should read like the customer's
 users wrote it.
 
 **Done when:** `python app.py "<a question>"` answers, and
 `FAILURE_MODE=<the scenario's failure> python app.py "<a question>"` shows the
-failure.
+failure. Move your worksheet into `agents/<your scenario>-<path>/readout/`; the
+skill creates that folder.
 
 ### Step 5. Instrument it and get the first trace in (30 minutes)
 
@@ -191,12 +205,13 @@ This is yours to do, from the docs. Pointers, not answers:
   on the Python path).
 - The SDK reads `SPLUNK_AO_CONSOLE_URL`, `SPLUNK_AO_API_URL`,
   `SPLUNK_AO_API_KEY`, and `SPLUNK_AO_PROJECT` from the environment. Use that
-  project. The agent stream name is `INSTANCE`. The SDK does not read it, so
+  project. The agent stream name is your `INSTANCE` value. The
+  `SPLUNK_AO_AGENT_STREAM=${INSTANCE}` line in your `.env` sets it for the SDK, or
   pass `agent_stream=os.environ["INSTANCE"]` when you create the logger. Do not
   create a project, and do not put the console login (`SPLUNK_AO_USER`,
   `SPLUNK_AO_PASSWORD`, `SPLUNK_AO_USER_ID`) in the agent.
 - The agent calls `gpt-4.1-mini` through `OPENAI_API_KEY` and, if you have a
-  gateway, `OPENAI_BASE_URL`, both from the `.env` you filled in step 4.
+  gateway, `OPENAI_BASE_URL`, from your host or the `.env` you checked in step 4.
 - LangGraph path: the LangChain callback,
   <https://agent-observability-docs.splunk.com/sdk-api/third-party-integrations/langchain>.
   Attach it on the graph call, `graph.invoke(..., config={"callbacks": [cb], ...})`,
@@ -246,7 +261,7 @@ metadata on it, the evaluators are scoring, and your notes are written.
 
 Where you should be when the block ends:
 
-- Design worksheet filled and signed off by a coach.
+- Design worksheet reviewed with your team.
 - Agent generated and answering.
 - Instrumented: a trace with the full tree in your project, with your metadata.
 - Traffic: `python run_batch.py 10` has run at least once.
@@ -266,7 +281,8 @@ Prove the failure gets caught and stopped.
 1. Send clean traffic: `python run_batch.py 10`. Nothing should flag.
 2. Send the failure: `FAILURE_MODE=<the scenario's failure> python run_batch.py 5`.
    This replays five questions with the planted failure switched on, so the
-   agent misbehaves the way the customer fears. For HR that is
+   agent misbehaves the way the customer fears. Questions that trigger the
+   failure are run first. For HR that is
    `FAILURE_MODE=pii_leak python run_batch.py 5`, and some replies will leak
    another employee's data. The agent's README names the mode for your
    scenario.
@@ -281,7 +297,10 @@ Prove the failure gets caught and stopped.
    SSN", "mentions ignore your instructions", not "no change verb".
    The control example needs `AGENT_CONTROL_API_KEY`. If it is empty on your
    host, ask your facilitator for it.
-5. Run the coach: `/coach agents/<your folder>` (Cursor: "coach agents/<your
+5. Stretch: if no preset evaluator catches your failure, write a custom LLM judge
+   in the customer's own definition of a bad answer. `examples/custom-judge-example.py`
+   is a worked one, for after you have tried.
+6. Run the coach skill: `/coach agents/<your folder>` (Cursor: "coach agents/<your
    folder>"). It reads your work and asks the questions the customer will ask.
 
 **Done when:** the planted failure is caught and acted on, and clean traffic is
@@ -300,7 +319,7 @@ Save it as `agents/<your folder>/readout/success-criteria.md`.
 
 ### Step 8. Show and tell (60 minutes in all, 2 to 3 minutes each)
 
-Each person shows their work to their coach and team. Keep it to two or three
+Each person shows their work to their coach and the rest of their group. Keep it to two or three
 minutes per person. This is informal. It is not a certification demo.
 
 A short turn in front of your group, console open: what you built, which
@@ -344,6 +363,7 @@ show-and-tell before you record.
 | Your customer | `scenarios/<your scenario>/SCENARIO.md` and `brief.yaml` |
 | The worksheet | `worksheets/design-worksheet.md` |
 | Success criteria sheet | `worksheets/success-criteria.md` |
-| Commands in detail | `README.md` |
+| Your host and its variables | `environment/LAB-ENVIRONMENT.md` |
+| Worked control, alert and judge | `examples/` |
 | Your agent | `agents/<your folder>/` after step 4 |
 | Product docs and SDK | <https://agent-observability-docs.splunk.com> |

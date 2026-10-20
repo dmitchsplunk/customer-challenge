@@ -19,8 +19,9 @@ How to ask for things in this chat:
 - "Coach agents/<folder>" → follow the coach rule. It reviews, it never fixes.
 
 Hard rules that apply in every case:
-- The generated agent must contain no observability code (no splunk_ao, galileo,
-  opentelemetry, langsmith, langfuse imports; no SPLUNK_AO_, OTEL_ or GALILEO_ variables).
+- The generated agent's code must contain no observability code (no splunk_ao, galileo,
+  opentelemetry, langsmith, langfuse imports; no code that reads SPLUNK_AO_, OTEL_ or
+  GALILEO_ variables). The `.env` files may list the SPLUNK_AO_ placeholders.
   `python shared/check_skeleton.py <dir>` must print OK before you are done.
 - While building the starter agent, never add evaluators, controls, alerts, or
   tracing to it. Point them at https://agent-observability-docs.splunk.com instead.

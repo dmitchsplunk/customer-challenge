@@ -1,11 +1,11 @@
 ---
 name: build-agent-langgraph
-description: Generate a small LangGraph agent skeleton in the shape of a customer's agent, from a scenario's brief.yaml. Four steps, up to four tools, mock data, one planted failure, no UI, and no observability code. Use when the scenario's framework is langgraph or langchain. The team instruments it afterwards.
+description: Generate a small LangGraph agent skeleton in the shape of a customer's agent, from a scenario's brief.yaml. Four steps, up to four tools, mock data, one planted failure, no UI, and no observability code. Use when the scenario's framework is langgraph or langchain. The participant instruments it afterwards.
 ---
 
 # build-agent-langgraph
 
-You produce the customer's agent, not the observability setup. The team wires
+You produce the customer's agent, not the observability setup. The participant wires
 Splunk Agent Observability themselves.
 
 ## Environment
@@ -23,8 +23,8 @@ optionally followed by an output directory. Default output: `agents/<slug>-langg
 ## Steps
 
 1. Read `brief.yaml`. Confirm `stack.framework` is `langgraph` or `langchain`. If it
-   is anything else, stop and tell the team which build skill matches. If it is
-   `UNANSWERED`, ask the team to pick a path and write the choice into
+   is anything else, stop and tell the participant which build skill matches. If it is
+   `UNANSWERED`, ask the participant to pick a path and write the choice into
    `brief.yaml` before continuing.
 2. From the repo root run
    `python shared/scaffold.py --skill build-agent-langgraph --brief <brief.yaml> --out <dir>`.
@@ -73,13 +73,14 @@ optionally followed by an output directory. Default output: `agents/<slug>-langg
   controls, or alerts to the skeleton, decline and point at
   https://agent-observability-docs.splunk.com. Say why: the participant has to set
   that up to learn it. Once the agent is built and they ask you to instrument
-  it, follow `CLAUDE.md`: explain each edit before you make it.
+  it, follow the teach-mode instructions (`CLAUDE.md` in Claude Code,
+  `.cursor/rules/02-teach-mode.mdc` in Cursor): explain each edit before you make it.
 - If asked to make the agent "more realistic" beyond the caps: decline. Offer to
   change names, data, and prompts instead.
 
 ## Model provider
 
-The workshop host already exports `OPENAI_API_KEY` and `OPENAI_BASE_URL`.
+The workshop host normally exports `OPENAI_API_KEY` and `OPENAI_BASE_URL`; check the environment first.
 The model is `gpt-4.1-mini` (`OPENAI_MODEL` overrides it). Do not ask for a
 key and do not change the provider. The customer's model vendor is not the lesson.
 

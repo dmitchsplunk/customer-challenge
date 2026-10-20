@@ -1,13 +1,13 @@
-"""Worked example for coaches: one runtime control on the agent's reply step.
+"""Worked example: one runtime control on the agent's reply step.
 
 Regex for a US SSN in the reply, post stage, action = steer with a safe
 message. Attached to a policy, policy bound to the agent by name. Needs
 AGENT_CONTROL_URL and AGENT_CONTROL_API_KEY (or SPLUNK_AO_API_KEY) in .env.
 Run once from the agent folder:
-    python ../../coaching/control-example.py
+    python ../../examples/control-example.py
 Then wrap the reply step with `@control(step_name="write")` from `agent_control`
 and catch `ControlSteerError` / `ControlViolationError` around the graph call.
-Show this to a team only after they have tried; it is a reference, not a shortcut.
+Use it only after you have tried yourself; it is a reference, not a shortcut.
 
 Regex note: the control plane validates patterns with RE2. No lookahead, so
 "deny unless X" cannot be written as (?!X); write the pattern for what you want
@@ -20,7 +20,7 @@ import agent_control
 from agent_control.client import AgentControlClient
 from agent_control import policies as ac_policies
 
-AGENT_NAME = os.environ.get("AGENT_CONTROL_AGENT_NAME", "my-team-agent")
+AGENT_NAME = os.environ.get("AGENT_CONTROL_AGENT_NAME", "my-agent")
 POLICY_NAME = os.environ.get("AGENT_CONTROL_POLICY_NAME", f"{AGENT_NAME}-guardrails-v1")
 CONTROL_NAME = os.environ.get("AGENT_CONTROL_CONTROL_NAME", f"{AGENT_NAME}_no_ssn_in_reply")
 CONTROL = {

@@ -20,7 +20,7 @@ traffic: "10 to 15 incidents a day"
 constraints:
   - "outbound traffic blocked by a corporate proxy until a domain is whitelisted"
   - "a change is a pull request, a review, and a restart; instrumentation must be inert until configured"
-  - "too little traffic for a two-week evaluation; replay closed incidents into a separate agent stream"
+  - "too little traffic for a two-week evaluation; replay closed incidents to build up traffic, tagged so it stays apart from live traffic"
   - "developer holds no cloud credentials; judge evaluators need a platform-team integration"
 competing_tools: []
 feared_failure:

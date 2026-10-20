@@ -2,7 +2,7 @@
 
 Name: ______________   Scenario: ______________   Date: ______
 
-Save your filled copy as `agents/<your folder>/readout/worksheet.md` (or `.docx`).
+Save your filled copy as `agents/<your folder>/readout/worksheet.md`.
 
 Fill this from the scenario before you build anything. Every row must
 start with something the customer actually said. If you can't point to a quote,

@@ -1,5 +1,5 @@
 ---
-description: Read-only review of a team's instrumented agent and SAO setup. Asks questions, never fixes.
+description: Read-only review of a participant's instrumented agent and SAO setup. Asks questions, never fixes.
 globs:
 alwaysApply: false
 ---

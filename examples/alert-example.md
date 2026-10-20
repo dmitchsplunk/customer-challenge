@@ -1,4 +1,4 @@
-# Worked example for coaches: an alert on an evaluator
+# Worked example: an alert on an evaluator
 
 Alerts are configured on the agent stream in the console, not in code.
 

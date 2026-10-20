@@ -5,6 +5,8 @@ preset, because the preset only asks whether the reply matches the sources it wa
 made-up brochure is one of them. This judge compares the reply with the second source, the
 inventory record, which is the source of truth for the specific car.
 
+The id prefixes in the prompt (BRO-, INV-) match the retail data; change them to match yours.
+
 Run once from your agent's folder, with its .env loaded:
     python ../../examples/custom-judge-example.py
 Then open Configure Evaluators on your agent stream and check that the judge is on, send the

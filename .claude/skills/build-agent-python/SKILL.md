@@ -1,12 +1,12 @@
 ---
 name: build-agent-python
-description: Generate a small pure-Python agent skeleton (no framework, hand-written tool-calling loop) in the shape of a customer's agent, from a scenario's brief.yaml. Four steps as plain functions, up to four tools, mock data, one planted failure, no UI, no observability code. Use when the scenario's framework is pure-python, or UNANSWERED and the team chooses this path. The team instruments it by hand afterwards.
+description: Generate a small pure-Python agent skeleton (no framework, hand-written tool-calling loop) in the shape of a customer's agent, from a scenario's brief.yaml. Four steps as plain functions, up to four tools, mock data, one planted failure, no UI, no observability code. Use when the scenario's framework is pure-python, or UNANSWERED and the participant chooses this path. The participant instruments it by hand afterwards.
 ---
 
 # build-agent-python
 
 You produce the customer's agent, not the observability setup. On this path the
-team builds every span by hand with the SDK logger, so the skeleton must leave
+participant builds every span by hand with the SDK logger, so the skeleton must leave
 clean seams and nothing more.
 
 ## Environment
@@ -41,14 +41,15 @@ optionally followed by an output directory. Default output: `agents/<slug>-pytho
      in `nodes.py` or `agents.py` is HR-shaped. Rewrite it as the customer's
      sensitive data (a subscriber record, say).
    - `questions.txt`: 30 inputs in the users' voice; 3 hit the feared failure,
-     2 are out of scope, 1 is a prompt injection.
+     2 are out of scope, 1 is a prompt injection (for `injection_success`, 3 match
+     `failure.TRIGGERS`, so a failing batch shows it).
    - Prompts in `agents.py`: category list and persona wording. Do not add
      agents. Tool names and schema descriptions in `tools.py` if the customer's
      tools have obvious names. Do not add a fourth tool unless the scenario names one.
    - `README.md` title and description.
 4. Keep the seams. `handle()` is one run, each `*_agent` is one agent, `chat()`
    and the loop in `action_agent` are the model calls, `run_tool()` is every
-   tool call. The team will wrap exactly those. Do not restructure them.
+   tool call. The participant will wrap exactly those. Do not restructure them.
 5. Keep the guarantees: no UI, no extra agents or tools, no memory, retries,
    streaming, or anything on the forbidden list in `shared/check_skeleton.py`.
 6. Create a venv with Python 3.12 and install the requirements.
@@ -69,14 +70,14 @@ optionally followed by an output directory. Default output: `agents/<slug>-pytho
 - While building: adding the splunk-ao SDK, OpenTelemetry, evaluators, controls,
   or alerts to the skeleton: decline, point at https://agent-observability-docs.splunk.com,
   and explain that the participant sets that up to learn it. Once the agent is
-  built and they ask you to instrument it, follow `CLAUDE.md`: explain each edit
-  before you make it.
+  built and they ask you to instrument it, follow the teach-mode instructions (`CLAUDE.md` in Claude
+  Code, `.cursor/rules/02-teach-mode.mdc` in Cursor): explain each edit before you make it.
 - Swapping in a framework "to make it easier": decline. This path exists to
   practice instrumenting an agent that has no framework.
 
 ## Model provider
 
-OpenAI chat completions against the host endpoint (`OPENAI_API_KEY`,
+OpenAI chat completions against the endpoint in the environment (`OPENAI_API_KEY`,
 `OPENAI_BASE_URL`, model `gpt-4.1-mini`). Do not swap providers.
 
 ## The write tool

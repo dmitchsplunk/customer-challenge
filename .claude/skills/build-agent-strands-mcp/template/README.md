@@ -3,7 +3,7 @@
 A Strands agent whose tools all come from a small MCP server the skeleton also
 provides. One agent, three MCP tools (two reads, one write), mock data, no UI.
 **No observability code.** On this path Strands emits OpenTelemetry natively;
-the team configures where it goes and in what shape. That is the lesson, and it
+you configure where it goes and in what shape. That is the lesson, and it
 has sharp edges on purpose.
 
 ## Run it
@@ -40,6 +40,8 @@ yesterday's data), `pii_leak`, `latency`, `injection_success`. Synthetic only.
 | `failure.py` | Planted failure switch. |
 
 ## What you still have to do
+
+These are steps 5 to 8 of the main README.
 
 - Get traces into your project. Strands speaks OpenTelemetry; you set the
    exporter, the endpoint, the headers, and the semantic-convention mode. Read

@@ -1,8 +1,8 @@
 # The workshop environment
 
 What is already on each participant's EC2 workshop host, and what that means for
-how you build, instrument, and show your agent. Read this before step 3 of the
-participant guide. The agent runs with the Python already on the host. You do
+how you build, instrument, and show your agent. Read this with step 3 of the
+README. You install Python 3.12 in step 3 and use it for the agent. You do
 not install a model, create a Splunk project, or apply a laptop proxy fix.
 
 ## Already on the host
@@ -15,13 +15,13 @@ env | grep -E 'SPLUNK_AO|^INSTANCE=|OPENAI'
 
 | Variable | What it is | What you do with it |
 |---|---|---|
-| `OPENAI_API_KEY` | Key for the OpenAI-compatible endpoint on this host. | The agent reads it from the environment. Do not clear it, and do not put it in a file. |
+| `OPENAI_API_KEY` | Key for the OpenAI-compatible endpoint on this host. | If it is set, leave it set; the agent reads it from the environment. If it is empty, ask your facilitator. |
 | `OPENAI_BASE_URL` | That endpoint. | The starter agents pass it as the client's base URL. |
 | `SPLUNK_AO_CONSOLE_URL` | Agent Observability console for this instance. | Open this URL in a browser to see traces. |
 | `SPLUNK_AO_API_URL` | API the `splunk-ao` SDK calls. | Leave it set. The SDK reads it. |
 | `SPLUNK_AO_API_KEY` | Key the SDK uses to send traces. | Leave it set. Do not paste it into code. |
 | `SPLUNK_AO_PROJECT` | Project on this instance. Traces go here. | Use this project. Do not create another one. |
-| `INSTANCE` | Agent stream name for this host. | Pass it as `agent_stream` when you create the logger. The SDK does not read `INSTANCE` by itself. |
+| `INSTANCE` | Agent stream name for this host. | Your `.env` sets `SPLUNK_AO_AGENT_STREAM=${INSTANCE}`, so the SDK reads it. Or pass it as `agent_stream` when you create the logger. |
 | `SPLUNK_AO_USER` | Console login. | Browser only. The SDK does not read it. |
 | `SPLUNK_AO_PASSWORD` | Console login. | Browser only. The SDK does not read it. |
 | `SPLUNK_AO_USER_ID` | Console login. | Browser only. The SDK does not read it. |
@@ -32,7 +32,7 @@ not preset; you do not need to set it.
 
 The SDK sends traces with `SPLUNK_AO_CONSOLE_URL`, `SPLUNK_AO_API_URL`,
 `SPLUNK_AO_API_KEY`, and `SPLUNK_AO_PROJECT`. The agent stream is `INSTANCE`.
-The SDK does not read that name on its own, so the logger has to be given it:
+If you do not use the `.env` line, give it to the logger yourself:
 
 ```python
 logger = SplunkAOLogger(
