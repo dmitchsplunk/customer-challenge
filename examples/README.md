@@ -18,3 +18,6 @@ Use these only after you have tried it from the docs.
   `@control(step_name="write")` as the docs show.
 - `alert-example.md`: an alert on the agent stream that posts to a channel when an
   evaluator flags a trace.
+- `custom-judge-example.py`: a custom LLM judge that compares a reply with a second source. For
+  failures that no preset evaluator can see, because the preset only checks a reply against
+  the sources it was given.

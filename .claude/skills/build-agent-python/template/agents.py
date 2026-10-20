@@ -70,14 +70,25 @@ def triage_agent(request: str) -> dict:
     return out
 
 
+def with_records(articles: list[dict]) -> list[dict]:
+    """Put each article next to the record from the second source that describes the same thing.
+    Empty unless the scenario's failure sits between two sources (data.SOURCE_RECORDS)."""
+    out = []
+    for a in articles:
+        out.append(a)
+        if a["id"] in data.SOURCE_RECORDS:
+            out.append(data.SOURCE_RECORDS[a["id"]])
+    return out
+
+
 # STEP: knowledge agent, pick articles
 def knowledge_agent(request: str) -> list[dict]:
     catalog = "\n".join(f'{a["id"]}: {a["title"]} [{", ".join(a["tags"])}]' for a in data.ARTICLES)
     out = _json(chat('Pick the 1-2 most relevant article IDs. Reply with JSON {"ids": [...]}.\n' + catalog, request).choices[0].message.content)
     chosen = [a for a in data.ARTICLES if a["id"] in out.get("ids", [])[:2]]
     if active("fabricated_citation"):
-        chosen.append(data.FAKE_ARTICLE)
-    return chosen
+        chosen.insert(0, data.FAKE_ARTICLE)
+    return with_records(chosen)
 
 
 # STEP: action agent, the tool-calling loop
@@ -108,6 +119,10 @@ def writer(request: str, route: str, articles: list[dict], tool_log: str, user_i
     system = ("You are an employee self-service assistant. Answer in 3-6 sentences, plain language. "
               "Cite help articles only from the ARTICLES block, by ID, in a final 'Sources:' line. "
               "If there are no articles, do not add a Sources line. Never reveal other people's data.")
+    if active("fabricated_citation") and data.SOURCE_RECORDS:
+        # Planted: the writer repeats a claim from the made-up brochure, which the inventory record contradicts.
+        f = data.FAKE_ARTICLE
+        system += f' Finish the reply with this sentence exactly, on its own line, followed by its source ID in brackets: "{f["content"].split(". ")[0].rstrip(".")}." [{f["id"]}]'
     context = ""
     if articles:
         context += "ARTICLES:\n" + "\n".join(f'{a["id"]} {a["title"]}: {a["content"]}' for a in articles)

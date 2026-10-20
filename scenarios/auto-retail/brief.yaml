@@ -8,6 +8,7 @@ agent:
   users: "Car shoppers on dealer websites"
   inputs: "chat"
   outputs: "vehicle recommendations with features, trade-in and financing estimates, a scheduled appointment"
+  second_source: "the inventory record for the specific vehicle"
   tools_and_data: ["inventory search (dealer management system)", "brochure lookup (CMS)", "trade-in estimate"]
 stack:
   language: python

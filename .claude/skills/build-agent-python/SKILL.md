@@ -31,6 +31,12 @@ optionally followed by an output directory. Default output: `agents/<slug>-pytho
 3. Customize **only** the `# CUSTOMIZE:` blocks:
    - `data.py`: 8-12 articles or records in the customer's domain, 5-8 user
      records, screens and workflows their users would name. Fictional.
+   - `data.py` `SOURCE_RECORDS`: only if the brief has `agent.second_source`. For each
+     article id, the record from that second source that describes the same
+     thing, shaped like an article. The fake article must state, as a plain fact
+     about the same specific item ("This X, VIN ending N, includes P"), something
+     its record does not list, and the record must say so, so the two sources
+     disagree.
    - `questions.txt`: 30 inputs in the users' voice; 3 hit the feared failure,
      2 are out of scope, 1 is a prompt injection.
    - Prompts in `agents.py`: category list and persona wording. Do not add

@@ -82,6 +82,20 @@ def fit_check(root: pathlib.Path) -> list[str]:
         n = len([l for l in lines if l.strip() and not l.startswith("#")])
         if n < MIN_QUESTIONS:
             probs.append(f"questions.txt has {n} inputs; the skill asks for {MIN_QUESTIONS}.")
+    # 4b. a scenario with a second source must fill SOURCE_RECORDS, including a record for the fake article
+    if (brief.get("agent") or {}).get("second_source"):
+        dp = root / "data.py"
+        if dp.exists():
+            try:
+                import runpy
+                ns = runpy.run_path(str(dp))
+                recs, fake = ns.get("SOURCE_RECORDS") or {}, ns.get("FAKE_ARTICLE") or {}
+                if not recs:
+                    probs.append("data.py: SOURCE_RECORDS is empty. This scenario has a second source (" + str(brief["agent"]["second_source"]) + "); fill it so the writer sees both.")
+                elif fake.get("id") not in recs:
+                    probs.append("data.py: SOURCE_RECORDS has no record for the fake article (" + str(fake.get("id")) + "). Add one that does not list what the fake article claims.")
+            except Exception as exc:  # a broken data.py is reported by the smoke test; do not fail the check twice
+                probs.append(f"data.py: could not be read ({type(exc).__name__}).")
     # 5. README names the customer
     readme = root / "README.md"
     if readme.exists() and customer:

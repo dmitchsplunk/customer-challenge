@@ -34,6 +34,12 @@ optionally followed by an output directory. Default output: `agents/<slug>-langg
    - `data.py`: 8-12 articles or records in the customer's domain, 5-8 user
      records, the screens and workflows their users would name. Fictional. Keep
      the real-ID prefix consistent and the fake article's ID outside it.
+   - `data.py` `SOURCE_RECORDS`: only if the brief has `agent.second_source`. For each
+     article id, the record from that second source that describes the same
+     thing, shaped like an article. The fake article must state, as a plain fact
+     about the same specific item ("This X, VIN ending N, includes P"), something
+     its record does not list, and the record must say so, so the two sources
+     disagree.
    - `questions.txt`: 30 inputs in the users' own voice. Include 3 that hit the
      feared failure, 2 out-of-scope asks, 1 prompt injection.
    - Node prompts in `agent/nodes.py`: category list and persona wording only.

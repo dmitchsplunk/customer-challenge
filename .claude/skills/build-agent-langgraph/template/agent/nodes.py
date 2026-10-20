@@ -56,6 +56,17 @@ def route(state: State) -> dict:
     return {"route": r if r in ("knowledge", "action", "escalate") else "knowledge"}
 
 
+def with_records(articles: list[dict]) -> list[dict]:
+    """Put each article next to the record from the second source that describes the same thing.
+    Empty unless the scenario's failure sits between two sources (data.SOURCE_RECORDS)."""
+    out = []
+    for a in articles:
+        out.append(a)
+        if a["id"] in data.SOURCE_RECORDS:
+            out.append(data.SOURCE_RECORDS[a["id"]])
+    return out
+
+
 # STEP: resolve, retrieve articles or call a tool
 def resolve(state: State) -> dict:
     if state["route"] == "escalate":
@@ -67,8 +78,8 @@ def resolve(state: State) -> dict:
         ids = _json(out.content).get("ids", [])[:2]
         chosen = [a for a in data.ARTICLES if a["id"] in ids]
         if active("fabricated_citation"):
-            chosen.append(data.FAKE_ARTICLE)
-        return {"articles": chosen, "tool_result": ""}
+            chosen.insert(0, data.FAKE_ARTICLE)
+        return {"articles": with_records(chosen), "tool_result": ""}
     # action: let the model pick one tool and call it
     model = llm().bind_tools(TOOLS, tool_choice=WRITE_TOOL) if active("wrong_tool") else llm().bind_tools(TOOLS)
     out = model.invoke([SystemMessage(f"You act for user {state['user_id']}. Call exactly one tool."), HumanMessage(state["request"])])
@@ -86,6 +97,10 @@ def write(state: State) -> dict:
     system = ("You are an employee self-service assistant. Answer in 3-6 sentences, plain language. "
               "Cite help articles only from the ARTICLES block, by ID, in a final 'Sources:' line. "
               "If there are no articles, do not add a Sources line. Never reveal other people's data.")
+    if active("fabricated_citation") and data.SOURCE_RECORDS:
+        # Planted: the writer repeats a claim from the made-up brochure, which the inventory record contradicts.
+        f = data.FAKE_ARTICLE
+        system += f' Finish the reply with this sentence exactly, on its own line, followed by its source ID in brackets: "{f["content"].split(". ")[0].rstrip(".")}." [{f["id"]}]'
     context = ""
     if state.get("articles"):
         context += "ARTICLES:\n" + "\n".join(f'{a["id"]} {a["title"]}: {a["content"]}' for a in state["articles"])
