@@ -4,7 +4,7 @@ alwaysApply: true
 ---
 
 This repo runs on a prepared EC2 workshop host. Before suggesting any setup, read
-`LAB-ENVIRONMENT.md` and follow it. In short:
+`environment/LAB-ENVIRONMENT.md` and follow it. In short:
 
 - Model: call the OpenAI-compatible endpoint already in the environment.
   `OPENAI_API_KEY` and `OPENAI_BASE_URL` are preset. Do not ask for a key and

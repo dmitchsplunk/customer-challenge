@@ -3,7 +3,7 @@ description: SAO Customer Challenge workshop. How to run the build and coach ski
 alwaysApply: true
 ---
 
-This repo is the SAO Customer Challenge. Participants read `scenarios/START-HERE.md`,
+This repo is the SAO Customer Challenge. Participants read the README,
 then their scenario, fill `worksheets/design-worksheet.md`, generate a starter agent,
 and instrument it themselves.
 
@@ -22,8 +22,10 @@ Hard rules that apply in every case:
 - The generated agent must contain no observability code (no splunk_ao, galileo,
   opentelemetry, langsmith, langfuse imports; no SPLUNK_AO_, OTEL_ or GALILEO_ variables).
   `python shared/check_skeleton.py <dir>` must print OK before you are done.
-- Never add evaluators, controls, alerts, or tracing to the skeleton for the
-  team. That is the exercise. Point them at https://agent-observability-docs.splunk.com instead.
+- While building the starter agent, never add evaluators, controls, alerts, or
+  tracing to it. Point them at https://agent-observability-docs.splunk.com instead.
+  Later, when the participant asks you to instrument their agent, follow
+  `02-teach-mode.mdc`: explain each edit before you make it.
 - When anyone instruments an agent in this repo, the SDK is `splunk-ao`
   (`from splunk_ao import SplunkAOLogger`, `SPLUNK_AO_*` variables). Never the
   `galileo` package.

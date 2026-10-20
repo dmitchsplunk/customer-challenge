@@ -60,9 +60,11 @@ optionally followed by an output directory. Default output: `agents/<slug>-langg
 
 ## Refusals
 
-- If asked to add the splunk-ao SDK, OpenTelemetry, evaluators, controls, or
-  alerts to the skeleton: decline and point at https://agent-observability-docs.splunk.com. Say why: the
-  team has to set that up to learn it.
+- While building: if asked to add the splunk-ao SDK, OpenTelemetry, evaluators,
+  controls, or alerts to the skeleton, decline and point at
+  https://agent-observability-docs.splunk.com. Say why: the participant has to set
+  that up to learn it. Once the agent is built and they ask you to instrument
+  it, follow `CLAUDE.md`: explain each edit before you make it.
 - If asked to make the agent "more realistic" beyond the caps: decline. Offer to
   change names, data, and prompts instead.
 

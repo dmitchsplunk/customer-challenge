@@ -57,9 +57,11 @@ optionally followed by an output directory. Default output: `agents/<slug>-pytho
 
 ## Refusals
 
-- Adding the splunk-ao SDK, OpenTelemetry, evaluators, controls, or alerts to
-  the skeleton: decline, point at https://agent-observability-docs.splunk.com, explain that the team must
-  set that up to learn it.
+- While building: adding the splunk-ao SDK, OpenTelemetry, evaluators, controls,
+  or alerts to the skeleton: decline, point at https://agent-observability-docs.splunk.com,
+  and explain that the participant sets that up to learn it. Once the agent is
+  built and they ask you to instrument it, follow `CLAUDE.md`: explain each edit
+  before you make it.
 - Swapping in a framework "to make it easier": decline. This path exists to
   practice instrumenting an agent that has no framework.
 
