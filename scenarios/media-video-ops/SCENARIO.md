@@ -119,7 +119,7 @@ minutes, console open: what you built, which evaluators and control you set
 up and why, and what you hit. Coaches give feedback. After the bootcamp, a
 recorded demo run as the customer meeting with the people in "Who you will
 present to", answering the questions in "What they said they want". The
-facilitator gives the window and where to submit it. Three screens, each tied to a numbered item: the injected alert
+facilitator gives the window and where to submit it. Three console views, each tied to a numbered item: the injected alert
 blocked before the model runs, with the evaluator flag on the record (1 and 2);
 a grounding score with its rationale on a reply (3); token cost and latency per
 agent with an alert on a spend threshold (5). Then your three to five success

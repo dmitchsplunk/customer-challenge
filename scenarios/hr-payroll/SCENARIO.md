@@ -69,7 +69,7 @@ failure in your starter agent (`pii_leak`).
 Two things.
 
 1. A short show and tell for your coach and team, two to three minutes. Show
-   three screens in Splunk Agent Observability, each tied to one of the quotes
+   three console views in Splunk Agent Observability, each tied to one of the quotes
    in "What they said they want". Say what you built and what you configured.
 2. Your success criteria: three to five lines, in the customer's words.
 

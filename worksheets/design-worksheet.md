@@ -28,8 +28,10 @@ Rules of thumb to check with your team:
 
 Out of scope hand-off: ______________________________________________
 
-## The three screens
-What the customer sees, in order. One line each.
+## The three console views
+What the customer sees in the console, in order. One line each.
+These are pages in the Splunk Agent Observability console, not screens of your
+agent (it has no UI). Picking them now is how you plan what you will demo.
 1. 
 2. 
 3. 

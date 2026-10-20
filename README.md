@@ -59,9 +59,13 @@ customer didn't say something, you don't know it; don't invent it for the demo.
 
 Fill in `worksheets/design-worksheet.md`. Three to five rows. Each row starts
 with a quote, then what you'll show, which product feature does it, and how
-you'll set it up. Below the table: the three screens you'll show, the metadata
+you'll set it up. Below the table: the three console views you'll show, the metadata
 you'll tag on every trace, and the build path (the scenario's framework tells
 you which build skill).
+
+The three console views are pages in the Splunk Agent Observability console, not
+screens of your agent, which has no UI. Picking them now is how you plan what
+you will demo.
 
 Keep it next to this README for now, as `worksheets/my-worksheet.md`. Once the
 agent folder exists in step 4, move it to `agents/<your folder>/readout/worksheet.md`.
@@ -285,10 +289,10 @@ minutes per person. This is informal. It is not a certification demo.
 
 A short turn in front of your group, console open: what you built, which
 evaluators and control you set up and why, what you hit along the way, and
-which quote each screen answers. This is not a customer presentation; it is
+which quote each view answers. This is not a customer presentation; it is
 how the group learns from each other and how the coaches see where everyone
 is. Coaches give feedback on the spot on four
-things: does every screen trace back to the customer, are the evaluators and
+things: does every view trace back to the customer, are the evaluators and
 control the right ones and why, would the customer agree with the success
 criteria, can you explain every setting and line you wrote.
 

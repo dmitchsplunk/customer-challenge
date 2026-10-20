@@ -25,7 +25,7 @@
 - [ ] At least one of the two is present and demonstrated.
 
 ## Demo
-- [ ] Three screens, each tied to a quote.
+- [ ] Three console views, each tied to a quote.
 - [ ] Under two minutes on the agent itself.
 - [ ] Out-of-scope asks from the scenario are handed off, not claimed.
 - [ ] The team can explain every line of instrumentation.

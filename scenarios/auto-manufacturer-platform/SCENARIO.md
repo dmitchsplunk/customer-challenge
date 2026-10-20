@@ -82,7 +82,7 @@ minutes, console open: what you built, which evaluators and control you set
 up and why, and what you hit. Coaches give feedback. After the bootcamp, a
 recorded demo run as the customer meeting with the people in "Who you will
 present to", answering the questions in "What they said they want". The
-facilitator gives the window and where to submit it. Three screens, each tied to one of the quotes, then your three
+facilitator gives the window and where to submit it. Three console views, each tied to one of the quotes, then your three
 to five success criteria. The thing they actually asked for is proof that you
 can tell, per tool, whether it was the right call and whether it worked: tool
 selection quality and tool error rate, per tool, on the trace.

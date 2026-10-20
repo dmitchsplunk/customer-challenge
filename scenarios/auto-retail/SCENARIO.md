@@ -84,7 +84,7 @@ up and why, and what you hit. Coaches give feedback. After the bootcamp, a
 recorded demo run as the customer meeting with the people in "Who you will
 present to", answering the questions in "What they said they want". The
 facilitator gives the window and where to submit it. The head of ML will ask "is this calibrated?"; the evaluation
-owner will say they've seen it. Three screens, each tied to one of the quotes,
+owner will say they've seen it. Three console views, each tied to one of the quotes,
 then your three to five success criteria. The win is a custom judge grounded
 against inventory, with a rationale the head of ML would accept, and honesty
 about what tokenomics does and doesn't attribute.
