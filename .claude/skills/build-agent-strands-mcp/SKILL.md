@@ -51,8 +51,10 @@ optionally followed by an output directory. Default output: `agents/<slug>-stran
 
 ## Refusals
 
-- Configuring OpenTelemetry export, the splunk-ao SDK, evaluators, controls, or
-  alerts in the skeleton: decline, point at https://agent-observability-docs.splunk.com, say why.
+- While building: configuring OpenTelemetry export, the splunk-ao SDK, evaluators,
+  controls, or alerts in the skeleton: decline, point at
+  https://agent-observability-docs.splunk.com, say why. Once it is built and they
+  ask you to instrument it, follow `CLAUDE.md`: explain each edit before you make it.
 - Replacing the MCP server with in-process tools "to simplify": decline. The MCP
   boundary is what the customer cares about.
 
