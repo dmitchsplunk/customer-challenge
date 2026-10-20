@@ -58,6 +58,12 @@ def fit_check(root: pathlib.Path) -> list[str]:
                 if needle in text:
                     probs.append(f"{p.relative_to(root)}: HR template text left in place ('{needle}'). Customize it for {customer or 'the customer'}.")
                     break
+    # 1b. the planted record must not be the HR one
+    if slug and slug != "hr-payroll":
+        for p, text in code.items():
+            if "987-65-4321" in text:
+                probs.append(f"{p.relative_to(root)}: the planted record is still the HR one (987-65-4321). Rewrite it as {customer or 'the customer'}'s sensitive data.")
+                break
     # 2. the write tool is set and exists
     for p in tools_files:
         text = code[p]

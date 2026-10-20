@@ -25,7 +25,7 @@ tool call: open the direct-deposit screen, start a workflow, or look up the
 employee's own record for things like the next pay date or PTO balance
 (resolve). A last step writes the reply the employee sees (write).
 
-Your starter agent is the same four steps and three tools, over 20 synthetic
+Your starter agent is the same four steps and three tools, over synthetic
 help articles and a handful of synthetic employee records.
 
 | | |
@@ -35,12 +35,12 @@ help articles and a handful of synthetic employee records.
 | Hosting | Cloud |
 | Steps | Intake (turn the request into a ticket), route, resolve (articles or one tool call), write the reply |
 | Tools | Open a screen, start a workflow, look up the requesting employee's own record |
-| Data | 20 help articles, employee records, screen and workflow names |
+| Data | Help articles, employee records, screen and workflow names |
 
 ## Who you will present to
 | Role | Cares about |
 |---|---|
-| Systems engineer, would administer the platform | Admin overhead on his team, one consolidated view across their environments, latency alerting |
+| Systems engineer, would administer the platform | Admin overhead on their team, one consolidated view across their environments, latency alerting |
 | Monitoring and guardrails lead | Detailed traces, accurate guardrails, anomaly alerting |
 | Data science lead | How agent-to-agent orchestration is traced, using their own models for evaluation, role-based access for agents |
 | Security lead | Guardrails |
@@ -75,4 +75,5 @@ This is not a certification demo. After the bootcamp you record a full
 customer-facing demo of your agent for L2. The session explains how.
 
 ## Next
-Finished reading? Go to the README, Step 2: the design worksheet.
+Finished reading? Go to the README at the repo root, step 2: the design
+worksheet. It lists every step from here to the show-and-tell.

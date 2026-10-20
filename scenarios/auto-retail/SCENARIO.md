@@ -12,11 +12,9 @@ scale across 20 business units, it doesn't close the loop automatically, and
 nobody has one governance view or a clear picture of token spend. They have
 already seen a tour of our product and said they'd seen it all elsewhere.
 
-**Where they're heading.** Keep LangFuse for developer tracing and add an
-enterprise layer on top: calibrated evaluators that catch grounding failures
-between their own systems, a loop that improves without a human in it every
-time, governance across all projects, and cost visibility that holds up with
-their buyer.
+**Where they're heading.** They keep LangFuse for developer tracing. They want a
+loop that improves without a human in it every time, governance across all
+projects, and cost visibility that holds up with their buyer.
 
 ## The agent
 A car-shopping assistant embedded in dealer websites. A shopper chats with it
@@ -29,23 +27,17 @@ for the matching models from the marketing brochures, compares the candidates,
 estimates the trade-in and a monthly payment, and offers a test-drive slot. A
 writer turns all of that into the reply.
 
-Your starter agent is smaller than the real one: route, look up inventory and
-the brochure, compare, write. Keep it small.
+Your starter agent is smaller than the real one: intake, route, look up (a
+brochure and the dealer's inventory record for the vehicle), write. Keep it small.
 
 | | |
 |---|---|
 | Language and framework | Python, LangGraph |
 | Model | Bedrock |
 | Hosting | AWS |
-| Steps | Route, look up inventory and brochure, compare, write the reply |
-| Tools | Inventory search, brochure lookup, trade-in estimate |
-
-## The failure they have actually seen
-The assistant tells a shopper that a vehicle has a feature, such as a
-hands-free driving package, that the dealer's records do not show for that
-vehicle, and cites a brochure for it. Nobody finds out until a shopper arrives
-asking for it. This is the planted failure in your starter agent
-(`fabricated_citation`).
+| Steps | Intake, route, look up (brochures and inventory records), write the reply |
+| Tools | Inventory lookup, trade-in estimate, test-drive booking |
+| Data | Brochures, inventory records, vehicle names |
 
 ## Who you will present to
 | Role | Cares about |
@@ -62,6 +54,13 @@ From meeting notes, so the wording is close rather than exact.
 - Head of ML: "Is this calibrated?"
 - Buyer: wants to see where the spend goes, and one governance view across the business units.
 - The team: "We're not replacing LangFuse."
+
+## The failure they fear most
+The assistant tells a shopper that a vehicle has a feature, such as a
+hands-free driving package, that the dealer's records do not show for that
+vehicle, and cites a brochure for it. Nobody finds out until a shopper arrives
+asking for it. This is the planted failure in your starter agent
+(`fabricated_citation`).
 
 ## Your deliverable
 Two things.

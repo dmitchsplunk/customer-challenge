@@ -24,9 +24,9 @@ team's tools.
 
 A typical run: an engineer asks "Which hosts on the paint line were degraded
 in the last hour? Raise the disk alert threshold to 90 percent." The agent
-works out what is being asked (triage), finds the relevant internal doc
-(knowledge), then calls the tools: search events, check host status, update an
-alert (action). A writer turns the results into a short answer.
+works out what is being asked (triage), then either answers from the
+internal docs (knowledge) or calls the tools: search events, check host status,
+update an alert (action). A writer turns the result into a short answer.
 
 In production those tools sit behind MCP servers the team built, and engineers
 reach them from several different coding assistants, which don't always pick
@@ -38,7 +38,7 @@ Python functions with the same names and shapes, so you build no MCP plumbing.
 | Language and framework | Python; no framework. A hand-written tool-calling loop. |
 | Model | On Bedrock, behind their own gateway |
 | Hosting | On-prem |
-| Shape | A triage step, a knowledge step over internal docs, an action step that calls the tools, and a writer. Two read tools, one write tool. |
+| Shape | A triage step, then either a knowledge step over internal docs or an action step that calls the tools, and a writer. Two read tools, one write tool. |
 | Tools | Search events, host status, update an alert |
 | Data | Log events, host health, alert definitions |
 

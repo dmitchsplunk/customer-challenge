@@ -18,7 +18,7 @@ stack:
   uses_mcp: true
 traffic: UNANSWERED
 constraints:
-  - "fully on-prem; no cloud services"
+  - "everything runs on-prem, including Splunk"
   - "own inference gateway in front of the model"
   - "owners of many agents must see only their own data"
 competing_tools: ["homegrown tooling for token cost and pieces of monitoring"]

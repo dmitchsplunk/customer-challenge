@@ -9,7 +9,7 @@ agent:
   inputs: "chat"
   outputs: "vehicle recommendations with features, trade-in and financing estimates, a scheduled appointment"
   second_source: "the inventory record for the specific vehicle"
-  tools_and_data: ["inventory search (dealer management system)", "brochure lookup (CMS)", "trade-in estimate"]
+  tools_and_data: ["inventory lookup (dealer management system)", "trade-in estimate", "test-drive booking"]
 stack:
   language: python
   framework: langgraph

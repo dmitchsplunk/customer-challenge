@@ -12,7 +12,7 @@ agent:
 stack:
   language: python
   framework: pure-python
-  model_provider: bedrock
+  model_provider: hosted
   model: a hosted model, reached through an API key the platform team issued
   hosting: on-prem
   uses_mcp: UNANSWERED

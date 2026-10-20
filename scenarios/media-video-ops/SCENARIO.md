@@ -18,8 +18,7 @@ to an analyst.
 their existing security workflow and observability stack: injections blocked
 live, data exfiltration stopped at the tool call, grounding scored, spend
 governed, flagged sessions reviewed by a person. They sent a list of eight
-things they want to see; the challenge is to deliver the five that are ours and
-be honest about the other three.
+things they want to see.
 
 ## The agent
 An incident triage bot for the team that runs video infrastructure. It sits in
@@ -27,15 +26,15 @@ the on-call channel and does the first pass on every alert so an engineer
 doesn't have to.
 
 A typical run: monitoring raises "encoder ENC-204 dropped output on channel
-17." The bot classifies the alert and sets a severity (triage), finds the
-matching runbook (knowledge), then calls tools: look up the device's status,
-open or update the ticket, post to the on-call channel (action). A writer
+17." The bot classifies the alert and sets a severity (triage), then
+either finds the matching runbook (knowledge) or calls tools: look up the
+device's status, open or update the ticket, post to the on-call channel
+(action). A writer
 produces the summary the on-call engineer reads. It handles 10 to 15 incidents
 a day.
 
 The customer's list below also mentions a customer-facing agent. For the
-challenge, the triage bot is the one you build, and the grounding score is
-shown on its replies.
+challenge, the triage bot is the one you build.
 
 Your starter agent is the same four steps and three tools, over synthetic
 runbooks, devices, tickets, and subscriber records.
