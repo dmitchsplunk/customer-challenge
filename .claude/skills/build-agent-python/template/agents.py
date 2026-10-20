@@ -124,6 +124,7 @@ def writer(request: str, route: str, articles: list[dict], tool_log: str, user_i
 
 def handle(request: str, user_id: str) -> dict:
     """One full run. Instrument around this and inside the agents when you wire observability."""
+    # INSTRUMENT HERE: start the trace here, add spans inside the agents, conclude and flush at the end.
     ticket = triage_agent(request)
     route = ticket.get("route", "knowledge")
     articles, tool_log = [], ""

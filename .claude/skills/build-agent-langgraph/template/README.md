@@ -36,16 +36,16 @@ controls have something to catch. Synthetic data only.
 
 ## What you still have to do
 
-The skeleton does none of this; it is the team's work.
+The skeleton does none of this; it is yours to do. These are steps 5 to 7 of the main README.
 
-1. Get traces into your project: instrument the graph with the splunk-ao SDK.
-2. Tag every trace with the metadata the customer asked to filter by.
-3. Turn on the evaluators your design worksheet says, and no more.
-4. Stretch: write one custom judge in the customer's own definition of a bad answer.
-5. Make something act on the failure: one runtime control on the right step,
+- Get traces into your project: instrument the graph with the splunk-ao SDK.
+- Tag every trace with the metadata the customer asked to filter by.
+- Turn on the evaluators your design worksheet says, and no more.
+- Stretch: write one custom judge in the customer's own definition of a bad answer.
+- Make something act on the failure: one runtime control on the right step,
    or one alert that reaches someone outside the console. One is enough; both
    is better.
-6. Run the batch, flip the failure on, and make sure the above catches it.
-7. Build the three-screen demo from the worksheet.
+- Run the batch, flip the failure on, and make sure the above catches it.
+- Show the console views from your worksheet.
 
 Docs: https://agent-observability-docs.splunk.com (SDK: `pip install splunk-ao`)

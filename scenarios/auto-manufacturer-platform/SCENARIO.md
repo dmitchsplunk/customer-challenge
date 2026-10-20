@@ -61,31 +61,24 @@ In their words, lightly cleaned up.
 A tool "not used the way I think it is": the agent calls the write tool,
 update an alert, on a request that only asked a question. Nobody asked for a
 change and something changed. This is the planted failure in your starter
-agent (`wrong_tool`). It is the kind of thing an evaluator flags per tool,
-and the kind of thing a control can refuse: no write unless the request
-asked for one.
+agent (`wrong_tool`).
 
 ## What changes what you show
 - Many agent owners, each of whom must see only their own data. In the lab you
   have one project and your own agent stream, so your stream stands in for an
-  owner's project: say "one project per owner" over the project list. It is a
-  screen, not a footnote.
-
-## Out of scope
-- Monitoring the load on their MCP server. That is APM and the Splunk platform, not this product. A team that builds load dashboards missed the lead's actual ask.
-- Building a pretty agent. They said "lots of small tools," not "a chat UI."
-- Claiming to see agents nobody instrumented.
+  owner's project: say "one project per owner" over the project list.
 
 ## Your deliverable
-Two parts. In the session, a short show-and-tell to your group, two to three
-minutes, console open: what you built, which evaluators and control you set
-up and why, and what you hit. Coaches give feedback. After the bootcamp, a
-recorded demo run as the customer meeting with the people in "Who you will
-present to", answering the questions in "What they said they want". The
-facilitator gives the window and where to submit it. Three console views, each tied to one of the quotes, then your three
-to five success criteria. The thing they actually asked for is proof that you
-can tell, per tool, whether it was the right call and whether it worked: tool
-selection quality and tool error rate, per tool, on the trace.
+Two things.
+
+1. A short show and tell for your coach and team, two to three minutes, console
+   open. Show the console views that show what you solved for the customer,
+   each tied to one of the quotes in "What they said they want". Say what you
+   built and what you configured.
+2. Your success criteria: three to five lines, in the customer's words.
+
+This is not a certification demo. After the bootcamp you record a full
+customer-facing demo of your agent for L2. The session explains how.
 
 ## Next
 Finished reading? Go to the README at the repo root, step 2: the design

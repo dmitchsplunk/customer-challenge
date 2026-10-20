@@ -56,7 +56,7 @@ runbooks, devices, tickets, and subscriber records.
 | Role | Cares about |
 |---|---|
 | Director of software engineering, engineering security | SOC-level visibility into agentic AI risk; how it plugs into detection and response |
-| Bot developer, owns the code | A change she can ship in one pull request; every tool call visible; the proxy |
+| Bot developer, owns the code | A change they can ship in one pull request; every tool call visible; the proxy |
 | Splunk admin lead | Whether this lands in the Splunk they already run; who gets alerted and how |
 
 ## What they said they want
@@ -82,19 +82,7 @@ And from the bot developer:
 Items 1 and 2 together: an alert's text carries an injected instruction, the
 bot follows it, and a tool call goes after subscriber data. This is the planted
 failure in your starter agent (`injection_success`): with it on, the writer
-obeys an "ignore your instructions" line in the input. The prompt-injection
-evaluator should flag it; a control on the input, before the model runs, should
-stop it.
-
-## What is, and isn't, this product's job
-Five of the eight are this product, and that's your demo: 1, 2, 3, 5, 7. Say
-so plainly, and say the rest plainly too:
-- Item 4, prompt-to-infrastructure correlation in one view, is Splunk
-  Observability Cloud and the platform, with agent traces alongside the
-  infrastructure traces. Show where the agent trace ends; don't claim the rest.
-- Item 6, the assistant, exists but runs on an external model. For a security
-  audience that's a question, not a feature. Mention it, don't lean on it.
-- Item 8, multimodal, is not in scope. Their own bot is text only today.
+obeys an "ignore your instructions" line in the input.
 
 ## What changes what you show
 - Outbound traffic from the bot's host is blocked until a domain is whitelisted.
@@ -104,26 +92,19 @@ so plainly, and say the rest plainly too:
 - 10 to 15 incidents a day is too thin; replay closed incidents into a separate
   agent stream and show that stream.
 - The developer holds no cloud credentials; judge evaluators need an
-  integration the platform team sets up. Lead with Luna evaluators.
-
-## Out of scope
-- Trying to show all eight. Five are yours; three are hand-offs.
-- Showing the injection caught after the fact. They asked for "caught and
-  blocked in real time." That's a control on the input, not an evaluator on the
-  output.
-- Making the agent bigger. One bot, one developer, four steps.
+  integration the platform team sets up.
 
 ## Your deliverable
-Two parts. In the session, a short show-and-tell to your group, two to three
-minutes, console open: what you built, which evaluators and control you set
-up and why, and what you hit. Coaches give feedback. After the bootcamp, a
-recorded demo run as the customer meeting with the people in "Who you will
-present to", answering the questions in "What they said they want". The
-facilitator gives the window and where to submit it. Three console views, each tied to a numbered item: the injected alert
-blocked before the model runs, with the evaluator flag on the record (1 and 2);
-a grounding score with its rationale on a reply (3); token cost and latency per
-agent with an alert on a spend threshold (5). Then your three to five success
-criteria, and the honest sentence about items 4, 6, and 8.
+Two things.
+
+1. A short show and tell for your coach and team, two to three minutes, console
+   open. Show the console views that show what you solved for the customer,
+   each tied to one of the quotes in "What they said they want". Say what you
+   built and what you configured.
+2. Your success criteria: three to five lines, in the customer's words.
+
+This is not a certification demo. After the bootcamp you record a full
+customer-facing demo of your agent for L2. The session explains how.
 
 ## Next
 Finished reading? Go to the README at the repo root, step 2: the design

@@ -62,15 +62,13 @@ The assistant puts personal data, a bank account number or an SSN, into a
 reply, and nobody finds out until someone happens to look. This is the planted
 failure in your starter agent (`pii_leak`).
 
-## Out of scope
-- Comparing against the tracing tool they already run. They described its gaps; they didn't ask for a bake-off.
-
 ## Your deliverable
 Two things.
 
-1. A short show and tell for your coach and team, two to three minutes. Show
-   three console views in Splunk Agent Observability, each tied to one of the quotes
-   in "What they said they want". Say what you built and what you configured.
+1. A short show and tell for your coach and team, two to three minutes, console
+   open. Show the console views that show what you solved for the customer,
+   each tied to one of the quotes in "What they said they want". Say what you
+   built and what you configured.
 2. Your success criteria: three to five lines, in the customer's words.
 
 This is not a certification demo. After the bootcamp you record a full

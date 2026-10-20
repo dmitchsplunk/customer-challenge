@@ -8,7 +8,7 @@ agent:
   users: "Car shoppers on dealer websites"
   inputs: "chat"
   outputs: "vehicle recommendations with features, trade-in and financing estimates, a scheduled appointment"
-  tools_and_data: ["inventory (dealer management system)", "marketing brochures (CMS)", "trade-in valuation", "financing calculator", "scheduler"]
+  tools_and_data: ["inventory search (dealer management system)", "brochure lookup (CMS)", "trade-in estimate"]
 stack:
   language: python
   framework: langgraph
@@ -26,7 +26,7 @@ feared_failure:
   speaker: "meeting notes"
   kind: fabricated_citation
 stakeholders:
-  - "Buyer, second in command / tokenomics, governance across business units"
+  - "Buyer, second in command / where the spend goes, governance across business units"
   - "Head of ML / is this calibrated?"
   - "Technical evaluation owner / automated close-the-loop, not another tour"
   - "New stakeholder / governance"

@@ -17,6 +17,7 @@ USER_ID = os.getenv("DEMO_USER_ID", "E-10001")
 
 
 def ask(graph, request: str, user_id: str = USER_ID) -> dict:
+    # INSTRUMENT HERE: attach the callback and your metadata to this call.
     return graph.invoke({"request": request, "user_id": user_id})
 
 

@@ -41,18 +41,18 @@ yesterday's data), `pii_leak`, `latency`, `injection_success`. Synthetic only.
 
 ## What you still have to do
 
-1. Get traces into your project. Strands speaks OpenTelemetry; you set the
+- Get traces into your project. Strands speaks OpenTelemetry; you set the
    exporter, the endpoint, the headers, and the semantic-convention mode. Read
    the docs carefully: where messages land (attributes vs events) and what the
    endpoint path is both matter.
-2. Make sure every MCP call shows as a tool span with its arguments and result.
-3. Tag every trace with the metadata the customer asked to filter by (user, team, harness).
-4. Turn on the evaluators your design worksheet says, tool-focused ones first.
-5. Run the same questions through a second harness against this same MCP server
+- Make sure every MCP call shows as a tool span with its arguments and result.
+- Tag every trace with the metadata the customer asked to filter by (user, team, harness).
+- Turn on the evaluators your design worksheet says, tool-focused ones first.
+- Run the same questions through a second harness against this same MCP server
    and compare tool choices in an experiment. That is what the customer asked for.
-6. Make something act on the failure: one runtime control on the write tool,
+- Make something act on the failure: one runtime control on the write tool,
    or one alert that reaches someone outside the console.
-7. Run the batch, flip the failure on, make sure the above catches it.
-8. Build the three-screen demo from the worksheet.
+- Run the batch, flip the failure on, make sure the above catches it.
+- Show the console views from your worksheet.
 
 Docs: https://agent-observability-docs.splunk.com (SDK: `pip install splunk-ao`)

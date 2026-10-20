@@ -59,13 +59,13 @@ customer didn't say something, you don't know it; don't invent it for the demo.
 
 Fill in `worksheets/design-worksheet.md`. Three to five rows. Each row starts
 with a quote, then what you'll show, which product feature does it, and how
-you'll set it up. Below the table: the three console views you'll show, the metadata
+you'll set it up. Below the table: the console views you'll show, the metadata
 you'll tag on every trace, and the build path (the scenario's framework tells
 you which build skill).
 
-The three console views are pages in the Splunk Agent Observability console, not
-screens of your agent, which has no UI. Picking them now is how you plan what
-you will demo.
+The console views are pages in the Splunk Agent Observability console that show
+what you solved for the customer. They are not screens of your agent, which has
+no UI.
 
 Keep it next to this README for now, as `worksheets/my-worksheet.md`. Once the
 agent folder exists in step 4, move it to `agents/<your folder>/readout/worksheet.md`.
@@ -209,6 +209,14 @@ This is yours to do, from the docs. Pointers, not answers:
   every trace. `run_batch.py` already rotates through several users. On the
   bootcamp tenant it shows on the spans, not on the trace, so put it on the
   agent spans too.
+- Your console login is on the host. Run
+  `env | grep -E 'SPLUNK_AO_(USER|PASSWORD)'` and sign in at
+  `SPLUNK_AO_CONSOLE_URL` with those. It is different for every Splunk Show event.
+- Cost can show 0.0 for the workshop model. Where the scenario asks about cost,
+  show token counts.
+- Look for the `# INSTRUMENT HERE` comment in your agent (`app.py` on the
+  LangGraph path, `agents.py` on the Python path). That is where the
+  instrumentation goes.
 - Things that bite on the Python path, learned the hard way:
   - Pass `tools=<your tool schemas>` on the LLM spans that may call tools.
     Without it the Tool Selection Quality evaluator errors instead of scoring.
@@ -225,8 +233,11 @@ evaluators need a model integration on the org; the facilitator set one up. If
 an evaluator shows an error about a model integration, that is the org, not
 you: tell the facilitator.
 
+When it works, answer the four questions in `worksheets/instrumentation-notes.md`
+in your own words. Your coach will ask about them at the show-and-tell.
+
 **Done when:** a trace with the full tree is in your project, with your
-metadata on it, and the evaluators are scoring.
+metadata on it, the evaluators are scoring, and your notes are written.
 
 ### End of day one
 
@@ -265,6 +276,8 @@ Prove the failure gets caught and stopped.
    A control's pattern describes what to refuse. The engine has no "unless",
    so write it as the thing to catch: "reads like a question", "contains an
    SSN", "mentions ignore your instructions", not "no change verb".
+   The control example needs `AGENT_CONTROL_API_KEY`. If it is empty on your
+   host, ask your facilitator for it.
 5. Run the coach: `/coach agents/<your folder>` (Cursor: "coach agents/<your
    folder>"). It reads your work and asks the questions the customer will ask.
 
@@ -288,8 +301,8 @@ Each person shows their work to their coach and team. Keep it to two or three
 minutes per person. This is informal. It is not a certification demo.
 
 A short turn in front of your group, console open: what you built, which
-evaluators and control you set up and why, what you hit along the way, and
-which quote each view answers. This is not a customer presentation; it is
+evaluators and control you set up and why, what you hit along the way, and the
+console views that show what you solved for the customer. This is not a customer presentation; it is
 how the group learns from each other and how the coaches see where everyone
 is. Coaches give feedback on the spot on four
 things: does every view trace back to the customer, are the evaluators and
