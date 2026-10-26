@@ -4,7 +4,7 @@ slug: "auto-manufacturer-platform"
 vertical: "Automotive; internal platform engineering"
 agent:
   name: "Internal-tools assistant for platform engineers"
-  purpose: "Takes a plain-language request from an engineer and runs searches, checks host status, or edits alerts in their on-prem Splunk through the platform team's tools"
+  purpose: "Takes a plain-language request from an engineer and runs searches, checks host status, or edits alerts in Splunk through the platform team's tools"
   users: "Internal engineers, from whatever coding assistant they use"
   inputs: "natural-language requests"
   outputs: "search results, alert changes, summaries"
@@ -12,13 +12,12 @@ agent:
 stack:
   language: python
   framework: pure-python      # challenge path; in production their tools sit behind MCP servers
-  model_provider: bedrock
-  model: Bedrock, behind their own gateway
-  hosting: on-prem
+  model_provider: hosted, through the workshop gateway
+  model: the model the workshop gateway provides
+  hosting: cloud
   uses_mcp: true
 traffic: UNANSWERED
 constraints:
-  - "everything runs on-prem, including Splunk"
   - "own inference gateway in front of the model"
   - "owners of many agents must see only their own data"
 competing_tools: ["homegrown tooling for token cost and pieces of monitoring"]

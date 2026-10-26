@@ -13,8 +13,8 @@ agent:
 stack:
   language: python
   framework: langgraph
-  model_provider: bedrock
-  model: Bedrock
+  model_provider: hosted, through the workshop gateway
+  model: the model the workshop gateway provides
   hosting: aws
   uses_mcp: UNANSWERED
 traffic: UNANSWERED
