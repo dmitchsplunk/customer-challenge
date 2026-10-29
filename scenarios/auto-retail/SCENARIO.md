@@ -14,7 +14,8 @@ already seen a tour of our product and said they'd seen it all elsewhere.
 
 **Where they're heading.** They keep LangFuse for developer tracing. They want a
 loop that improves without a human in it every time, governance across all
-projects, and cost visibility that holds up with their buyer.
+projects, and token spend they can see per request and per business unit, in
+terms that hold up with their buyer.
 
 ## The agent
 A car-shopping assistant embedded in dealer websites. A shopper chats with it
@@ -52,7 +53,7 @@ From meeting notes, so the wording is close rather than exact.
 
 - Technical evaluation owner: "We've seen these functionalities with other products."
 - Head of ML: "Is this calibrated?"
-- Buyer: wants to see where the spend goes, and one governance view across the business units.
+- Buyer: wants to see where the token spend goes, per request and per business unit, and one governance view across the business units.
 - The team: "We're not replacing LangFuse."
 
 ## The failure they fear most
