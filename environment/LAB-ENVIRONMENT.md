@@ -5,9 +5,11 @@ how you build, instrument, and show your agent. Read this with step 3 of the
 README. You install Python 3.12 in step 3 and use it for the agent. You do
 not install a model, create a Splunk project, or apply a laptop proxy fix.
 
-## Already on the host
+## Variables on your host
 
-Check it before you start:
+Which of these your host sets depends on the Splunk Show template for your event.
+Two EMEA hosts, checked on 2026-10-26 and 2026-10-28, set every variable in the table.
+Another template may differ. Check before you start. What the host sets wins. Put the rest in your `.env`:
 
 ```bash
 env | grep -E 'SPLUNK_AO|^INSTANCE=|OPENAI'
@@ -25,6 +27,9 @@ env | grep -E 'SPLUNK_AO|^INSTANCE=|OPENAI'
 | `SPLUNK_AO_USER` | Console login. | Browser only. The SDK does not read it. |
 | `SPLUNK_AO_PASSWORD` | Console login. | Browser only. The SDK does not read it. |
 | `SPLUNK_AO_USER_ID` | Console login. | Browser only. The SDK does not read it. |
+
+You set one variable yourself: `SPLUNK_AO_AGENT_STREAM=${INSTANCE}` in your `.env`.
+The EMEA hosts do not set it.
 
 The model behind `OPENAI_BASE_URL` is `gpt-4.1-mini`. The starter agents use
 that name unless `OPENAI_MODEL` is set to something else. `OPENAI_MODEL` is

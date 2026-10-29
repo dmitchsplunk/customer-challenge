@@ -12,9 +12,10 @@ clean seams and nothing more.
 ## Environment
 
 Ensure that you use Python 3.12 to build the agent. Install it on the machine if it's not already installed. 
-The `template/.env.example` file includes placeholders for OPENAI_* and SPLUNK_AO_* environment variables. 
-These will be added to the .env file by the workshop participant once the agent is created. Don't attempt 
-to run smoke tests until the .env file is populated by the workshop participant. 
+The `template/.env.example` file carries placeholders for OPENAI_* and SPLUNK_AO_* variables.
+The scaffold creates `.env` from it, so the participant never copies it by hand. Anything the
+host already sets wins. The participant fills only the values that are missing. Don't attempt
+to run smoke tests until they have done so.
 
 ## Inputs
 
@@ -53,11 +54,14 @@ optionally followed by an output directory. Default output: `agents/<slug>-pytho
 5. Keep the guarantees: no UI, no extra agents or tools, no memory, retries,
    streaming, or anything on the forbidden list in `shared/check_skeleton.py`.
 6. Create a venv with Python 3.12 and install the requirements.
-   Then stop. Print the exact lines the participant has to fill in `.env`
-   (model key, base URL if their host has a gateway, SAO console URL, API URL,
-   API key, project, agent stream) and wait. Do not go looking for keys on the
-   host and do not run the smoke test until they say the file is filled. If
-   they have no gateway, tell them to delete the `OPENAI_BASE_URL` line.
+   Then stop. Have the participant run `env | grep -E 'SPLUNK_AO|OPENAI|INSTANCE'` first.
+   Values the host already sets win. Print only the `.env` lines still missing, from this
+   list: model key, base URL if their host has a gateway, SAO console URL, API URL, API key,
+   project. Leave `SPLUNK_AO_AGENT_STREAM=${INSTANCE}` as it is. The host supplies
+   `INSTANCE`, so do not ask for an agent stream. Then ask which of those values are
+   still missing, and wait. Do not run the smoke test until the participant says every
+   missing value is filled. If they have no gateway, tell them to delete the
+   `OPENAI_BASE_URL` line.
    When they confirm, smoke-test: `python app.py "<a knowledge question>"`,
    `python app.py "<an action request>"` (must show a tool call), and
    `FAILURE_MODE=<kind> python app.py "<trigger>"`.
@@ -69,9 +73,10 @@ optionally followed by an output directory. Default output: `agents/<slug>-pytho
 
 - While building: adding the splunk-ao SDK, OpenTelemetry, evaluators, controls,
   or alerts to the skeleton: decline, point at https://agent-observability-docs.splunk.com,
-  and explain that the participant sets that up to learn it. Once the agent is
-  built and they ask you to instrument it, follow the teach-mode instructions (`CLAUDE.md` in Claude
-  Code, `.cursor/rules/02-teach-mode.mdc` in Cursor): explain each edit before you make it.
+  and explain that the participant sets that up to learn it. Once the agent is built and they ask you to instrument
+  it, follow the teach-mode rules (`CLAUDE.md` in Claude Code,
+  `.cursor/rules/02-teach-mode.mdc` in Cursor): in step 5 you coach and the
+  participant makes the edits.
 - Swapping in a framework "to make it easier": decline. This path exists to
   practice instrumenting an agent that has no framework.
 
