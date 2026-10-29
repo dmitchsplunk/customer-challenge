@@ -33,8 +33,8 @@ some console screens still say log stream. Same thing.
 
 - Spend your time on the product and the customer, not on the agent. The agent
   is capped at four steps and four tools; `shared/check_skeleton.py` counts them.
-- You may use Claude Code or Cursor to help write the instrumentation. You
-  must be able to explain every line at the show-and-tell.
+- Claude Code or Cursor can coach you through the instrumentation, but you
+  write it yourself. You must be able to explain every line at the show-and-tell.
 - If the scenario says the customer didn't ask for it, it isn't in your demo.
 - Between the two blocks, coaches answer in the workshop channel the facilitator
   names, within 30 minutes. In the room, just ask. They won't write your code.
@@ -68,7 +68,7 @@ what you solved for the customer. They are not screens of your agent, which has
 no UI.
 
 Keep it next to this README for now, as `worksheets/my-worksheet.md`. Once the
-agent folder exists in step 4, move it to `agents/<your folder>/readout/worksheet.md`.
+agent folder exists in step 4, move it to `agents/<your scenario>-<path>/readout/worksheet.md`.
 
 **Done when:** you have reviewed the worksheet with your team and removed
 anything the customer didn't ask for.
@@ -105,7 +105,8 @@ cd customer-challenge
 ```
 
 Then, use Claude or Cursor to SSH to the EC2 instance using the information
-from Splunk Show.
+from Splunk Show. In Cursor, use the Remote-SSH extension. Connect to the host
+and port `2222` from your Splunk Show page.
 
 Refer to [CLAUDE-SETUP.md](environment/CLAUDE-SETUP.md) or
 [CURSOR-SETUP.md](environment/CURSOR-SETUP.md) for detailed instructions. What is
@@ -119,6 +120,11 @@ already on your host, and what to check, is in
 
 In this step, we'll use AI to build an agent using the provided skills.
 
+The agent has no UI. This is on purpose. You talk to it in the terminal, from
+its folder with the venv active: `python app.py "<a question>"`. The command
+`python run_batch.py 10` sends a batch of ten questions. What you show the
+customer is the console, not the agent.
+
 Using Claude Code, this can be achieved via the following prompt:
 
 ```text
@@ -131,6 +137,18 @@ example:
 ```text
 /build-agent-langgraph scenarios/auto-retail/brief.yaml
 ```
+
+Some scenarios use the pure Python path. For those, the command is
+`/build-agent-python`:
+
+```text
+/build-agent-python scenarios/<your scenario>/brief.yaml
+```
+
+To pick the right command, open `scenarios/<your scenario>/brief.yaml` and read
+the `framework:` line. `langgraph` means `/build-agent-langgraph`.
+`pure-python` means `/build-agent-python`. The wrong command writes nothing
+under `agents/`.
 
 In Cursor, use the following prompt instead:
 
@@ -177,7 +195,10 @@ SPLUNK_AO_AGENT_STREAM=${INSTANCE}   leave as is; it expands to your instance na
 
 Then tell Claude or Cursor the values are in place and let it run the smoke tests.
 Run the agent's commands from its folder with its virtual environment active:
-`cd agents/<your scenario>-<path> && source .venv/bin/activate`.
+
+```bash
+cd agents/<your scenario>-<path> && source .venv/bin/activate
+```
 
 Before you move on, run the check yourself and read what it says:
 
@@ -192,6 +213,10 @@ line in `.env`. Fix what it names, or tell Claude or Cursor to, until it prints
 OK. Then look at `questions.txt` yourself: it should read like the customer's
 users wrote it.
 
+Before step 5, read the agent code: the node files in `agent/` on the
+LangGraph path, or `agents.py` on the Python path. Then you can tell a wrong
+trace from correct agent behaviour.
+
 **Done when:** `python app.py "<a question>"` answers, and
 `FAILURE_MODE=<the scenario's failure> python app.py "<a question>"` shows the
 failure. Move your worksheet into `agents/<your scenario>-<path>/readout/`; the
@@ -201,6 +226,8 @@ skill creates that folder.
 
 This is yours to do, from the docs. Pointers, not answers:
 
+- Run `which python` first. It must print a path inside the agent's `.venv`.
+  If it does not, activate the venv before you install.
 - `pip install "splunk-ao[langchain]"` in the agent's venv (plain `splunk-ao`
   on the Python path).
 - The SDK reads `SPLUNK_AO_CONSOLE_URL`, `SPLUNK_AO_API_URL`,
@@ -244,7 +271,9 @@ This is yours to do, from the docs. Pointers, not answers:
     `chat <model>`) and shows the trace under the first agent span's name.
     Your code worked; that is just how it displays.
 
-Run one question, find the trace in the console. Then turn on the evaluators
+Run one question, find the trace in the console. On the LangGraph path, the
+root span's input and output show the whole state as JSON. The reply is the
+`reply` key. Then turn on the evaluators
 your worksheet names, and no more: agent stream, Configure Evaluators. Luna
 evaluators run on Splunk-hosted small models with no setup. LLM-judge
 evaluators need a model integration on the org; the facilitator set one up. If
@@ -266,6 +295,8 @@ Where you should be when the block ends:
 - Instrumented: a trace with the full tree in your project, with your metadata.
 - Traffic: `python run_batch.py 10` has run at least once.
 - At least one evaluator from your worksheet turned on and scoring.
+- Your work saved off the instance. See
+  [environment/workshop-backup-and-restore.md](environment/workshop-backup-and-restore.md).
 
 One line per person at the checkpoint: what's wired, what's left. If you are
 behind, say so; the coaches use the gap between blocks to catch people up.
