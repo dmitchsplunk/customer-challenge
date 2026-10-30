@@ -27,8 +27,8 @@ Use these only after you have tried it from the docs.
   It reads `AGENT_CONTROL_URL`, `AGENT_CONTROL_API_KEY`,
   `AGENT_CONTROL_API_KEY_HEADER`, and `AGENT_CONTROL_AGENT_NAME` from the environment.
   Without the header variable the control plane returns 401. The values for the
-  bootcamp tenant are in your agent's `.env.example`; if the key is empty, ask
-  your facilitator for it. Then wrap your reply step with
+  bootcamp tenant are in your agent's `.env.example`. The key is filled from
+  `SPLUNK_AO_API_KEY`, so you do not need to ask for it. Then wrap your reply step with
   `@control(step_name="write")` as the docs show.
 - `alert-example.md`: an alert on the agent stream that posts to a channel when an
   evaluator flags a trace.
