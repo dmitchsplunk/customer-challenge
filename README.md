@@ -385,9 +385,7 @@ copy your agent folder and worksheets to your laptop so you can record your
 demo from them. The folder to back up is `customer-challenge/agents/<your scenario>-<path>`.
 It holds your agent, your `.env` and `readout/` (worksheet and success criteria). Follow
 [environment/workshop-backup-and-restore.md](environment/workshop-backup-and-restore.md)
-and use that folder wherever it says `WORKSHOP_FOLDER`. In the `tar` command, put
-`--exclude=.venv` before the folder name, as `tar -czf workshop-backup.tar.gz --exclude=.venv <folder>`,
-so the file stays small. You rebuild the venv on your laptop anyway.
+and use that folder wherever it says `WORKSHOP_FOLDER`.
 
 Recreate the venv on your laptop with Python 3.12 and `requirements.txt` plus
 `splunk-ao`. Your `.env` holds the keys the facilitator gave you; keep it off
