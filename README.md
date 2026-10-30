@@ -286,7 +286,7 @@ This is yours to do, from the docs. Pointers, not answers:
 Run one question, find the trace in the console. On the LangGraph path, the
 root span's input and output show the whole state as JSON. The reply is the
 `reply` key. Then turn on the evaluators your worksheet names, and no more: 
-agent stream, Configure Evaluators. Luna evaluators (the ones marked "(SLM)") run on Splunk-hosted small 
+agent stream, Configure Evaluators. Luna evaluators run on Splunk-hosted small 
 models with no setup. LLM-judge evaluators need a model integration on the org; 
 the facilitator set one up. If an evaluator shows an error about a model integration, or says the model service is
 not available, that is the org, not you: tell the facilitator.
