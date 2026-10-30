@@ -37,6 +37,13 @@ customer, in order. One line each. You have two to three minutes.
 
 ## Metadata we'll tag on every trace
 (so the filters the customer asked for actually work)
+Look in what the customer said for "per ___" or "only their own ___". Each one is
+something you will want to filter or group by in the console, so each needs a label
+on every trace. For example, "per branch" means a `branch` label.
+Skip anything the console already separates for you: the agent stream, the project, the
+model.
+If the customer didn't say, use `user_id` and write that down. Use one to three short
+keys with plain names.
 - 
 
 ## Build path

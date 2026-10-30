@@ -70,6 +70,12 @@ The console views are pages in the Splunk Agent Observability console that show
 what you solved for the customer. They are not screens of your agent, which has
 no UI.
 
+The metadata is what lets you filter and group in those views, for example latency
+per user. Look in what the customer said for "per ___" or "only their own ___" and
+tag that on every trace. Skip anything the console already separates, such as the agent
+stream, the project or the model. If they did not say, use `user_id`. Step 5 shows where
+it goes.
+
 Keep it next to this README for now, as `worksheets/my-worksheet.md`. If you have not
 cloned the repo yet (step 3), save it on your laptop as `my-worksheet.md` and copy it into
 `worksheets/` after you clone. Once the agent folder exists in step 4, move it to
