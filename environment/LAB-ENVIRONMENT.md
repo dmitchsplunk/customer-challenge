@@ -5,12 +5,13 @@ how you build, instrument, and show your agent. Read this with step 3 of the
 README. You install Python 3.12 in step 3 and use it for the agent. You do
 not install a model, create a Splunk project, or apply a laptop proxy fix.
 
-## Already on the host
+## Variables on your host
 
-Check it before you start:
+The following environment variables will be automatically set on your EC2 workshop host. 
+You can confirm which variables are set by running the following command: 
 
 ```bash
-env | grep -E 'SPLUNK_AO|^INSTANCE=|OPENAI'
+env | grep -oE '^(SPLUNK_AO|OPENAI)[A-Z_]*|^INSTANCE'
 ```
 
 | Variable | What it is | What you do with it |
@@ -26,13 +27,12 @@ env | grep -E 'SPLUNK_AO|^INSTANCE=|OPENAI'
 | `SPLUNK_AO_PASSWORD` | Console login. | Browser only. The SDK does not read it. |
 | `SPLUNK_AO_USER_ID` | Console login. | Browser only. The SDK does not read it. |
 
-The model behind `OPENAI_BASE_URL` is `gpt-4.1-mini`. The starter agents use
-that name unless `OPENAI_MODEL` is set to something else. `OPENAI_MODEL` is
-not preset; you do not need to set it.
+The model behind `OPENAI_BASE_URL` is `gpt-4.1-mini`. Do not change it. 
 
 The SDK sends traces with `SPLUNK_AO_CONSOLE_URL`, `SPLUNK_AO_API_URL`,
 `SPLUNK_AO_API_KEY`, and `SPLUNK_AO_PROJECT`. The agent stream is `INSTANCE`.
-If you do not use the `.env` line, give it to the logger yourself:
+If you do not use the `.env` line that sets `SPLUNK_AO_AGENT_STREAM`, 
+give it to the logger yourself:
 
 ```python
 logger = SplunkAOLogger(

@@ -34,7 +34,7 @@ brochure and the dealer's inventory record for the vehicle), write. Keep it smal
 | | |
 |---|---|
 | Language and framework | Python, LangGraph |
-| Model | Bedrock |
+| Model | A hosted model, reached through a gateway |
 | Hosting | AWS |
 | Steps | Intake, route, look up (brochures and inventory records), write the reply |
 | Tools | Inventory lookup, trade-in estimate, test-drive booking |

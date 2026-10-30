@@ -57,7 +57,7 @@ tar -tzf ~/workshop-backup.tar.gz | head -20
 
 The first command shows the file and its size. The second lists the first 20 files inside it. Each should start with `WORKSHOP_FOLDER/`.
 
-### Step 4 – Log out of the instance  **[on the instance]**
+### Step 3 – Log out of the instance  **[on the instance]**
 
 ```bash
 exit
@@ -65,7 +65,7 @@ exit
 
 You are now back on your own computer.
 
-### Step 5 – Download the file **[on your computer]**
+### Step 4 – Download the file **[on your computer]**
 
 **macOS / Linux:**
 
@@ -122,7 +122,7 @@ cd ~
 tar -xzf workshop-backup.tar.gz
 ```
 
-### Step 5 – Check the restore **[on the instance]**
+### Step 4 – Check the restore **[on the instance]**
 
 ```bash
 ls -la ~/WORKSHOP_FOLDER

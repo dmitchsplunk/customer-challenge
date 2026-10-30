@@ -13,8 +13,8 @@ stack:
   language: python
   framework: pure-python
   model_provider: hosted
-  model: a hosted model, reached through an API key the platform team issued
-  hosting: on-prem
+  model: a hosted model, reached through a gateway
+  hosting: their own network, behind a corporate proxy
   uses_mcp: UNANSWERED
 traffic: "10 to 15 incidents a day"
 constraints:

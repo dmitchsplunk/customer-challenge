@@ -26,7 +26,7 @@ Hard rules that apply in every case:
 - While building the starter agent, never add evaluators, controls, alerts, or
   tracing to it. Point them at https://agent-observability-docs.splunk.com instead.
   Later, when the participant asks you to instrument their agent, follow
-  `02-teach-mode.mdc`: explain each edit before you make it.
+  `02-teach-mode.mdc`: coach, do not write the instrumentation.
 - When anyone instruments an agent in this repo, the SDK is `splunk-ao`
   (`from splunk_ao import SplunkAOLogger`, `SPLUNK_AO_*` variables). Never the
   `galileo` package.
