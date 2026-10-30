@@ -183,7 +183,7 @@ The skill stops before the smoke test and tells you which values it needs.
 First check what your host already has:
 
 ```bash
-env | grep -E 'SPLUNK_AO|OPENAI|INSTANCE'
+env | grep -oE '^(SPLUNK_AO|OPENAI)[A-Z_]*|^INSTANCE'
 ```
 
 Anything already set on the host wins; the agent reads the host environment
@@ -286,13 +286,13 @@ This is yours to do, from the docs. Pointers, not answers:
 Run one question, find the trace in the console. On the LangGraph path, the
 root span's input and output show the whole state as JSON. The reply is the
 `reply` key. Then turn on the evaluators your worksheet names, and no more: 
-agent stream, Configure Evaluators. Luna evaluators run on Splunk-hosted small 
+agent stream, Configure Evaluators. Luna evaluators (the ones marked "(SLM)") run on Splunk-hosted small 
 models with no setup. LLM-judge evaluators need a model integration on the org; 
-the facilitator set one up. If an evaluator shows an error about a model integration, 
-that is the org, not you: tell the facilitator.
+the facilitator set one up. If an evaluator shows an error about a model integration, or says the model service is
+not available, that is the org, not you: tell the facilitator.
 
 When it works, answer the four questions in `worksheets/instrumentation-notes.md`
-in your own words. Your coach will ask about them at the show-and-tell.
+in your own words, and save them as `agents/<your scenario>-<path>/readout/instrumentation-notes.md`. Your coach will ask about them at the show-and-tell.
 
 **Done when:** a trace with the full tree is in your project, with your
 metadata on it, the evaluators are scoring, and your notes are written.
@@ -320,7 +320,9 @@ and bind one control.
 
 Prove the failure gets caught and stopped.
 
-1. Send clean traffic: `python run_batch.py 10`. Nothing should flag.
+1. Send clean traffic: `python run_batch.py 10`. The planted failure should not show up.
+   An evaluator may still flag something harmless, such as a name from the employee's own
+   record in the lookup result. Read its rationale before you assume your setup is wrong.
 2. Send the failure: `FAILURE_MODE=<the scenario's failure> python run_batch.py 5`.
    This replays five questions with the planted failure switched on, so the
    agent misbehaves the way the customer fears. Questions that trigger the
@@ -383,8 +385,9 @@ copy your agent folder and worksheets to your laptop so you can record your
 demo from them. The folder to back up is `customer-challenge/agents/<your scenario>-<path>`.
 It holds your agent, your `.env` and `readout/` (worksheet and success criteria). Follow
 [environment/workshop-backup-and-restore.md](environment/workshop-backup-and-restore.md)
-and use that folder wherever it says `WORKSHOP_FOLDER`. Add `--exclude=.venv` to the `tar`
-command so the file stays small; you rebuild the venv on your laptop anyway.
+and use that folder wherever it says `WORKSHOP_FOLDER`. In the `tar` command, put
+`--exclude=.venv` before the folder name, as `tar -czf workshop-backup.tar.gz --exclude=.venv <folder>`,
+so the file stays small. You rebuild the venv on your laptop anyway.
 
 Recreate the venv on your laptop with Python 3.12 and `requirements.txt` plus
 `splunk-ao`. Your `.env` holds the keys the facilitator gave you; keep it off
