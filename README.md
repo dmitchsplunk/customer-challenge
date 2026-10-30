@@ -293,7 +293,9 @@ Prove the failure gets caught and stopped.
    on the agent stream that posts to a channel. One is enough. Work from the
    docs first. If you are stuck, ask a coach.
    A control's pattern describes what to refuse. The engine has no "unless",
-   so write it as the thing to catch, not as an exception to what is allowed.
+   so write it as the thing to catch, not as an exception to what is allowed. 
+   The control example needs `AGENT_CONTROL_API_KEY`, which is populated from 
+   the value of the `SPLUNK_AO_API_KEY` environment variable set on the host.
 5. Stretch: if no preset evaluator catches your failure, write a custom LLM judge
    in the customer's own definition of a bad answer. Ask a coach for a worked
    example once you have tried.
