@@ -27,7 +27,7 @@ feared_failure:
   speaker: "meeting notes"
   kind: fabricated_citation
 stakeholders:
-  - "Buyer, second in command / where the spend goes, governance across business units"
+  - "Buyer, second in command / wants to see where the token spend goes, per request and per business unit, and one governance view across the business units."
   - "Head of ML / is this calibrated?"
   - "Technical evaluation owner / automated close-the-loop, not another tour"
   - "New stakeholder / governance"

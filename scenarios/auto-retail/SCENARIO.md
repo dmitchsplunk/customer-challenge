@@ -43,7 +43,7 @@ brochure and the dealer's inventory record for the vehicle), write. Keep it smal
 ## Who you will present to
 | Role | Cares about |
 |---|---|
-| Buyer, second in command, owns their highest-priority triage agent | Cost and token spend, one governance view across business units |
+| Buyer, second in command, owns their highest-priority triage agent | Token spend per request and per business unit, one governance view across business units |
 | Head of ML | "Is this calibrated?" about any evaluator you show |
 | Technical evaluation owner | Runs a human-calibrated LLM-as-judge in production today and wants the loop automated; has seen the tour |
 | New stakeholder, role unknown | Governance, probably |
