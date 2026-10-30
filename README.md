@@ -288,8 +288,8 @@ root span's input and output show the whole state as JSON. The reply is the
 `reply` key. Then turn on the evaluators your worksheet names, and no more: 
 agent stream, Configure Evaluators. Luna evaluators run on Splunk-hosted small 
 models with no setup. LLM-judge evaluators need a model integration on the org; 
-the facilitator set one up. If an evaluator shows an error about a model integration, or says the model service is
-not available, that is the org, not you: tell the facilitator.
+the facilitator set one up. If an evaluator shows an error about a model integration, 
+that is the org, not you: tell the facilitator.
 
 When it works, answer the four questions in `worksheets/instrumentation-notes.md`
 in your own words, and save them as `agents/<your scenario>-<path>/readout/instrumentation-notes.md`. Your coach will ask about them at the show-and-tell.
