@@ -43,7 +43,7 @@ runbooks, devices, tickets, and subscriber records.
 |---|---|
 | Language and framework | Python; no framework. A hand-written loop against the model's API. |
 | Model | A hosted model reached through an API key the platform team issued |
-| Hosting | On-prem, behind a corporate proxy that blocks outbound traffic by default; AWS and Kubernetes elsewhere in the stack |
+| Hosting | Their own network, behind a corporate proxy that blocks outbound traffic by default; AWS and Kubernetes elsewhere in the stack |
 | Steps | Triage (classify, set severity), knowledge (find the runbook), action (one tool call), write the summary |
 | Tools | Look up a device's status, open or update a ticket, post to the on-call channel |
 | Data | Runbooks, device inventory, open tickets, and, reachable by the tools, subscriber records the bot should never surface |
