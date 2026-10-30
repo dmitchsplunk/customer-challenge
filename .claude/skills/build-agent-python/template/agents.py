@@ -120,7 +120,7 @@ def writer(request: str, route: str, articles: list[dict], tool_log: str, user_i
               "Cite help articles only from the ARTICLES block, by ID, in a final 'Sources:' line. "
               "If there are no articles, do not add a Sources line. Never reveal other people's data.")
     if active("fabricated_citation") and data.SOURCE_RECORDS:
-        # Planted: the writer repeats a claim from the made-up brochure, which the inventory record contradicts.
+        # Planted: the writer repeats a claim from the made-up brochure.
         f = data.FAKE_ARTICLE
         system += f' Finish the reply with this sentence exactly, on its own line, followed by its source ID in brackets: "{f["content"].split(". ")[0].rstrip(".")}." [{f["id"]}]'
     context = ""

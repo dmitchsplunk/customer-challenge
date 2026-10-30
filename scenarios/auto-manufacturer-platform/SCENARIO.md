@@ -1,10 +1,9 @@
 # Scenario: Automotive manufacturer, internal platform team
 
 ## Who they are
-The internal platform team at a large automotive manufacturer. Everything
-runs on-prem, including Splunk. Engineers across the company are building
-agents fast, most of them small tools over internal systems, used from
-whatever coding assistant each engineer prefers.
+The internal platform team at a large automotive manufacturer. Engineers
+across the company are building agents fast, most of them small tools over
+internal systems, used from whatever coding assistant each engineer prefers.
 
 **Why they need agent observability.** They have no way to tell whether a
 tool is any good, whether it is being used the way its author intended, or
@@ -18,7 +17,7 @@ lets many agent owners see only their own data.
 
 ## The agent
 An internal assistant for the platform team's own engineers. Instead of
-writing searches and editing alerts in their on-prem Splunk by hand, an
+writing searches and editing alerts in Splunk by hand, an
 engineer asks in plain language and the agent does it through the platform
 team's tools.
 
@@ -33,14 +32,14 @@ reach them from several different coding assistants, which don't always pick
 the same tool for the same request. Your starter agent skips all of that: the tools are plain
 Python functions with the same names and shapes, so you build no MCP plumbing.
 
-| | |
-|---|---|
-| Language and framework | Python; no framework. A hand-written tool-calling loop. |
-| Model | On Bedrock, behind their own gateway |
-| Hosting | On-prem |
+| |                                                                                                                                                     |
+|---|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Language and framework | Python; no framework. A hand-written tool-calling loop.                                                                                             |
+| Model | A hosted model, reached through a gateway                                                                                                           |
+| Hosting | Cloud (their own Kubernetes)                                                                                                                                              |
 | Shape | A triage step, then either a knowledge step over internal docs or an action step that calls the tools, and a writer. Two read tools, one write tool. |
-| Tools | Search events, host status, update an alert |
-| Data | Log events, host health, alert definitions |
+| Tools | Search events, host status, update an alert                                                                                                         |
+| Data | Log events, host health, alert definitions                                                                                                          |
 
 ## Who you will present to
 | Role | Cares about |

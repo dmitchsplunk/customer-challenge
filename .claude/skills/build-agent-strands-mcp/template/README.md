@@ -11,7 +11,7 @@ has sharp edges on purpose.
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env     # model name only; OPENAI_API_KEY and OPENAI_BASE_URL are already set
+# .env was created in step 4 of the main README. Do not copy .env.example over it.
 python app.py "Which hosts are degraded right now?"
 python run_batch.py 10
 FAILURE_MODE=<failure> python run_batch.py 5   # this scenario's planted failure
