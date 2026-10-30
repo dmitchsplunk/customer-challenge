@@ -12,8 +12,8 @@ agent:
 stack:
   language: python
   framework: pure-python      # challenge path; in production their tools sit behind MCP servers
-  model_provider: hosted, through the workshop gateway
-  model: the model the workshop gateway provides
+  model_provider: hosted
+  model: a hosted model, reached through a gateway
   hosting: cloud
   uses_mcp: true
 traffic: UNANSWERED

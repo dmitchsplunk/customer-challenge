@@ -13,8 +13,8 @@ agent:
 stack:
   language: python
   framework: langgraph
-  model_provider: hosted, through the workshop gateway
-  model: the model the workshop gateway provides
+  model_provider: hosted
+  model: a hosted model, reached through a gateway
   hosting: aws
   uses_mcp: UNANSWERED
 traffic: UNANSWERED
