@@ -43,6 +43,11 @@ some console screens still say log stream. Same thing.
 
 Ensure that Cursor or Claude is installed on your machine.
 
+You clone this repo onto your instance in step 3, but steps 1 and 2 come first. Until then,
+read your scenario and the worksheet on GitHub:
+<https://github.com/dmitchsplunk/customer-challenge>. Your scenario is under
+`scenarios/<your scenario>/`.
+
 ## Day one: Discover, Design, Build (about two hours)
 
 ### Step 1. Read the scenario (10 minutes)
@@ -65,8 +70,10 @@ The console views are pages in the Splunk Agent Observability console that show
 what you solved for the customer. They are not screens of your agent, which has
 no UI.
 
-Keep it next to this README for now, as `worksheets/my-worksheet.md`. Once the
-agent folder exists in step 4, move it to `agents/<your scenario>-<path>/readout/worksheet.md`.
+Keep it next to this README for now, as `worksheets/my-worksheet.md`. If you have not
+cloned the repo yet (step 3), save it on your laptop as `my-worksheet.md` and copy it into
+`worksheets/` after you clone. Once the agent folder exists in step 4, move it to
+`agents/<your scenario>-<path>/readout/worksheet.md`.
 
 **Done when:** you have reviewed the worksheet with your team and removed
 anything the customer didn't ask for.
@@ -247,9 +254,12 @@ This is yours to do, from the docs. Pointers, not answers:
   seams the README names. Overview of both:
   <https://agent-observability-docs.splunk.com/sdk-api/logging/logging-basics>
 - Metadata: whatever your worksheet says the customer wants to filter by, on
-  every trace. `run_batch.py` already rotates through several users. On the
-  bootcamp tenant it shows on the spans, not on the trace, so put it on the
-  agent spans too.
+  every trace. If the customer did not say, use `user_id`. `run_batch.py` already
+  rotates through several users. On the bootcamp tenant it shows on the spans, not
+  on the trace, so put it on the agent spans too. The SDK stores all your metadata
+  as one JSON string, so `user_id` is not a field of its own and you can only match
+  it with "contains". This is a known product issue. Once you have tried it,
+  `examples/metadata-fields-example.py` shows one way around it.
 - Your console login is on the host. Run
   `env | grep -E 'SPLUNK_AO_(USER|PASSWORD)'` and sign in at
   `SPLUNK_AO_CONSOLE_URL` with those. It is different for every Splunk Show event.
@@ -309,9 +319,9 @@ Prove the failure gets caught and stopped.
    This replays five questions with the planted failure switched on, so the
    agent misbehaves the way the customer fears. Questions that trigger the
    failure are run first. For HR that is
-   `FAILURE_MODE=pii_leak python run_batch.py 5`, and some replies will leak
-   another employee's data. The agent's README names the mode for your
-   scenario.
+   `FAILURE_MODE=pii_leak python run_batch.py 5`, and some replies will include
+   personal data the customer would never want in a reply. The agent's README
+   names the mode for your scenario.
 3. In the console, confirm an evaluator flags those traces and its rationale
    says why.
 4. Make something act on it. Either a runtime control that steers or blocks
@@ -320,8 +330,8 @@ Prove the failure gets caught and stopped.
    docs first. If you are stuck, ask a coach.
    A control's pattern describes what to refuse. The engine has no "unless",
    so write it as the thing to catch, not as an exception to what is allowed. 
-   The control example needs `AGENT_CONTROL_API_KEY`, which is populated from 
-   the value of the `SPLUNK_AO_API_KEY` environment variable set on the host.
+   The control example reads `AGENT_CONTROL_API_KEY`. You do not set it: `.env` fills it
+   from `SPLUNK_AO_API_KEY`.
 5. Stretch: if no preset evaluator catches your failure, write a custom LLM judge
    in the customer's own definition of a bad answer. Ask a coach for a worked
    example once you have tried.
@@ -364,8 +374,11 @@ the last day. Same format, a little longer.
 
 Your EC2 instance is deleted the day after the bootcamp. Before you leave,
 copy your agent folder and worksheets to your laptop so you can record your
-demo from them. See [environment/workshop-backup-and-restore.md](environment/workshop-backup-and-restore.md) 
-for the detailed steps.
+demo from them. The folder to back up is `customer-challenge/agents/<your scenario>-<path>`.
+It holds your agent, your `.env` and `readout/` (worksheet and success criteria). Follow
+[environment/workshop-backup-and-restore.md](environment/workshop-backup-and-restore.md)
+and use that folder wherever it says `WORKSHOP_FOLDER`. Add `--exclude=.venv` to the `tar`
+command so the file stays small; you rebuild the venv on your laptop anyway.
 
 Recreate the venv on your laptop with Python 3.12 and `requirements.txt` plus
 `splunk-ao`. Your `.env` holds the keys the facilitator gave you; keep it off
