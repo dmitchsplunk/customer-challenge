@@ -163,7 +163,7 @@ Anything already set on the host wins; the agent reads the host environment
 first and `.env` second. Open `agents/<your scenario>-<path>/.env` (the skill
 creates it from `.env.example`) and fill in only the values that are missing,
 using what your facilitator gave you. The file lists a few other variables too;
-leave those alone. Do not add lines:
+leave those alone. Add no other lines:
 
 ```text
 OPENAI_API_KEY=            your model key
@@ -179,7 +179,7 @@ Then tell Claude or Cursor the values are in place and let it run the smoke test
 Run the agent's commands from its folder with its virtual environment active:
 `cd agents/<your scenario>-<path> && source .venv/bin/activate`.
 
-Before you move on, run the check yourself and read what it says:
+Before you move on, run the check yourself from the repo root and read what it says:
 
 ```bash
 python shared/check_skeleton.py agents/<your scenario>-<path>
