@@ -105,9 +105,7 @@ cd customer-challenge
 ```
 
 Then, use Claude or Cursor to SSH to the EC2 instance using the information
-from Splunk Show. In Cursor, use the Remote-SSH extension. Connect to the host
-and port `2222` from your Splunk Show page.
-
+from Splunk Show. Connect to the host and port `2222` from your Splunk Show page.
 Refer to [CLAUDE-SETUP.md](environment/CLAUDE-SETUP.md) or
 [CURSOR-SETUP.md](environment/CURSOR-SETUP.md) for detailed instructions. What is
 already on your host, and what to check, is in
@@ -273,12 +271,11 @@ This is yours to do, from the docs. Pointers, not answers:
 
 Run one question, find the trace in the console. On the LangGraph path, the
 root span's input and output show the whole state as JSON. The reply is the
-`reply` key. Then turn on the evaluators
-your worksheet names, and no more: agent stream, Configure Evaluators. Luna
-evaluators run on Splunk-hosted small models with no setup. LLM-judge
-evaluators need a model integration on the org; the facilitator set one up. If
-an evaluator shows an error about a model integration, that is the org, not
-you: tell the facilitator.
+`reply` key. Then turn on the evaluators your worksheet names, and no more: 
+agent stream, Configure Evaluators. Luna evaluators run on Splunk-hosted small 
+models with no setup. LLM-judge evaluators need a model integration on the org; 
+the facilitator set one up. If an evaluator shows an error about a model integration, 
+that is the org, not you: tell the facilitator.
 
 When it works, answer the four questions in `worksheets/instrumentation-notes.md`
 in your own words. Your coach will ask about them at the show-and-tell.
@@ -330,8 +327,9 @@ Prove the failure gets caught and stopped.
 5. Stretch: if no preset evaluator catches your failure, write a custom LLM judge
    in the customer's own definition of a bad answer. Ask a coach for a worked
    example once you have tried.
-6. Run the coach skill: `/coach agents/<your folder>` (Cursor: "coach agents/<your
-   folder>"). It reads your work and asks the questions the customer will ask.
+6. Run the coach skill: `/coach agents/<your scenario>-<path>` (Cursor: 
+   "coach agents/<your scenario>-<path>"). It reads your work and asks the
+   questions the customer will ask.
 
 **Done when:** the planted failure is caught and acted on, and clean traffic is
 left alone.
@@ -343,7 +341,7 @@ in the customer's words with how your demo proves it, taken from your worksheet
 rows. Then one line for the objection this customer will raise and your answer,
 and one line for what you'd hand off because it isn't this product's job.
 
-Save it as `agents/<your folder>/readout/success-criteria.md`.
+Save it as `agents/<your scenario>-<path>/readout/success-criteria.md`.
 
 **Done when:** the customer would agree those are the criteria.
 
@@ -368,11 +366,8 @@ the last day. Same format, a little longer.
 
 Your EC2 instance is deleted the day after the bootcamp. Before you leave,
 copy your agent folder and worksheets to your laptop so you can record your
-demo from them:
-
-```bash
-rsync -av -e "ssh -p 2222" --exclude .venv splunk@<your instance>:~/customer-challenge/agents/<your folder>/ ~/customer-challenge-agent/
-```
+demo from them. See [environment/workshop-backup-and-restore.md](environment/workshop-backup-and-restore.md) 
+for the detailed steps.
 
 Recreate the venv on your laptop with Python 3.12 and `requirements.txt` plus
 `splunk-ao`. Your `.env` holds the keys the facilitator gave you; keep it off
@@ -395,5 +390,5 @@ show-and-tell before you record.
 | Success criteria sheet | `worksheets/success-criteria.md` |
 | Your host and its variables | `environment/LAB-ENVIRONMENT.md` |
 | Worked control, alert and judge | Ask a coach |
-| Your agent | `agents/<your folder>/` after step 4 |
+| Your agent | `agents/<your scenario>-<path>/` after step 4 |
 | Product docs and SDK | <https://agent-observability-docs.splunk.com> |
