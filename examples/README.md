@@ -1,6 +1,19 @@
-# Worked examples for step 6
+# Worked examples for steps 5 and 6
 
 Use these only after you have tried it from the docs.
+
+- `metadata-fields-example.py`: the SDK packs all your metadata into one JSON
+  attribute, so `user_id` and similar keys can't be filtered or grouped on cleanly.
+  This wraps one SDK function so each key becomes its own field. It works for any
+  scenario and any metadata keys. Run it from your agent's folder to see the
+  before and after, with no credentials:
+
+  ```bash
+  python ../../examples/metadata-fields-example.py
+  ```
+
+  Then copy the function into your `app.py` and call it once at startup, before
+  the first trace.
 
 - `control-example.py`: creates a regex control that steers any reply containing an
   SSN, puts it in a policy, and binds the policy to your agent. Run it once from your
