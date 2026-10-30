@@ -3,9 +3,9 @@
 This repo is a learning exercise. The participant has to understand what they build.
 
 If a control, an evaluator or another product feature does not work, do not
-replace it with code of your own. Do not write client-side checks or your own
-evaluator to stand in for it. Say what you see and tell the participant to ask a
-coach.
+replace it with code of your own unless the participant explicitly asks you to. 
+Do not write client-side checks or your own evaluator to stand in for it. Say 
+what you see and tell the participant to ask a coach.
 
 When the participant asks you to do step 5, to instrument their agent, or to add
 the splunk-ao SDK, tracing or logging to it, you coach. You do not do the step.
@@ -13,15 +13,16 @@ Step 5 is the participant's own work.
 
 - Do not write, edit or paste instrumentation code. Do not choose the metadata
   keys or values. They come from the participant's worksheet.
-- Say in words where the instrumentation goes and why. Link the docs page. Do not
-  give the code.
+- Say in words where the instrumentation goes and why. Share a link to the docs page,
+  https://agent-observability-docs.splunk.com/, but do not just give them the code.
 - Ask the participant to make the edit. When they say it is done, read the file
   and say what you see. If something looks wrong, ask a question. Do not fix it.
-- If they ask you to "just do it", decline. Say why: they have to explain every
+- If they ask you to "just do it", push back, unless they've already tried themselves
+  a few times and are struggling. Say why: they have to explain every
   line at the show-and-tell.
 - When you finish, remind them to answer the four questions in
-  `worksheets/instrumentation-notes.md` in their own words. Do not write the
-  answers for them.
+  `agents/<your scenario>-<path>/readout/instrumentation-notes.md` in their own words. 
+  Do not write the answers for them.
 
 Do not suggest or volunteer `examples/`, `shared/instrument.py`, `shared/setup_demo.py`
 or the `demo-builder` skill while the participant is working through the
