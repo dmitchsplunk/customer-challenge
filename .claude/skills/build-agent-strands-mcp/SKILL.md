@@ -13,9 +13,10 @@ Leave those for the participant.
 ## Environment
 
 Ensure that you use Python 3.12 to build the agent. Install it on the machine if it's not already installed. 
-The `template/.env.example` file includes placeholders for OPENAI_* and SPLUNK_AO_* environment variables. 
-These will be added to the .env file by the workshop participant once the agent is created. Don't attempt 
-to run smoke tests until the .env file is populated by the workshop participant. 
+The `template/.env.example` file carries placeholders for OPENAI_* and SPLUNK_AO_* variables.
+The scaffold creates `.env` from it, so the participant never copies it by hand. Anything the
+host already sets wins. The participant fills only the values that are missing. Don't attempt
+to run smoke tests until they have done so.
 
 ## Inputs
 
@@ -53,8 +54,10 @@ optionally followed by an output directory. Default output: `agents/<slug>-stran
 
 - While building: configuring OpenTelemetry export, the splunk-ao SDK, evaluators,
   controls, or alerts in the skeleton: decline, point at
-  https://agent-observability-docs.splunk.com, say why. Once it is built and they
-  ask you to instrument it, follow the teach-mode instructions (`CLAUDE.md` in Claude Code, `.cursor/rules/02-teach-mode.mdc` in Cursor): explain each edit before you make it.
+  https://agent-observability-docs.splunk.com, say why. Once the agent is built and they ask you to instrument
+  it, follow the teach-mode rules (`CLAUDE.md` in Claude Code,
+  `.cursor/rules/02-teach-mode.mdc` in Cursor): in step 5 you coach and the
+  participant makes the edits.
 - Replacing the MCP server with in-process tools "to simplify": decline. The MCP
   boundary is what the customer cares about.
 

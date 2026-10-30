@@ -163,7 +163,7 @@ Anything already set on the host wins; the agent reads the host environment
 first and `.env` second. Open `agents/<your scenario>-<path>/.env` (the skill
 creates it from `.env.example`) and fill in only the values that are missing,
 using what your facilitator gave you. The file lists a few other variables too;
-leave those alone. Do not add lines:
+leave those alone. Add no other lines:
 
 ```text
 OPENAI_API_KEY=            your model key
@@ -179,7 +179,7 @@ Then tell Claude or Cursor the values are in place and let it run the smoke test
 Run the agent's commands from its folder with its virtual environment active:
 `cd agents/<your scenario>-<path> && source .venv/bin/activate`.
 
-Before you move on, run the check yourself and read what it says:
+Before you move on, run the check yourself from the repo root and read what it says:
 
 ```bash
 python shared/check_skeleton.py agents/<your scenario>-<path>
@@ -291,15 +291,14 @@ Prove the failure gets caught and stopped.
 4. Make something act on it. Either a runtime control that steers or blocks
    the reply (set up in the Agent Control console or with the SDK), or an alert
    on the agent stream that posts to a channel. One is enough. Work from the
-   docs first; `examples/` has a worked example of each if you get stuck.
+   docs first. If you are stuck, ask a coach.
    A control's pattern describes what to refuse. The engine has no "unless",
-   so write it as the thing to catch: "reads like a question", "contains an
-   SSN", "mentions ignore your instructions", not "no change verb".
-   The control example needs `AGENT_CONTROL_API_KEY`. If it is empty on your
-   host, ask your facilitator for it.
+   so write it as the thing to catch, not as an exception to what is allowed. 
+   The control example needs `AGENT_CONTROL_API_KEY`, which is populated from 
+   the value of the `SPLUNK_AO_API_KEY` environment variable set on the host.
 5. Stretch: if no preset evaluator catches your failure, write a custom LLM judge
-   in the customer's own definition of a bad answer. `examples/custom-judge-example.py`
-   is a worked one, for after you have tried.
+   in the customer's own definition of a bad answer. Ask a coach for a worked
+   example once you have tried.
 6. Run the coach skill: `/coach agents/<your folder>` (Cursor: "coach agents/<your
    folder>"). It reads your work and asks the questions the customer will ask.
 
@@ -364,6 +363,6 @@ show-and-tell before you record.
 | The worksheet | `worksheets/design-worksheet.md` |
 | Success criteria sheet | `worksheets/success-criteria.md` |
 | Your host and its variables | `environment/LAB-ENVIRONMENT.md` |
-| Worked control, alert and judge | `examples/` |
+| Worked control, alert and judge | Ask a coach |
 | Your agent | `agents/<your folder>/` after step 4 |
 | Product docs and SDK | <https://agent-observability-docs.splunk.com> |

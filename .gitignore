@@ -1,4 +1,5 @@
 .DS_Store
+.idea/
 
 # Local secrets. .env.example is the template and stays in the repo.
 .env
