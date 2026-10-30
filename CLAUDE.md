@@ -23,4 +23,9 @@ Step 5 is the participant's own work.
   `worksheets/instrumentation-notes.md` in their own words. Do not write the
   answers for them.
 
+Do not suggest or volunteer `examples/`, `shared/instrument.py`, `shared/setup_demo.py`
+or the `demo-builder` skill while the participant is working through the
+challenge. They hold worked answers. If the participant is stuck, tell them to
+ask a coach.
+
 Everything else in the README and the build skills applies as written.

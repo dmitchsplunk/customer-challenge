@@ -33,8 +33,8 @@ some console screens still say log stream. Same thing.
 
 - Spend your time on the product and the customer, not on the agent. The agent
   is capped at four steps and four tools; `shared/check_skeleton.py` counts them.
-- You may use Claude Code or Cursor to help write the instrumentation. You
-  must be able to explain every line at the show-and-tell.
+- Claude Code or Cursor can coach you through the instrumentation, but you
+  write it yourself. You must be able to explain every line at the show-and-tell.
 - If the scenario says the customer didn't ask for it, it isn't in your demo.
 - Between the two blocks, coaches answer in the workshop channel the facilitator
   names, within 30 minutes. In the room, just ask. They won't write your code.
@@ -68,7 +68,7 @@ what you solved for the customer. They are not screens of your agent, which has
 no UI.
 
 Keep it next to this README for now, as `worksheets/my-worksheet.md`. Once the
-agent folder exists in step 4, move it to `agents/<your folder>/readout/worksheet.md`.
+agent folder exists in step 4, move it to `agents/<your scenario>-<path>/readout/worksheet.md`.
 
 **Done when:** you have reviewed the worksheet with your team and removed
 anything the customer didn't ask for.
@@ -105,8 +105,7 @@ cd customer-challenge
 ```
 
 Then, use Claude or Cursor to SSH to the EC2 instance using the information
-from Splunk Show.
-
+from Splunk Show. Connect to the host and port `2222` from your Splunk Show page.
 Refer to [CLAUDE-SETUP.md](environment/CLAUDE-SETUP.md) or
 [CURSOR-SETUP.md](environment/CURSOR-SETUP.md) for detailed instructions. What is
 already on your host, and what to check, is in
@@ -118,6 +117,11 @@ already on your host, and what to check, is in
 ### Step 4. Generate the agent (30 minutes)
 
 In this step, we'll use AI to build an agent using the provided skills.
+
+The agent has no UI. This is on purpose. You talk to it in the terminal, from
+its folder with the venv active: `python app.py "<a question>"`. The command
+`python run_batch.py 10` sends a batch of ten questions. What you show the
+customer is the console, not the agent.
 
 Using Claude Code, this can be achieved via the following prompt:
 
@@ -131,6 +135,18 @@ example:
 ```text
 /build-agent-langgraph scenarios/auto-retail/brief.yaml
 ```
+
+Some scenarios use the pure Python path. For those, the command is
+`/build-agent-python`:
+
+```text
+/build-agent-python scenarios/<your scenario>/brief.yaml
+```
+
+To pick the right command, open `scenarios/<your scenario>/brief.yaml` and read
+the `framework:` line. `langgraph` means `/build-agent-langgraph`.
+`pure-python` means `/build-agent-python`. The wrong command writes nothing
+under `agents/`.
 
 In Cursor, use the following prompt instead:
 
@@ -163,7 +179,7 @@ Anything already set on the host wins; the agent reads the host environment
 first and `.env` second. Open `agents/<your scenario>-<path>/.env` (the skill
 creates it from `.env.example`) and fill in only the values that are missing,
 using what your facilitator gave you. The file lists a few other variables too;
-leave those alone. Do not add lines:
+leave those alone. Add no other lines:
 
 ```text
 OPENAI_API_KEY=            your model key
@@ -177,9 +193,12 @@ SPLUNK_AO_AGENT_STREAM=${INSTANCE}   leave as is; it expands to your instance na
 
 Then tell Claude or Cursor the values are in place and let it run the smoke tests.
 Run the agent's commands from its folder with its virtual environment active:
-`cd agents/<your scenario>-<path> && source .venv/bin/activate`.
 
-Before you move on, run the check yourself and read what it says:
+```bash
+cd agents/<your scenario>-<path> && source .venv/bin/activate
+```
+
+Before you move on, run the check yourself from the repo root and read what it says:
 
 ```bash
 python shared/check_skeleton.py agents/<your scenario>-<path>
@@ -192,6 +211,10 @@ line in `.env`. Fix what it names, or tell Claude or Cursor to, until it prints
 OK. Then look at `questions.txt` yourself: it should read like the customer's
 users wrote it.
 
+Before step 5, read the agent code: the node files in `agent/` on the
+LangGraph path, or `agents.py` on the Python path. Then you can tell a wrong
+trace from correct agent behaviour.
+
 **Done when:** `python app.py "<a question>"` answers, and
 `FAILURE_MODE=<the scenario's failure> python app.py "<a question>"` shows the
 failure. Move your worksheet into `agents/<your scenario>-<path>/readout/`; the
@@ -201,6 +224,8 @@ skill creates that folder.
 
 This is yours to do, from the docs. Pointers, not answers:
 
+- Run `which python` first. It must print a path inside the agent's `.venv`.
+  If it does not, activate the venv before you install.
 - `pip install "splunk-ao[langchain]"` in the agent's venv (plain `splunk-ao`
   on the Python path).
 - The SDK reads `SPLUNK_AO_CONSOLE_URL`, `SPLUNK_AO_API_URL`,
@@ -244,12 +269,13 @@ This is yours to do, from the docs. Pointers, not answers:
     `chat <model>`) and shows the trace under the first agent span's name.
     Your code worked; that is just how it displays.
 
-Run one question, find the trace in the console. Then turn on the evaluators
-your worksheet names, and no more: agent stream, Configure Evaluators. Luna
-evaluators run on Splunk-hosted small models with no setup. LLM-judge
-evaluators need a model integration on the org; the facilitator set one up. If
-an evaluator shows an error about a model integration, that is the org, not
-you: tell the facilitator.
+Run one question, find the trace in the console. On the LangGraph path, the
+root span's input and output show the whole state as JSON. The reply is the
+`reply` key. Then turn on the evaluators your worksheet names, and no more: 
+agent stream, Configure Evaluators. Luna evaluators run on Splunk-hosted small 
+models with no setup. LLM-judge evaluators need a model integration on the org; 
+the facilitator set one up. If an evaluator shows an error about a model integration, 
+that is the org, not you: tell the facilitator.
 
 When it works, answer the four questions in `worksheets/instrumentation-notes.md`
 in your own words. Your coach will ask about them at the show-and-tell.
@@ -266,6 +292,8 @@ Where you should be when the block ends:
 - Instrumented: a trace with the full tree in your project, with your metadata.
 - Traffic: `python run_batch.py 10` has run at least once.
 - At least one evaluator from your worksheet turned on and scoring.
+- Your work saved off the instance. See
+  [environment/workshop-backup-and-restore.md](environment/workshop-backup-and-restore.md).
 
 One line per person at the checkpoint: what's wired, what's left. If you are
 behind, say so; the coaches use the gap between blocks to catch people up.
@@ -291,17 +319,17 @@ Prove the failure gets caught and stopped.
 4. Make something act on it. Either a runtime control that steers or blocks
    the reply (set up in the Agent Control console or with the SDK), or an alert
    on the agent stream that posts to a channel. One is enough. Work from the
-   docs first; `examples/` has a worked example of each if you get stuck.
+   docs first. If you are stuck, ask a coach.
    A control's pattern describes what to refuse. The engine has no "unless",
-   so write it as the thing to catch: "reads like a question", "contains an
-   SSN", "mentions ignore your instructions", not "no change verb".
-   The control example needs `AGENT_CONTROL_API_KEY`. If it is empty on your
-   host, ask your facilitator for it.
+   so write it as the thing to catch, not as an exception to what is allowed. 
+   The control example needs `AGENT_CONTROL_API_KEY`, which is populated from 
+   the value of the `SPLUNK_AO_API_KEY` environment variable set on the host.
 5. Stretch: if no preset evaluator catches your failure, write a custom LLM judge
-   in the customer's own definition of a bad answer. `examples/custom-judge-example.py`
-   is a worked one, for after you have tried.
-6. Run the coach skill: `/coach agents/<your folder>` (Cursor: "coach agents/<your
-   folder>"). It reads your work and asks the questions the customer will ask.
+   in the customer's own definition of a bad answer. Ask a coach for a worked
+   example once you have tried.
+6. Run the coach skill: `/coach agents/<your scenario>-<path>` (Cursor: 
+   "coach agents/<your scenario>-<path>"). It reads your work and asks the
+   questions the customer will ask.
 
 **Done when:** the planted failure is caught and acted on, and clean traffic is
 left alone.
@@ -313,7 +341,7 @@ in the customer's words with how your demo proves it, taken from your worksheet
 rows. Then one line for the objection this customer will raise and your answer,
 and one line for what you'd hand off because it isn't this product's job.
 
-Save it as `agents/<your folder>/readout/success-criteria.md`.
+Save it as `agents/<your scenario>-<path>/readout/success-criteria.md`.
 
 **Done when:** the customer would agree those are the criteria.
 
@@ -338,11 +366,8 @@ the last day. Same format, a little longer.
 
 Your EC2 instance is deleted the day after the bootcamp. Before you leave,
 copy your agent folder and worksheets to your laptop so you can record your
-demo from them:
-
-```bash
-rsync -av -e "ssh -p 2222" --exclude .venv splunk@<your instance>:~/customer-challenge/agents/<your folder>/ ~/customer-challenge-agent/
-```
+demo from them. See [environment/workshop-backup-and-restore.md](environment/workshop-backup-and-restore.md) 
+for the detailed steps.
 
 Recreate the venv on your laptop with Python 3.12 and `requirements.txt` plus
 `splunk-ao`. Your `.env` holds the keys the facilitator gave you; keep it off
@@ -364,6 +389,6 @@ show-and-tell before you record.
 | The worksheet | `worksheets/design-worksheet.md` |
 | Success criteria sheet | `worksheets/success-criteria.md` |
 | Your host and its variables | `environment/LAB-ENVIRONMENT.md` |
-| Worked control, alert and judge | `examples/` |
-| Your agent | `agents/<your folder>/` after step 4 |
+| Worked control, alert and judge | Ask a coach |
+| Your agent | `agents/<your scenario>-<path>/` after step 4 |
 | Product docs and SDK | <https://agent-observability-docs.splunk.com> |
