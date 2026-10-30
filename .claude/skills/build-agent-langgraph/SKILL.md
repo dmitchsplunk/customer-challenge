@@ -56,14 +56,12 @@ optionally followed by an output directory. Default output: `agents/<slug>-langg
    `shared/check_skeleton.py`. The customer's real agent may be bigger; the
    starter stays small.
 5. Create a venv with Python 3.12 and install the requirements.
-   Then stop. Have the participant run `env | grep -E 'SPLUNK_AO|OPENAI|INSTANCE'` first.
-   Values the host already sets win. Print only the `.env` lines still missing, from this
-   list: model key, base URL if their host has a gateway, SAO console URL, API URL, API key,
-   project. Leave `SPLUNK_AO_AGENT_STREAM=${INSTANCE}` as it is. The host supplies
-   `INSTANCE`, so do not ask for an agent stream. Then ask which of those values are
-   still missing, and wait. Do not run the smoke test until the participant says every
-   missing value is filled. If they have no gateway, tell them to delete the
-   `OPENAI_BASE_URL` line.
+   Have the participant run
+   `env | grep -oE '^(SPLUNK_AO|OPENAI)[A-Z_]*|^INSTANCE'`. It prints names only.
+   Expect OPENAI_API_KEY, OPENAI_BASE_URL, SPLUNK_AO_API_KEY, SPLUNK_AO_API_URL,
+   SPLUNK_AO_CONSOLE_URL, SPLUNK_AO_PROJECT and INSTANCE. If one is missing, have
+   them add it to `.env`. Do not go looking for keys on the host. Run the smoke
+   test only after they confirm.
    When they confirm, smoke-test: `python app.py "<one question from questions.txt>"`
    and `FAILURE_MODE=<kind> python app.py "<a question that triggers it>"`. Both
    must succeed and the second must visibly show the failure.
