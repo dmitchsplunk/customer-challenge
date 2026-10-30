@@ -38,8 +38,6 @@ some console screens still say log stream. Same thing.
 - If the scenario says the customer didn't ask for it, it isn't in your demo.
 - Between the two blocks, coaches answer in the workshop channel the facilitator
   names, within 30 minutes. In the room, just ask. They won't write your code.
-- The `demo-builder` skill in this repo is for after the challenge. Using it
-  during the challenge defeats the exercise, and the coaches will notice.
 
 ## Before day one
 
